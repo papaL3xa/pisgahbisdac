@@ -34,6 +34,42 @@
         // =========================================================================
         // PENTING: URL WEB APP GOOGLE APPS SCRIPT
         // =========================================================================
+        const GAS_API_URL = '<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ART1S - GMAHK Tidar 1 Surabaya</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" crossorigin="anonymous"></script>
+
+    <style>
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+        .prose p { margin-bottom: 1rem; line-height: 1.7; color: #4b5563; }
+        .prose h3 { font-weight: bold; font-size: 1.25rem; margin-top: 1.5rem; margin-bottom: 0.75rem; color: #1f2937; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // =========================================================================
+        // PENTING: URL WEB APP GOOGLE APPS SCRIPT
+        // =========================================================================
         const GAS_API_URL = 'https://script.google.com/macros/s/AKfycbx10oOSQqy5cUSUe2KY761n0cniaJCupmu77L-CSJxGBcmvWfBo8eSo26bWVGjqCBj0ng/exec';
         
         // --- INITIAL DATA ---
@@ -98,7 +134,9 @@
                 X: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>,
                 Edit: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>,
                 Trash: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>,
-                Settings: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                Settings: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>,
+                Eye: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>,
+                EyeOff: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" x2="22" y1="2" y2="22"/></svg>
             };
             return icons[name] || null;
         };
@@ -725,6 +763,8 @@
             const [newPassword, setNewPassword] = React.useState('');
             const [confirmPassword, setConfirmPassword] = React.useState('');
             const [status, setStatus] = React.useState(''); // '', 'loading', 'error_match', 'error_length', 'error_token', 'success'
+            const [showNewPassword, setShowNewPassword] = React.useState(false);
+            const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
 
             const handleSubmit = (e) => {
                 e.preventDefault();
@@ -775,11 +815,21 @@
                     <form onSubmit={handleSubmit} className="space-y-5">
                         <div>
                             <label className="block text-sm md:text-base font-bold text-gray-700 mb-2">Password Baru (Minimal 6 karakter)</label>
-                            <input type="password" value={newPassword} onChange={e => setNewPassword(e.target.value)} autoFocus className={`w-full p-3.5 border ${status.startsWith('error') ? 'border-red-500' : 'border-gray-300'} rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition text-base`} placeholder="Masukkan password baru..." />
+                            <div className="relative">
+                                <input type={showNewPassword ? "text" : "password"} value={newPassword} onChange={e => setNewPassword(e.target.value)} autoFocus className={`w-full p-3.5 pr-12 border ${status.startsWith('error') ? 'border-red-500' : 'border-gray-300'} rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition text-base`} placeholder="Masukkan password baru..." />
+                                <button type="button" onClick={() => setShowNewPassword(!showNewPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none p-1">
+                                    <Icon name={showNewPassword ? 'EyeOff' : 'Eye'} className="w-5 h-5" />
+                                </button>
+                            </div>
                         </div>
                         <div>
                             <label className="block text-sm md:text-base font-bold text-gray-700 mb-2">Konfirmasi Password Baru</label>
-                            <input type="password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} className={`w-full p-3.5 border ${status === 'error_match' ? 'border-red-500' : 'border-gray-300'} rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition text-base`} placeholder="Ketik ulang password..." />
+                            <div className="relative">
+                                <input type={showConfirmPassword ? "text" : "password"} value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} className={`w-full p-3.5 pr-12 border ${status === 'error_match' ? 'border-red-500' : 'border-gray-300'} rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition text-base`} placeholder="Ketik ulang password..." />
+                                <button type="button" onClick={() => setShowConfirmPassword(!showConfirmPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none p-1">
+                                    <Icon name={showConfirmPassword ? 'EyeOff' : 'Eye'} className="w-5 h-5" />
+                                </button>
+                            </div>
                         </div>
 
                         {status === 'error_match' && <p className="text-red-500 text-sm font-bold animate-pulse text-center">Konfirmasi password tidak cocok.</p>}
@@ -800,6 +850,7 @@
             const [error, setError] = React.useState(false);
             const [isChecking, setIsChecking] = React.useState(false);
             const [isSendingReset, setIsSendingReset] = React.useState(false);
+            const [showPassword, setShowPassword] = React.useState(false);
 
             if (!isOpen) return null;
 
@@ -860,7 +911,1422 @@
                         <form onSubmit={handleLogin}>
                             <div className="mb-5">
                                 <label className="block text-sm md:text-base font-bold text-gray-700 mb-2">Password</label>
-                                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} autoFocus className={`w-full p-3.5 border ${error ? 'border-red-500 bg-red-50' : 'border-gray-300'} rounded-xl focus:ring-2 focus:ring-gray-800 outline-none transition text-base`} placeholder="Masukkan password..." />
+                                <div className="relative">
+                                    <input type={showPassword ? "text" : "password"} value={password} onChange={(e) => setPassword(e.target.value)} autoFocus className={`w-full p-3.5 pr-12 border ${error ? 'border-red-500 bg-red-50' : 'border-gray-300'} rounded-xl focus:ring-2 focus:ring-gray-800 outline-none transition text-base`} placeholder="Masukkan password..." />
+                                    <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none p-1">
+                                        <Icon name={showPassword ? 'EyeOff' : 'Eye'} className="w-5 h-5" />
+                                    </button>
+                                </div>
+                                {error && <p className="text-red-500 text-sm mt-2 font-bold">Password salah, coba lagi.</p>}
+                            </div>
+                            <button type="submit" disabled={isChecking || isSendingReset} className={`w-full ${isChecking || isSendingReset ? 'bg-gray-600' : 'bg-gray-900 hover:bg-gray-800'} text-white font-bold py-3.5 rounded-xl transition shadow-md text-base`}>
+                                {isChecking ? 'Memeriksa...' : 'Masuk ke Dashboard'}
+                            </button>
+                        </form>
+                        <div className="mt-6 text-center">
+                            <button onClick={handleLupaPassword} disabled={isSendingReset} className="text-sm md:text-base font-medium text-gray-500 hover:text-gray-900 hover:underline">
+                                {isSendingReset ? 'Mengirim Email Reset...' : 'Lupa Password?'}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const AdminDashboard = ({ dataPejabat, setDataPejabat, jadwalDB, setJadwalDB, videos, setVideos }) => {
+            const [adminTab, setAdminTab] = React.useState('jadwal');
+            const [viewMonth, setViewMonth] = React.useState(new Date().getMonth());
+            const [viewYear, setViewYear] = React.useState(new Date().getFullYear());
+            const [subTab, setSubTab] = React.useState('rabu'); 
+            const [editingDate, setEditingDate] = React.useState(null);
+            const [editForm, setEditForm] = React.useState([]);
+            const [isSavingJadwal, setIsSavingJadwal] = React.useState(false);
+            const [isSavingPejabat, setIsSavingPejabat] = React.useState(false);
+            const [isSavingVideos, setIsSavingVideos] = React.useState(false);
+
+            const monthNames = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+            
+            const getTriwulan = (m) => {
+                if (m < 3) return "JANUARI - MARET";
+                if (m < 6) return "APRIL - JUNI";
+                if (m < 9) return "JULI - SEPTEMBER";
+                return "OKTOBER - DESEMBER";
+            };
+
+            const prevMonth = () => { if (viewMonth === 0) { setViewMonth(11); setViewYear(viewYear - 1); } else { setViewMonth(viewMonth - 1); } setEditingDate(null); };
+            const nextMonth = () => { if (viewMonth === 11) { setViewMonth(0); setViewYear(viewYear + 1); } else { setViewMonth(viewMonth + 1); } setEditingDate(null); };
+
+            const getDatesForMonth = (year, month, dayOfWeek) => {
+                let d = new Date(year, month, 1);
+                let dates = [];
+                while (d.getDay() !== dayOfWeek) { d.setDate(d.getDate() + 1); }
+                while (d.getMonth() === month) { dates.push(toYMD(d)); d.setDate(d.getDate() + 7); }
+                return dates;
+            };
+
+            const isRabu = subTab === 'rabu';
+            const targetDates = isRabu ? getDatesForMonth(viewYear, viewMonth, 3) : getDatesForMonth(viewYear, viewMonth, 6);
+
+            const getActiveArray = (rowData, tab) => {
+                if (tab === 'rabu') return rowData.petugas;
+                if (tab === 'sekolahSabat') return rowData.sekolahSabat;
+                if (tab === 'khotbah') return rowData.khotbah;
+                if (tab === 'diakon') return rowData.diakon;
+                if (tab === 'musik') return rowData.musik;
+                if (tab === 'perjamuan') return rowData.perjamuan;
+                return [];
+            };
+
+            const subTabs = [
+                { id: 'rabu', label: 'Rabu: Permintaan Doa' },
+                { id: 'sekolahSabat', label: 'Sekolah Sabat' },
+                { id: 'khotbah', label: 'Ibadah Khotbah' },
+                { id: 'musik', label: 'Petugas Musik' },
+                { id: 'diakon', label: 'Petugas Diakon' },
+                { id: 'perjamuan', label: 'Perjamuan Kudus' }
+            ];
+
+            const currentSubTabLabel = subTabs.find(t => t.id === subTab)?.label || '';
+            const columns = getActiveArray(isRabu ? initialJadwalRabu : initialJadwalSabat, subTab).map(p => p.tugas);
+
+            const handleEditClick = (date) => {
+                setEditingDate(date);
+                const existingData = jadwalDB[date] || (isRabu ? initialJadwalRabu : initialJadwalSabat);
+                setEditForm(JSON.parse(JSON.stringify(getActiveArray(existingData, subTab))));
+            };
+
+            const handleEditFormChange = (index, value) => {
+                const newForm = [...editForm];
+                newForm[index].nama = value;
+                setEditForm(newForm);
+            };
+
+            const handleSaveRow = (date) => {
+                const baseData = jadwalDB[date] ? JSON.parse(JSON.stringify(jadwalDB[date])) : JSON.parse(JSON.stringify(isRabu ? initialJadwalRabu : initialJadwalSabat));
+                if (subTab === 'rabu') baseData.petugas = editForm;
+                else if (subTab === 'sekolahSabat') baseData.sekolahSabat = editForm;
+                else if (subTab === 'khotbah') baseData.khotbah = editForm;
+                else if (subTab === 'diakon') baseData.diakon = editForm;
+                else if (subTab === 'musik') baseData.musik = editForm;
+                else if (subTab === 'perjamuan') baseData.perjamuan = editForm;
+                
+                setIsSavingJadwal(true);
+                
+                fetch(GAS_API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ action: 'saveJadwal', tanggal: date, payload: baseData })
+                })
+                .then(res => res.json())
+                .then(result => {
+                    setIsSavingJadwal(false);
+                    if (result.success) {
+                        setJadwalDB({...jadwalDB, [date]: baseData});
+                        setEditingDate(null);
+                    } else { alert("Gagal menyimpan: " + result.error); }
+                })
+                .catch(err => {
+                    setIsSavingJadwal(false);
+                    console.error("Fetch error:", err);
+                    alert("Terjadi kesalahan jaringan.");
+                });
+            };
+
+            const handleDeleteRow = (date) => {
+                if(!jadwalDB[date]) return; 
+                if(window.confirm(`Kembalikan jadwal ${formatIndoDateShort(date)} ke default?`)) {
+                    setIsSavingJadwal(true);
+                    const defaultData = JSON.parse(JSON.stringify(isRabu ? initialJadwalRabu : initialJadwalSabat));
+                    
+                    fetch(GAS_API_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                        body: JSON.stringify({ action: 'saveJadwal', tanggal: date, payload: defaultData })
+                    })
+                    .then(res => res.json())
+                    .then(result => {
+                        setIsSavingJadwal(false);
+                        if (result.success) {
+                            const newDB = {...jadwalDB}; 
+                            delete newDB[date]; 
+                            setJadwalDB(newDB);
+                        }
+                    })
+                    .catch(err => {
+                        setIsSavingJadwal(false);
+                        console.error(err);
+                    });
+                }
+            };
+
+            const handleSimpanPejabat = () => {
+                setIsSavingPejabat(true);
+
+                fetch(GAS_API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ action: 'savePejabat', payload: dataPejabat })
+                })
+                .then(res => res.json())
+                .then(result => {
+                    setIsSavingPejabat(false);
+                    if (result.success) alert("Berhasil! Data Pelayan Jemaat sudah tersimpan ke Google Sheets.");
+                    else alert("Gagal menyimpan: " + result.error);
+                })
+                .catch(err => {
+                    setIsSavingPejabat(false);
+                    console.error(err);
+                    alert("Terjadi kesalahan jaringan.");
+                });
+            };
+
+            const handleSimpanVideos = () => {
+                setIsSavingVideos(true);
+
+                fetch(GAS_API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ action: 'saveVideos', payload: videos })
+                })
+                .then(res => res.json())
+                .then(result => {
+                    setIsSavingVideos(false);
+                    if (result.success) alert("Berhasil! Pengaturan URL Video sudah tersimpan.");
+                    else alert("Gagal menyimpan: " + result.error);
+                })
+                .catch(err => {
+                    setIsSavingVideos(false);
+                    console.error(err);
+                    alert("Terjadi kesalahan jaringan.");
+                });
+            };
+
+            const handleFileChange = (e, id) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = (event) => {
+                    const img = new Image();
+                    img.src = event.target.result;
+                    img.onload = () => {
+                        const MAX_WIDTH = 150;
+                        const MAX_HEIGHT = 150;
+                        let width = img.width;
+                        let height = img.height;
+
+                        if (width > height) {
+                            if (width > MAX_WIDTH) { height *= MAX_WIDTH / width; width = MAX_WIDTH; }
+                        } else {
+                            if (height > MAX_HEIGHT) { width *= MAX_HEIGHT / height; height = MAX_HEIGHT; }
+                        }
+
+                        const canvas = document.createElement('canvas');
+                        canvas.width = width;
+                        canvas.height = height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, width, height);
+
+                        const dataUrl = canvas.toDataURL('image/jpeg', 0.6);
+                        
+                        const updated = dataPejabat.map(p => p.id === id ? { ...p, img: dataUrl } : p);
+                        setDataPejabat(updated);
+                    };
+                };
+            };
+
+            const handleUbahText = (id, field, value) => { const updated = dataPejabat.map(p => p.id === id ? { ...p, [field]: value } : p); setDataPejabat(updated); };
+            const handleHapusPejabat = (id) => { if(window.confirm("Yakin ingin menghapus data pelayan ini?")) { setDataPejabat(dataPejabat.filter(p => p.id !== id)); } };
+
+            return (
+                <div className="space-y-6 animate-fade-in">
+                    <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                        <div className="flex border-b border-gray-200 overflow-x-auto hide-scrollbar">
+                            <button onClick={() => setAdminTab('jadwal')} className={`flex-1 min-w-[140px] py-4 font-bold text-sm md:text-base text-center transition-colors ${adminTab === 'jadwal' ? 'bg-gray-900 text-white' : 'text-gray-600 hover:bg-gray-50'}`}>Kelola Jadwal</button>
+                            <button onClick={() => setAdminTab('pelayan')} className={`flex-1 min-w-[170px] py-4 font-bold text-sm md:text-base text-center transition-colors ${adminTab === 'pelayan' ? 'bg-gray-900 text-white' : 'text-gray-600 hover:bg-gray-50'}`}>Kelola Pelayan Jemaat</button>
+                            <button onClick={() => setAdminTab('media')} className={`flex-1 min-w-[140px] py-4 font-bold text-sm md:text-base text-center transition-colors ${adminTab === 'media' ? 'bg-gray-900 text-white' : 'text-gray-600 hover:bg-gray-50'}`}>Kelola Konten</button>
+                        </div>
+
+                        <div className={`p-4 md:p-6 ${adminTab === 'jadwal' ? 'bg-[#f4f7fa]' : 'bg-white'}`}>
+                            {adminTab === 'jadwal' && (
+                                <div className="animate-fade-in space-y-4">
+                                    <div className="bg-[#eef2f6] rounded-xl flex overflow-x-auto border border-gray-200 p-2 gap-2 hide-scrollbar">
+                                        {subTabs.map(tab => (
+                                            <button key={tab.id} onClick={() => { setSubTab(tab.id); setEditingDate(null); }} className={`px-4 py-2.5 rounded-lg text-sm md:text-base whitespace-nowrap transition-colors ${subTab === tab.id ? 'bg-white shadow-sm font-bold border border-gray-200 text-slate-800' : 'font-medium text-slate-500 hover:bg-slate-200'}`}>
+                                                {tab.label}
+                                            </button>
+                                        ))}
+                                    </div>
+                                    
+                                    {subTab === 'perjamuan' && (
+                                        <div className="bg-purple-50 border border-purple-200 p-4 md:p-5 rounded-xl text-purple-800 text-sm md:text-base flex items-start shadow-sm">
+                                            <Icon name="Gift" className="w-6 h-6 mr-3 shrink-0" />
+                                            <p><b>Jadwal Spesial:</b> Perjamuan Kudus hanya dilaksanakan pada <span className="font-bold underline">Sabtu terakhir</span> di bulan Maret, Juni, Oktober, dan Desember. Mengisi jadwal pada tanggal lain tidak akan memunculkannya secara otomatis di bulan tersebut.</p>
+                                        </div>
+                                    )}
+
+                                    <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                                        <div className="flex flex-col md:flex-row justify-between items-center p-4 md:p-5 border-b border-gray-200 gap-4 bg-white">
+                                            <div className="flex items-center">
+                                                <span className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-slate-800 mr-3 hidden md:block"></span>
+                                                <div><h3 className="font-bold text-lg md:text-xl text-slate-800">{currentSubTabLabel}</h3><p className="text-xs text-slate-500 uppercase tracking-wider font-bold">Triwulan: {getTriwulan(viewMonth)}</p></div>
+                                            </div>
+                                            <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden bg-white shadow-sm">
+                                                <button onClick={prevMonth} className="p-2.5 hover:bg-slate-100 transition"><Icon name="ChevronLeft" className="w-5 h-5 text-slate-600" /></button>
+                                                <div className="px-4 py-2 font-bold text-sm md:text-base bg-white flex items-center min-w-[150px] md:min-w-[180px] justify-center text-slate-800"><Icon name="Calendar" className="w-4 h-4 md:w-5 md:h-5 mr-2 text-slate-500" />{monthNames[viewMonth].toUpperCase()} {viewYear}</div>
+                                                <button onClick={nextMonth} className="p-2.5 hover:bg-slate-100 transition"><Icon name="ChevronRight" className="w-5 h-5 text-slate-600" /></button>
+                                            </div>
+                                        </div>
+                                        <div className="overflow-x-auto">
+                                            <table className={`w-full text-left border-collapse ${subTab === 'perjamuan' ? 'min-w-[2800px]' : 'min-w-[800px]'}`}>
+                                                <thead className="bg-[#eef2f6] border-b border-gray-200">
+                                                    <tr>
+                                                        <th className="p-4 text-xs md:text-sm font-extrabold text-slate-700 uppercase tracking-wider text-center w-40">Tanggal</th>
+                                                        {columns.map((col, i) => <th key={i} className="p-4 text-xs md:text-sm font-extrabold text-slate-700 uppercase tracking-wider text-center">{col}</th>)}
+                                                        <th className="p-4 text-xs md:text-sm font-extrabold text-slate-700 uppercase tracking-wider text-center w-32">Aksi</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody className="divide-y divide-gray-100 bg-white">
+                                                    {targetDates.map(date => {
+                                                        const isEditing = editingDate === date;
+                                                        const rowData = jadwalDB[date] || (isRabu ? initialJadwalRabu : initialJadwalSabat);
+                                                        const dataArray = getActiveArray(rowData, subTab);
+                                                        const isSaved = !!jadwalDB[date] && (subTab === 'rabu' ? !!jadwalDB[date].petugas : !!jadwalDB[date][subTab]);
+                                                        
+                                                        return (
+                                                            <tr key={date} className="hover:bg-slate-50 transition group">
+                                                                <td className="p-4 md:p-5 text-center align-middle border-r border-gray-50 bg-slate-50/30">
+                                                                    <div className="font-bold text-slate-500 text-xs md:text-sm mb-0.5">{isRabu ? 'RABU' : 'SABTU'}</div>
+                                                                    <div className="text-sm md:text-base font-extrabold text-slate-800">{formatIndoDateShort(date)}</div>
+                                                                </td>
+                                                                {dataArray.map((p, i) => (
+                                                                    <td key={i} className="p-4 md:p-5 text-center align-middle border-r border-gray-50">
+                                                                        {isEditing ? (
+                                                                            <input type="text" value={editForm[i]?.nama || ''} onChange={(e) => handleEditFormChange(i, e.target.value)} className="w-full p-2.5 border border-blue-400 rounded-lg text-sm md:text-base text-center font-bold focus:ring-2 focus:ring-blue-500 outline-none shadow-inner" />
+                                                                        ) : (
+                                                                            <div className="flex flex-col items-center">
+                                                                                <span className="font-bold text-slate-800 text-sm md:text-base mb-1.5">{p.nama}</span>
+                                                                                <span className={`text-[10px] md:text-xs px-2.5 py-1 rounded-full font-bold uppercase tracking-wider shadow-sm ${isSaved ? 'bg-[#fff5e6] text-[#e59c3f] border border-[#f5dfb8]' : 'bg-white text-gray-400 border border-gray-200'}`}>{isSaved ? 'Terkunci' : 'Default'}</span>
+                                                                            </div>
+                                                                        )}
+                                                                    </td>
+                                                                ))}
+                                                                <td className="p-4 md:p-5 text-center align-middle">
+                                                                    {isEditing ? (
+                                                                        <div className="flex justify-center space-x-2">
+                                                                            <button onClick={() => handleSaveRow(date)} disabled={isSavingJadwal} className={`p-2.5 text-white bg-green-500 hover:bg-green-600 rounded-lg transition shadow-sm ${isSavingJadwal ? 'opacity-50' : ''}`}><Icon name="Check" className="w-5 h-5" /></button>
+                                                                            <button onClick={() => setEditingDate(null)} className="p-2.5 text-white bg-slate-400 hover:bg-slate-500 rounded-lg transition shadow-sm"><Icon name="X" className="w-5 h-5" /></button>
+                                                                        </div>
+                                                                    ) : (
+                                                                        <div className="flex justify-center space-x-2 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity">
+                                                                            <button onClick={() => handleEditClick(date)} className="p-2.5 text-slate-500 hover:text-slate-800 hover:bg-slate-200 rounded-lg transition" title="Edit Baris"><Icon name="Edit" className="w-5 h-5" /></button>
+                                                                            {isSaved ? (<button onClick={() => handleDeleteRow(date)} className="p-2.5 text-slate-500 hover:text-red-600 hover:bg-red-100 rounded-lg transition" title="Hapus (Kembali ke Default)"><Icon name="Trash" className="w-5 h-5" /></button>) : (<div className="w-10"></div>)}
+                                                                        </div>
+                                                                    )}
+                                                                </td>
+                                                            </tr>
+                                                        )
+                                                    })}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+
+                            {adminTab === 'pelayan' && (
+                                <div className="space-y-4 animate-fade-in bg-white p-2 md:p-4 rounded-xl">
+                                    <div className="flex justify-between items-center bg-green-50 p-4 md:p-5 rounded-xl border border-green-200">
+                                        <p className="text-sm md:text-base text-green-800 font-bold w-2/3">Edit tabel di bawah, tekan ikon potret untuk ganti foto dari HP, lalu simpan perubahan.</p>
+                                        <button onClick={handleSimpanPejabat} disabled={isSavingPejabat} className={`${isSavingPejabat ? 'bg-gray-400' : 'bg-green-600 hover:bg-green-700'} text-white font-bold py-3 px-4 md:px-6 rounded-lg transition shadow-md text-sm md:text-base`}>{isSavingPejabat ? 'Menyimpan...' : 'Simpan Pejabat'}</button>
+                                    </div>
+                                    <div className="overflow-x-auto border border-gray-200 rounded-xl">
+                                        <table className="w-full text-left text-sm md:text-base border-collapse min-w-[700px]">
+                                            <thead>
+                                                <tr className="bg-gray-100 text-gray-600 uppercase text-xs md:text-sm tracking-wider font-bold"><th className="p-4">Foto</th><th className="p-4">Jabatan</th><th className="p-4">Nama Lengkap</th><th className="p-4">No WhatsApp (62xxx)</th><th className="p-4 text-center">Aksi</th></tr>
+                                            </thead>
+                                            <tbody>
+                                                {dataPejabat.map((p) => (
+                                                    <tr key={p.id} className="border-b border-gray-100 hover:bg-gray-50 transition">
+                                                        <td className="p-4"><div className="relative w-14 h-14 md:w-16 md:h-16"><img src={p.img} alt={p.nama} className="w-full h-full rounded-full object-cover border border-gray-200 bg-white" /><label className="absolute -bottom-1 -right-1 bg-white border border-gray-300 rounded-full p-1 cursor-pointer hover:bg-gray-100 shadow-sm"><Icon name="Edit" className="w-4 h-4 text-gray-600" /><input type="file" accept="image/*" className="hidden" onChange={(e) => handleFileChange(e, p.id)} /></label></div></td>
+                                                        <td className="p-4"><input type="text" value={p.jabatan} onChange={(e) => handleUbahText(p.id, 'jabatan', e.target.value)} className="w-full p-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500 outline-none font-bold text-sm md:text-base" /></td>
+                                                        <td className="p-4"><input type="text" value={p.nama} onChange={(e) => handleUbahText(p.id, 'nama', e.target.value)} className="w-full p-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500 outline-none font-bold text-sm md:text-base" /></td>
+                                                        <td className="p-4"><input type="text" value={p.wa} onChange={(e) => handleUbahText(p.id, 'wa', e.target.value)} className="w-full p-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-green-500 outline-none font-mono text-sm md:text-base" /></td>
+                                                        <td className="p-4 text-center"><button onClick={() => handleHapusPejabat(p.id)} className="p-2.5 text-red-500 hover:bg-red-50 hover:text-red-700 rounded-lg transition" title="Hapus Data"><Icon name="Trash" className="w-5 h-5" /></button></td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            )}
+
+                            {adminTab === 'media' && (
+                                <div className="space-y-4 animate-fade-in bg-white p-2 md:p-4 rounded-xl">
+                                    <div className="flex justify-between items-center bg-blue-50 p-4 md:p-5 rounded-xl border border-blue-200 mb-6">
+                                        <p className="text-sm md:text-base text-blue-800 font-bold w-2/3">Atur URL embed video YouTube untuk halaman Home dan Live Streaming.</p>
+                                        <button onClick={handleSimpanVideos} disabled={isSavingVideos} className={`${isSavingVideos ? 'bg-gray-400' : 'bg-blue-600 hover:bg-blue-700'} text-white font-bold py-3 px-4 md:px-6 rounded-lg transition shadow-md text-sm md:text-base`}>
+                                            {isSavingVideos ? 'Menyimpan...' : 'Simpan Konten'}
+                                        </button>
+                                    </div>
+                                    
+                                    <div className="space-y-6">
+                                        <div className="bg-gray-50 p-5 md:p-6 rounded-xl border border-gray-200 shadow-sm">
+                                            <label className="flex items-center text-sm md:text-base font-bold text-gray-800 mb-2">
+                                                <Icon name="Video" className="w-5 h-5 mr-2 text-red-600"/> URL Video Home (Terbaru)
+                                            </label>
+                                            <p className="text-xs md:text-sm text-gray-500 mb-4">Masukkan link YouTube yang ingin ditampilkan di halaman Home (wajib menggunakan format embed: https://www.youtube.com/embed/...)</p>
+                                            <input type="text" value={videos.homeVideo} onChange={e => setVideos({...videos, homeVideo: e.target.value})} className="w-full p-3.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none text-sm md:text-base font-medium" placeholder="https://www.youtube.com/embed/..." />
+                                        </div>
+                                        
+                                        <div className="bg-gray-50 p-5 md:p-6 rounded-xl border border-gray-200 shadow-sm">
+                                            <label className="flex items-center text-sm md:text-base font-bold text-gray-800 mb-2">
+                                                <Icon name="Video" className="w-5 h-5 mr-2 text-red-600"/> URL Video Live Streaming
+                                            </label>
+                                            <p className="text-xs md:text-sm text-gray-500 mb-4">Masukkan link YouTube yang ingin ditampilkan di halaman Live (wajib menggunakan format embed: https://www.youtube.com/embed/...)</p>
+                                            <input type="text" value={videos.liveVideo} onChange={e => setVideos({...videos, liveVideo: e.target.value})} className="w-full p-3.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none text-sm md:text-base font-medium" placeholder="https://www.youtube.com/embed/..." />
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const App = () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const initialToken = urlParams.get('resetToken');
+
+            const [isAppLoading, setIsAppLoading] = React.useState(true);
+            const [activeTab, setActiveTab] = React.useState(initialToken ? 'reset_password' : 'home');
+            const [jadwalDB, setJadwalDB] = React.useState({});
+            const [dataPejabat, setDataPejabat] = React.useState(initialDataPejabat);
+            const [videos, setVideos] = React.useState(initialVideos);
+
+            const today = new Date();
+            today.setHours(0,0,0,0);
+            
+            let nextRabu = new Date(today);
+            nextRabu.setDate(today.getDate() + ((3 - today.getDay() + 7) % 7));
+            const rabuYMD = toYMD(nextRabu);
+            
+            let nextSabat = new Date(today);
+            nextSabat.setDate(today.getDate() + ((6 - today.getDay() + 7) % 7));
+            const sabatYMD = toYMD(nextSabat);
+
+            const getNextPerjamuan = () => {
+                const year = today.getFullYear();
+                const months = [2, 5, 9, 11]; // Mar, Jun, Oct, Dec
+                for (let m of months) {
+                    let lastDay = new Date(year, m + 1, 0);
+                    let lastSat = new Date(lastDay);
+                    lastSat.setDate(lastDay.getDate() - ((lastDay.getDay() + 1) % 7));
+                    if (today <= lastSat) return lastSat;
+                }
+                let lastDayNextYear = new Date(year + 1, 3, 0);
+                let lastSatNextYear = new Date(lastDayNextYear);
+                lastSatNextYear.setDate(lastDayNextYear.getDate() - ((lastDayNextYear.getDay() + 1) % 7));
+                return lastSatNextYear;
+            };
+
+            const nextPerjamuanObj = getNextPerjamuan();
+            const perjamuanYMD = toYMD(nextPerjamuanObj);
+            
+            const diffTime = nextPerjamuanObj - today;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            const showPerjamuan = diffDays <= 8 && diffDays >= 0;
+
+            const activeRabu = jadwalDB[rabuYMD] || initialJadwalRabu;
+            const activeSabat = jadwalDB[sabatYMD] || initialJadwalSabat;
+            const activePerjamuan = jadwalDB[perjamuanYMD]?.perjamuan || initialJadwalSabat.perjamuan;
+
+            React.useEffect(() => {
+                if (GAS_API_URL.includes('MASUKKAN_ID_SCRIPT_KAMU') || !GAS_API_URL.startsWith('http')) {
+                    setIsAppLoading(false);
+                    return;
+                }
+
+                fetch(GAS_API_URL + '?action=getData')
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.dataPejabat) setDataPejabat(data.dataPejabat);
+                        if (data.jadwalDB) setJadwalDB(data.jadwalDB);
+                        if (data.videos) setVideos(data.videos);
+                        setIsAppLoading(false);
+                    })
+                    .catch(error => {
+                        console.error('Gagal mengambil data dari Google Sheets:', error);
+                        setIsAppLoading(false); 
+                    });
+            }, []);
+
+            const [isAdminLoggedIn, setIsAdminLoggedIn] = React.useState(false);
+            const [showLoginModal, setShowLoginModal] = React.useState(false);
+
+            const tabs = [
+                { id: 'home', label: 'Home', icon: 'Home' },
+                { id: 'belajar', label: 'Belajar', icon: 'BookOpen' },
+                { id: 'live', label: 'Live', icon: 'Video' },
+                { id: 'jadwal', label: 'Jadwal', icon: 'Calendar' },
+                { id: 'persembahan', label: 'Persembahan', icon: 'Gift' }
+            ];
+
+            const handleAdminClick = () => { if (isAdminLoggedIn) { setActiveTab('admin_dashboard'); } else { setShowLoginModal(true); } };
+            const handleLogout = () => { setIsAdminLoggedIn(false); setActiveTab('home'); };
+
+            const renderContent = () => {
+                switch(activeTab) {
+                    case 'reset_password': return <ResetPassword token={initialToken} setActiveTab={setActiveTab} />;
+                    case 'home': return <Home setActiveTab={setActiveTab} videos={videos} />;
+                    case 'belajar': return <Belajar setActiveTab={setActiveTab} />;
+                    case 'belajar_alkitab': return <DetailAlkitab setActiveTab={setActiveTab} dataPejabat={dataPejabat} />;
+                    case 'belajar_28dasar': return <Detail28Dasar setActiveTab={setActiveTab} dataPejabat={dataPejabat} />;
+                    case 'belajar_egw': return <DetailEGW setActiveTab={setActiveTab} dataPejabat={dataPejabat} />;
+                    case 'live': return <Live setActiveTab={setActiveTab} activeRabu={activeRabu} activeSabat={activeSabat} rabuYMD={rabuYMD} sabatYMD={sabatYMD} showPerjamuan={showPerjamuan} perjamuanYMD={perjamuanYMD} activePerjamuan={activePerjamuan} videos={videos} />;
+                    case 'jadwal': return <Jadwal activeRabu={activeRabu} activeSabat={activeSabat} rabuYMD={rabuYMD} sabatYMD={sabatYMD} showPerjamuan={showPerjamuan} perjamuanYMD={perjamuanYMD} activePerjamuan={activePerjamuan} />;
+                    case 'persembahan': return <Persembahan dataPejabat={dataPejabat} />;
+                    case 'keanggotaan': return <Keanggotaan setActiveTab={setActiveTab} />;
+                    case 'member_baru': return <MemberBaru setActiveTab={setActiveTab} dataPejabat={dataPejabat} />;
+                    case 'pindah_masuk': return <PindahMasuk setActiveTab={setActiveTab} dataPejabat={dataPejabat} />;
+                    case 'hubungi': return <Hubungi setActiveTab={setActiveTab} dataPejabat={dataPejabat} />;
+                    case 'form_acms': return <FormACMS setActiveTab={setActiveTab} />;
+                    case 'admin_dashboard': return isAdminLoggedIn ? <AdminDashboard dataPejabat={dataPejabat} setDataPejabat={setDataPejabat} jadwalDB={jadwalDB} setJadwalDB={setJadwalDB} videos={videos} setVideos={setVideos} /> : <Home setActiveTab={setActiveTab} videos={videos} />;
+                    default: return <Home setActiveTab={setActiveTab} videos={videos} />;
+                }
+            };
+
+            if (isAppLoading) {
+                return (
+                    <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-between py-12">
+                        <div className="flex-1 flex flex-col items-center justify-center w-full">
+                            <div className="w-12 h-12 md:w-16 md:h-16 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin mb-5"></div>
+                            <p className="text-gray-500 font-bold text-sm md:text-base animate-pulse">Memuat data ART1S...</p>
+                        </div>
+                        <div className="mt-auto flex flex-col items-center opacity-40">
+                            <img src="art1s-outline.svg" alt="ART1S Logo" className="h-8 md:h-10 w-auto mb-2.5" />
+                            <span className="text-xs md:text-sm font-bold text-gray-500">Tech Team 2026</span>
+                        </div>
+                    </div>
+                );
+            }
+
+            return (
+                <div className="min-h-screen bg-gray-50 flex flex-col">
+                    <LoginModal isOpen={showLoginModal} onClose={() => setShowLoginModal(false)} onSuccess={() => { setIsAdminLoggedIn(true); setShowLoginModal(false); setActiveTab('admin_dashboard'); }} />
+
+                    <header className="md:hidden bg-white shadow-sm sticky top-0 z-50">
+                        <div className="flex justify-between items-center px-5 py-3.5">
+                            <img src="art1s-outline.svg" alt="ART1S" className="h-8 w-auto" />
+                            {isAdminLoggedIn ? (<button onClick={handleLogout} className="p-2 text-red-600 hover:text-red-800 transition"><Icon name="LogOut" className="w-6 h-6" /></button>) : (<button onClick={handleAdminClick} className="p-2 text-gray-600 hover:text-gray-900 transition"><Icon name="LogIn" className="w-6 h-6" /></button>)}
+                        </div>
+                    </header>
+
+                    <header className="hidden md:block bg-white shadow-sm sticky top-0 z-50">
+                        <div className="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+                            <div className="flex items-center space-x-2">
+                                <img src="art1s-outline.svg" alt="ART1S" className="h-9 w-auto" />
+                            </div>
+                            <nav className="flex space-x-2">
+                                {tabs.map(tab => (<button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`px-4 py-2.5 rounded-lg font-bold transition flex items-center space-x-2 text-sm md:text-base ${activeTab.startsWith(tab.id) ? 'bg-blue-50 text-blue-700' : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'}`}><Icon name={tab.icon} className="w-5 h-5" /><span>{tab.label}</span></button>))}
+                            </nav>
+                            {isAdminLoggedIn ? (
+                                <div className="flex items-center space-x-3"><button onClick={() => setActiveTab('admin_dashboard')} className="flex items-center space-x-2 bg-gray-100 text-gray-800 px-5 py-2.5 rounded-lg font-bold hover:bg-gray-200 transition text-sm md:text-base"><Icon name="Settings" className="w-5 h-5" /><span>Dashboard</span></button><button onClick={handleLogout} className="flex items-center space-x-2 border border-red-200 text-red-600 px-4 py-2.5 rounded-lg font-bold hover:bg-red-50 transition text-sm md:text-base"><Icon name="LogOut" className="w-5 h-5" /></button></div>
+                            ) : (
+                                <button onClick={handleAdminClick} className="flex items-center space-x-2 bg-gray-900 text-white px-5 py-2.5 rounded-lg font-bold hover:bg-gray-800 transition text-sm md:text-base"><Icon name="LogIn" className="w-5 h-5" /><span>Admin Login</span></button>
+                            )}
+                        </div>
+                    </header>
+
+                    <main className="flex-1 max-w-5xl mx-auto w-full p-5 md:p-8 pb-28 md:pb-12">
+                        <div className="mb-8 md:mb-10">
+                            <h2 className="text-2xl md:text-3xl font-extrabold text-gray-800 capitalize">
+                                {activeTab === 'reset_password' ? 'Sistem Pemulihan Akses' : activeTab === 'home' ? 'Selamat Datang' : activeTab === 'belajar' ? 'Halaman Belajar' : activeTab.startsWith('belajar_') ? 'Detail Pembelajaran' : activeTab === 'keanggotaan' ? 'Keanggotaan Jemaat' : activeTab === 'member_baru' ? 'Permohonan Member Baru' : activeTab === 'pindah_masuk' ? 'Permohonan Pindah Masuk' : activeTab === 'hubungi' ? 'Hubungi Kami' : activeTab === 'form_acms' ? 'Formulir Pindah Masuk' : activeTab === 'admin_dashboard' ? 'Dashboard Admin' : activeTab}
+                            </h2>
+                            {activeTab === 'home' && <p className="text-sm md:text-base text-gray-500 mt-2 font-medium">Gereja Masehi Advent Hari Ketujuh Tidar 1 Surabaya</p>}
+                            {activeTab === 'admin_dashboard' && <p className="text-sm md:text-base text-gray-500 mt-2 font-medium">Kelola jadwal ibadah, daftar pelayan jemaat, dan media konten web ART1S.</p>}
+                        </div>
+                        {renderContent()}
+                    </main>
+
+                    {activeTab !== 'reset_password' && (
+                        <nav className="md:hidden fixed bottom-0 w-full bg-white border-t border-gray-200 pb-safe z-50 shadow-[0_-4px_10px_-1px_rgba(0,0,0,0.05)]">
+                            <div className="flex justify-around items-center">
+                                {tabs.map(tab => (
+                                    <button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`flex flex-col items-center flex-1 py-3.5 transition ${activeTab.startsWith(tab.id) ? 'text-blue-600' : 'text-gray-500'}`}><Icon name={tab.icon} className={`w-6 h-6 mb-1.5 ${activeTab.startsWith(tab.id) ? 'stroke-[2.5px]' : 'stroke-2'}`} /><span className="text-[11px] font-bold">{tab.label}</span></button>
+                                ))}
+                            </div>
+                        </nav>
+                    )}
+
+                    {/* Floating Action Button (Hubungi / WA) */}
+                    {activeTab !== 'admin_dashboard' && activeTab !== 'hubungi' && activeTab !== 'reset_password' && (
+                        <button 
+                            onClick={() => setActiveTab('hubungi')}
+                            className="fixed bottom-24 md:bottom-8 right-5 md:right-8 z-40 bg-[#25D366] hover:bg-[#20bd5a] text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:scale-110 flex items-center justify-center animate-fade-in"
+                            aria-label="Hubungi Kami"
+                            title="Hubungi Kami"
+                        >
+                            <Icon name="Phone" className="w-6 h-6 md:w-8 md:h-8" />
+                        </button>
+                    )}
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>';
+        
+        // --- INITIAL DATA ---
+        const initialVideos = {
+            homeVideo: "https://www.youtube-nocookie.com/embed?listType=playlist&list=UUz6rQ_5zP0Y0c8V7aKx2jLQ",
+            liveVideo: "https://www.youtube-nocookie.com/embed?listType=playlist&list=UUz6rQ_5zP0Y0c8V7aKx2jLQ"
+        };
+
+        const initialJadwalRabu = {
+            title: "Ibadah Permintaan Doa (Rabu)", time: "19:00 WIB - selesai",
+            petugas: [ { tugas: "Pemimpin Acara", nama: "Bpk. Budi Santoso" }, { tugas: "Renungan", nama: "Pdt. Samuel" }, { tugas: "Doa Syafaat", nama: "Ibu Maria" }, { tugas: "Diakon", nama: "Sdr. Joshua" } ]
+        };
+
+        const initialJadwalSabat = {
+            title: "Ibadah Sabat (Sabtu)", time: "09:00 - 12:00 WIB",
+            sekolahSabatTime: "09:00 - 10:30 WIB",
+            sekolahSabat: [ { tugas: "Pianist", nama: "Sdri. Grace" }, { tugas: "Pembawa Acara", nama: "Bpk. Andi" }, { tugas: "Ayat Inti & Doa Buka", nama: "Bpk. Yohanes" }, { tugas: "Berita Misi", nama: "Ibu Lina" }, { tugas: "Pelayanan Perorangan", nama: "Bpk. Sitorus" } ],
+            khotbahTime: "10:30 - 12:00 WIB",
+            khotbah: [ { tugas: "Khotbah", nama: "Pdt. David Siregar" }, { tugas: "Pendamping 1", nama: "Bpk. Daniel" }, { tugas: "Pendamping 2", nama: "Sdr. Kevin" }, { tugas: "Cerita Anak-anak", nama: "Ibu Sarah" }, { tugas: "Song Leader", nama: "Sdr. Joshua" }, { tugas: "Lagu Pujian", nama: "Koor Pemuda" } ],
+            diakon: [ { tugas: "Diakon 1", nama: "Bpk. Sitorus" }, { tugas: "Diakon 2", nama: "Bpk. Tambunan" }, { tugas: "Diakones 1", nama: "Ibu Sitorus" }, { tugas: "Diakones 2", nama: "Ibu Tambunan" } ],
+            musik: [ { tugas: "Pianis", nama: "Sdri. Grace" }, { tugas: "Keyboardis", nama: "Sdr. Kevin" }, { tugas: "Gitaris", nama: "Sdr. Alex" }, { tugas: "Bassist", nama: "Sdr. Brian" }, { tugas: "Saxophonist", nama: "Bpk. Anton" }, { tugas: "Violinist", nama: "Sdri. Clara" } ],
+            perjamuan: [
+                { tugas: "P. Roti & Anggur 1", nama: "" }, { tugas: "P. Roti & Anggur 2", nama: "" }, { tugas: "P. Roti & Anggur 3", nama: "" }, { tugas: "P. Roti & Anggur 4", nama: "" }, { tugas: "P. Roti & Anggur 5", nama: "" },
+                { tugas: "P. Basuh Kaki 1", nama: "" }, { tugas: "P. Basuh Kaki 2", nama: "" }, { tugas: "P. Basuh Kaki 3", nama: "" },
+                { tugas: "Pelayan Basuh Kaki 1", nama: "" }, { tugas: "Pelayan Basuh Kaki 2", nama: "" }, { tugas: "Pelayan Basuh Kaki 3", nama: "" },
+                { tugas: "Pelayan Perjamuan (L1)", nama: "" }, { tugas: "Pelayan Perjamuan (L2)", nama: "" }, { tugas: "Pelayan Perjamuan (P1)", nama: "" }, { tugas: "Pelayan Perjamuan (P2)", nama: "" },
+                { tugas: "Cuci Baskom 1", nama: "" }, { tugas: "Cuci Baskom 2", nama: "" }, { tugas: "Cuci Baskom 3", nama: "" }, { tugas: "Cuci Baskom 4", nama: "" },
+                { tugas: "Cuci Alat Perjamuan", nama: "Diatur oleh Diakones" }
+            ]
+        };
+
+        const initialDataPejabat = [
+            { id: 'gembala', jabatan: "Gembala Jemaat", nama: "Pdt. [Nama Gembala]", wa: "62800000000", img: "https://ui-avatars.com/api/?name=Gembala+Jemaat&background=eff6ff&color=1e3a8a&size=128" },
+            { id: 'ketua1', jabatan: "Ketua Jemaat 1", nama: "Bpk. [Nama Ketua 1]", wa: "62800000000", img: "https://ui-avatars.com/api/?name=Ketua+1&background=eff6ff&color=1e3a8a&size=128" },
+            { id: 'ketua2', jabatan: "Ketua Jemaat 2", nama: "Bpk. [Nama Ketua 2]", wa: "62800000000", img: "https://ui-avatars.com/api/?name=Ketua+2&background=eff6ff&color=1e3a8a&size=128" },
+            { id: 'sekretaris1', jabatan: "Sekretaris 1", nama: "Ibu [Nama Sekretaris 1]", wa: "62800000000", img: "https://ui-avatars.com/api/?name=Sekretaris+1&background=f0fdf4&color=14532d&size=128" },
+            { id: 'sekretaris2', jabatan: "Sekretaris 2", nama: "Bpk. [Nama Sekretaris 2]", wa: "62800000000", img: "https://ui-avatars.com/api/?name=Sekretaris+2&background=f0fdf4&color=14532d&size=128" },
+            { id: 'bendahara1', jabatan: "Bendahara 1", nama: "Ibu Ari Pahlawani", wa: "62800000000", img: "https://ui-avatars.com/api/?name=Ari+Pahlawani&background=fffbeb&color=78350f&size=128" },
+            { id: 'bendahara2', jabatan: "Bendahara 2", nama: "Ibu Kasfia Naibaho", wa: "62800000000", img: "https://ui-avatars.com/api/?name=Kasfia+Naibaho&background=fffbeb&color=78350f&size=128" },
+            { id: 'diakon', jabatan: "Ketua Diakon & Diakones", nama: "Bpk. [Nama Ketua Diakon]", wa: "62800000000", img: "https://ui-avatars.com/api/?name=Diakon+Diakones&background=f3f4f6&color=1f2937&size=128" },
+            { id: 'pemuda', jabatan: "Ketua Pemuda", nama: "Sdr. [Nama Ketua Pemuda]", wa: "62800000000", img: "https://ui-avatars.com/api/?name=Ketua+Pemuda&background=faf5ff&color=581c87&size=128" }
+        ];
+
+        // --- ICONS (SVG MAPPING) ---
+        const Icon = ({ name, className }) => {
+            const icons = {
+                Home: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>,
+                BookOpen: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>,
+                Video: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2" ry="2"/></svg>,
+                Calendar: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>,
+                Gift: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><polyline points="20 12 20 22 4 22 4 12"/><rect width="20" height="5" x="2" y="7"/><line x1="12" x2="12" y1="22" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>,
+                LogIn: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" x2="3" y1="12" y2="12"/></svg>,
+                LogOut: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>,
+                Download: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>,
+                Headphones: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/></svg>,
+                Users: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>,
+                MessageCircle: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>,
+                Phone: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>,
+                ChevronLeft: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><polyline points="15 18 9 12 15 6"/></svg>,
+                ChevronRight: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><polyline points="9 18 15 12 9 6"/></svg>,
+                Check: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><polyline points="20 6 9 17 4 12"/></svg>,
+                X: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>,
+                Edit: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>,
+                Trash: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>,
+                Settings: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>,
+                Eye: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>,
+                EyeOff: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" x2="22" y1="2" y2="22"/></svg>
+            };
+            return icons[name] || null;
+        };
+
+        // --- HELPER FUNCTIONS FOR DATE ---
+        const toYMD = (d) => {
+            const pad = n => n < 10 ? '0' + n : n;
+            return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+        };
+
+        const formatIndoDateShort = (dateString) => {
+            if (!dateString) return '';
+            const d = new Date(dateString + 'T00:00:00'); 
+            if (isNaN(d.getTime())) return dateString;
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Ags', 'Sep', 'Okt', 'Nov', 'Des'];
+            return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+        };
+
+        const formatIndoDate = (dateString) => {
+            if (!dateString) return '';
+            const d = new Date(dateString + 'T00:00:00'); 
+            if (isNaN(d.getTime())) return dateString;
+            const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Ags', 'Sep', 'Okt', 'Nov', 'Des'];
+            return `${days[d.getDay()]}, ${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+        };
+
+        const formatDate = (dateString) => {
+            if (!dateString) return '';
+            const date = new Date(dateString);
+            if (isNaN(date.getTime())) return dateString;
+            const d = String(date.getDate()).padStart(2, '0');
+            const m = String(date.getMonth() + 1).padStart(2, '0');
+            const y = date.getFullYear();
+            return `${d}/${m}/${y}`;
+        };
+
+        // --- COMPONENTS ---
+        const Home = ({ setActiveTab, videos }) => (
+            <div className="space-y-4 md:space-y-6 animate-fade-in">
+                <div className="grid grid-cols-3 gap-2 md:gap-4">
+                    <a href="https://sabbath-school.adventech.io/in" target="_blank" rel="noopener noreferrer" className="bg-white p-3 md:p-6 rounded-xl shadow-sm flex flex-col items-center text-center justify-center hover:bg-blue-50 transition border border-gray-100">
+                        <Icon name="BookOpen" className="w-6 h-6 md:w-8 md:h-8 text-blue-600 mb-1 md:mb-2" />
+                        <h3 className="font-bold text-xs md:text-sm leading-tight text-gray-800">Sekolah<br/>Sabat</h3>
+                    </a>
+                    <div onClick={() => setActiveTab('keanggotaan')} className="bg-white p-3 md:p-6 rounded-xl shadow-sm flex flex-col items-center text-center justify-center cursor-pointer hover:bg-green-50 transition border border-gray-100">
+                        <Icon name="Users" className="w-6 h-6 md:w-8 md:h-8 text-green-600 mb-1 md:mb-2" />
+                        <h3 className="font-bold text-xs md:text-sm leading-tight text-gray-800">Layanan<br/>Anggota</h3>
+                    </div>
+                    <div onClick={() => setActiveTab('hubungi')} className="bg-white p-3 md:p-6 rounded-xl shadow-sm flex flex-col items-center text-center justify-center cursor-pointer hover:bg-orange-50 transition border border-gray-100">
+                        <Icon name="Phone" className="w-6 h-6 md:w-8 md:h-8 text-orange-600 mb-1 md:mb-2" />
+                        <h3 className="font-bold text-xs md:text-sm leading-tight text-gray-800">Hubungi<br/>Kami</h3>
+                    </div>
+                </div>
+
+                <div className="bg-white p-4 md:p-5 rounded-xl shadow-sm border border-gray-100">
+                    <h2 className="text-xl md:text-2xl font-bold mb-3 text-gray-800 flex items-center">
+                        <Icon name="Video" className="w-5 h-5 md:w-6 md:h-6 mr-2 text-red-600" /> Video Terbaru
+                    </h2>
+                    <div className="relative w-full overflow-hidden rounded-lg" style={{ paddingTop: '56.25%' }}>
+                        <iframe 
+                            className="absolute top-0 left-0 w-full h-full"
+                            src={videos.homeVideo} 
+                            title="YouTube video player" 
+                            frameBorder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowFullScreen>
+                        </iframe>
+                    </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch">
+                    <div className="bg-white p-4 md:p-5 rounded-xl shadow-sm border border-gray-100">
+                        <div className="flex items-center space-x-2 mb-3">
+                            <Icon name="Headphones" className="w-4 h-4 md:w-5 md:h-5 text-purple-600" />
+                            <h3 className="font-bold text-sm md:text-base text-gray-800">Podcast Kita</h3>
+                        </div>
+                        <div className="w-full flex justify-center">
+                            <iframe data-testid="embed-iframe" style={{ borderRadius: '12px' }} src="https://open.spotify.com/embed/show/6PcT9H7ksbbJjsnl1qUfKB/video?utm_source=generator" width="100%" height="152" frameBorder="0" allowFullScreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                    <div className="bg-white p-4 md:p-5 rounded-xl shadow-sm border border-gray-100 flex flex-col justify-center h-full">
+                        <div className="flex items-center space-x-2 mb-3 md:mb-4">
+                            <Icon name="Download" className="w-4 h-4 md:w-5 md:h-5 text-green-600" />
+                            <h3 className="font-bold text-sm md:text-base text-gray-800">Download Aplikasi</h3>
+                        </div>
+                        <div className="grid grid-cols-2 gap-2">
+                            <a href="https://play.lagusion.org/" target="_blank" rel="noopener noreferrer" className="flex flex-col md:flex-row items-center justify-center md:justify-start space-y-1 md:space-y-0 md:space-x-3 bg-gray-50 border border-gray-200 hover:bg-gray-100 px-2 py-3 md:py-3 md:px-4 rounded-lg transition text-center md:text-left shadow-sm">
+                                <img src="https://www.google.com/s2/favicons?domain=play.lagusion.org&sz=128" alt="Lagu Sion Logo" className="w-5 h-5 md:w-6 md:h-6 rounded-sm object-contain" />
+                                <span className="text-xs md:text-sm font-medium leading-tight">Lagu Sion</span>
+                            </a>
+                            <a href="https://sabbath-school.adventech.io/in/" target="_blank" rel="noopener noreferrer" className="flex flex-col md:flex-row items-center justify-center md:justify-start space-y-1 md:space-y-0 md:space-x-3 bg-gray-50 border border-gray-200 hover:bg-gray-100 px-2 py-3 md:py-3 md:px-4 rounded-lg transition text-center md:text-left shadow-sm">
+                                <img src="https://www.google.com/s2/favicons?domain=sabbath-school.adventech.io&sz=128" alt="Sabbath School Logo" className="w-5 h-5 md:w-6 md:h-6 rounded-sm object-contain" />
+                                <span className="text-xs md:text-sm font-medium leading-tight">Sabbath School</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <footer className="mt-8 pt-6 pb-2 border-t border-gray-200 text-center text-gray-400 text-xs md:text-sm">
+                    Copyright &copy; by ART1S Tech Team 2026
+                </footer>
+            </div>
+        );
+
+        const Belajar = ({ setActiveTab }) => {
+            const items = [
+                { id: 'sekolah_sabat', title: 'Sekolah Sabat', desc: 'Akses pelajaran harian Sekolah Sabat secara online untuk pedalaman rohani Anda.', img: 'https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?auto=format&fit=crop&q=80&w=800', color: 'orange', isExternal: true, link: 'https://sabbath-school.adventech.io/in' },
+                { id: 'alkitab', title: 'Alkitab', desc: 'Alkitab adalah firman Allah yang diilhamkan, satu-satunya aturan iman dan praktik.', img: 'https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&q=80&w=800', color: 'blue' },
+                { id: '28dasar', title: '28 Dasar Kepercayaan', desc: 'Gereja Advent memegang keyakinan dasar tertentu sebagai ajaran Kitab Suci.', img: 'https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&q=80&w=800', color: 'green' },
+                { id: 'egw', title: 'Ellen G. White', desc: 'Mengenal tulisan-tulisan yang diilhami untuk menuntun gereja pada akhir zaman.', img: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&q=80&w=800', color: 'purple' }
+            ];
+
+            return (
+                <div className="space-y-6 animate-fade-in">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        {items.map((item) => (
+                            <div key={item.id} className="bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden flex flex-col group hover:shadow-xl transition-shadow">
+                                <div className="h-48 overflow-hidden relative">
+                                    <img src={item.img} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                                    <h3 className="absolute bottom-4 left-4 text-white font-bold text-xl">{item.title}</h3>
+                                </div>
+                                <div className="p-5 flex-1 flex flex-col">
+                                    <p className="text-gray-600 text-sm md:text-base mb-6 flex-1">{item.desc}</p>
+                                    {item.isExternal ? (
+                                        <a href={item.link} target="_blank" rel="noopener noreferrer" className={`w-full py-3 rounded-xl font-bold transition flex items-center justify-center space-x-2 text-sm md:text-base ${item.color === 'blue' ? 'bg-blue-600 hover:bg-blue-700 text-white' : item.color === 'green' ? 'bg-green-600 hover:bg-green-700 text-white' : item.color === 'orange' ? 'bg-orange-600 hover:bg-orange-700 text-white' : 'bg-purple-600 hover:bg-purple-700 text-white'}`}>
+                                            <span>Mulai Belajar</span><Icon name="BookOpen" className="w-4 h-4 md:w-5 md:h-5" />
+                                        </a>
+                                    ) : (
+                                        <button onClick={() => setActiveTab(`belajar_${item.id}`)} className={`w-full py-3 rounded-xl font-bold transition flex items-center justify-center space-x-2 text-sm md:text-base ${item.color === 'blue' ? 'bg-blue-600 hover:bg-blue-700 text-white' : item.color === 'green' ? 'bg-green-600 hover:bg-green-700 text-white' : item.color === 'orange' ? 'bg-orange-600 hover:bg-orange-700 text-white' : 'bg-purple-600 hover:bg-purple-700 text-white'}`}>
+                                            <span>Pelajari Detail</span><Icon name="BookOpen" className="w-4 h-4 md:w-5 md:h-5" />
+                                        </button>
+                                    )}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        };
+
+        const ContactGembala = ({ dataPejabat }) => {
+            const gembala = dataPejabat.find(p => p.id === 'gembala');
+            if (!gembala) return null;
+            return (
+                <div className="mt-10 bg-blue-50 border border-blue-100 rounded-xl p-6 flex flex-col md:flex-row items-center justify-between not-prose shadow-sm">
+                    <div className="flex-1 text-center md:text-left mb-4 md:mb-0 md:mr-6">
+                        <h4 className="font-bold text-blue-900 text-lg md:text-xl mb-1">Ingin Pelajari Lebih Lanjut?</h4>
+                        <p className="text-sm md:text-base text-blue-700 leading-relaxed">Jika Anda memiliki pertanyaan mendalam, membutuhkan bimbingan rohani, atau ingin berdiskusi lebih lanjut, jangan ragu untuk menghubungi Gembala Jemaat kami.</p>
+                    </div>
+                    <a href={`https://wa.me/${gembala.wa}`} target="_blank" rel="noopener noreferrer" className="flex items-center p-3 md:p-4 rounded-xl border border-blue-200 bg-white hover:bg-blue-100 hover:shadow-md transition group shrink-0 w-full md:w-auto">
+                        <img src={gembala.img} alt={gembala.nama} className="w-12 h-12 md:w-14 md:h-14 rounded-full object-cover mr-4 border-2 border-blue-100 group-hover:border-blue-400 transition shrink-0" />
+                        <div className="text-left">
+                            <p className="text-xs font-bold text-blue-600 uppercase tracking-wider mb-0.5">{gembala.jabatan}</p>
+                            <p className="font-semibold text-gray-800 leading-tight text-sm md:text-base pr-2">{gembala.nama}</p>
+                            <p className="text-xs md:text-sm text-blue-600 mt-1 flex items-center font-medium"><Icon name="MessageCircle" className="w-3.5 h-3.5 mr-1" /> Hubungi via WA</p>
+                        </div>
+                    </a>
+                </div>
+            );
+        };
+
+        const DetailAlkitab = ({ setActiveTab, dataPejabat }) => (
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8 animate-fade-in">
+                <button onClick={() => setActiveTab('belajar')} className="text-blue-600 font-medium flex items-center hover:underline mb-6 text-sm md:text-base">&larr; Kembali ke Belajar</button>
+                <div className="prose max-w-none">
+                    <h1 className="text-2xl md:text-3xl font-extrabold text-gray-900 mb-6 border-b pb-4">Doktrin Alkitab</h1>
+                    <img src="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?auto=format&fit=crop&q=80&w=1200" alt="Bible Detail" className="w-full h-64 object-cover rounded-xl mb-8" />
+                    <p className="text-base md:text-lg text-gray-700 font-medium italic mb-6">"Segala tulisan yang diilhamkan Allah memang bermanfaat untuk mengajar, untuk menyatakan kesalahan, untuk memperbaiki kelakuan dan untuk mendidik orang dalam kebenaran." (2 Timotius 3:16)</p>
+                    <div className="space-y-4 text-base md:text-lg text-gray-700">
+                        <p>Kitab Suci, yang terdiri dari Perjanjian Lama dan Perjanjian Baru, adalah Firman Allah yang tertulis, diberikan melalui ilham ilahi. Penulis yang diilhami berbicara dan menulis saat mereka digerakkan oleh Roh Kudus.</p>
+                        <h3 className="text-xl md:text-2xl text-gray-800">Otoritas Firman Allah</h3>
+                        <p>Dalam Firman ini, Allah telah memberikan pengetahuan yang diperlukan bagi keselamatan manusia. Kitab Suci adalah wahyu yang tertinggi, otoritatif, dan merupakan standar karakter yang sempurna.</p>
+                        <h3 className="text-xl md:text-2xl text-gray-800">Ujian Pengalaman</h3>
+                        <p>Alkitab adalah ujian bagi pengalaman, penentu doktrin-doktrin yang otoritatif, dan catatan yang dapat dipercaya tentang tindakan Allah dalam sejarah dunia.</p>
+                        <div className="bg-blue-50 p-6 rounded-xl border-l-4 border-blue-600 my-8 italic text-blue-900 text-base md:text-lg">Firman-Mu itu pelita bagi kakiku dan terang bagi jalanku. (Mazmur 119:105)</div>
+                        <ContactGembala dataPejabat={dataPejabat} />
+                    </div>
+                </div>
+            </div>
+        );
+
+        const Detail28Dasar = ({ setActiveTab, dataPejabat }) => {
+            const [openIndex, setOpenIndex] = React.useState(null);
+            const doktrinData = [
+                { category: "Doktrin tentang Allah", emoji: "✝️", items: [ { title: "Kitab Suci", desc: "Firman Allah yang diilhami.", ref: "2 Timotius 3:16-17; 2 Petrus 1:20-21" }, { title: "Tritunggal / Trinitas", desc: "Allah yang Esa dalam tiga Pribadi.", ref: "Matius 28:19; 2 Korintus 13:14" }, { title: "Bapa", desc: "Allah sebagai Pencipta dan Pemelihara.", ref: "Yohanes 3:16; 1 Yohanes 4:8" }, { title: "Anak", desc: "Yesus Kristus sebagai Penebus.", ref: "Yohanes 1:1-3,14; Kolose 2:9" }, { title: "Roh Kudus", desc: "Pribadi Ilahi yang membimbing umat.", ref: "Yohanes 14:16-17; Kisah 1:8" } ] },
+                { category: "Doktrin tentang Manusia", emoji: "😁", items: [ { title: "Penciptaan", desc: "Dunia diciptakan dalam enam hari literal.", ref: "Kejadian 1:1; Keluaran 20:11" }, { title: "Sifat Manusia", desc: "Manusia diciptakan dalam rupa Allah tetapi jatuh dalam dosa.", ref: "Kejadian 1:26-27; Roma 3:23" } ] },
+                { category: "Doktrin tentang Keselamatan", emoji: "🙏", items: [ { title: "Perjuangan Besar", desc: "Pertentangan antara Kristus dan Setan.", ref: "Wahyu 12:7-9; 1 Petrus 5:8" }, { title: "Kehidupan, Kematian, dan Kebangkitan Kristus", desc: "Yesus mati dan bangkit untuk keselamatan manusia.", ref: "Roma 6:23; 1 Korintus 15:3-4" }, { title: "Pengalaman Keselamatan", desc: "Keselamatan oleh kasih karunia melalui iman.", ref: "Efesus 2:8-9; Roma 10:9" }, { title: "Berkembang dalam Kristus", desc: "Hidup dalam pertumbuhan rohani.", ref: "Kolose 2:6-7; 2 Petrus 3:18" } ] },
+                { category: "Doktrin tentang Gereja", emoji: "⛪", items: [ { title: "Gereja", desc: "Tubuh Kristus yang terdiri dari umat percaya.", ref: "Efesus 1:22-23; 1 Korintus 12:12-14" }, { title: "Sisa Umat Tuhan dan Misinya", desc: "Umat sisa yang menaati hukum Allah dan memiliki iman Yesus.", ref: "Wahyu 12:17; Wahyu 14:6-12" }, { title: "Kesatuan dalam Tubuh Kristus", desc: "Kesatuan gereja dalam Kristus.", ref: "Yohanes 17:20-23; Efesus 4:3-6" }, { title: "Baptisan", desc: "Baptisan oleh pencelupan sebagai tanda komitmen.", ref: "Matius 28:19-20; Roma 6:3-4" }, { title: "Perjamuan Kudus (Komuni)", desc: "Perjamuan Tuhan sebagai peringatan pengorbanan Kristus.", ref: "1 Korintus 11:23-26; Yohanes 13:14-17" } ] },
+                { category: "Doktrin tentang Kehidupan Kristen", emoji: "👨‍👩‍👦", items: [ { title: "Karunia Rohani dan Pelayanan", desc: "Karunia Rohani diberikan untuk membangun gereja.", ref: "Efesus 4:11-16; 1 Korintus 12:7-11" }, { title: "Karunia Nubuat", desc: "Kami percaya karunia ini diwujudkan dalam pelayanan Ellen G. White.", ref: "2 Tim. 3:16, 17; Ibr. 1:1-3" }, { title: "Hukum Allah", desc: "Sepuluh Perintah tetap berlaku.", ref: "Keluaran 20:1-17; Matius 5:17-19" }, { title: "Hari Sabat", desc: "Sabat hari ketujuh sebagai hari perhentian.", ref: "Kejadian 2:2-3; Keluaran 20:8-11" }, { title: "Penatalayanan Kristen", desc: "Mengelola sumber daya untuk kemuliaan Tuhan.", ref: "Maleakhi 3:10; 2 Korintus 9:6-7" }, { title: "Perilaku Kristen", desc: "Hidup dalam kekudusan dan sesuai Firman Tuhan.", ref: "1 Korintus 10:31; Filipi 4:8" }, { title: "Pernikahan dan Keluarga", desc: "Pernikahan kudus antara pria dan wanita.", ref: "Kejadian 2:24; Efesus 5:22-25" } ] },
+                { category: "Doktrin tentang Peristiwa Akhir Zaman", emoji: "🕘", items: [ { title: "Pelayanan Kristus di Tempat Kudus Surgawi", desc: "Kristus sebagai Imam Besar.", ref: "Ibrani 8:1-2; Daniel 7:9-10" }, { title: "Kedatangan Kedua Kristus", desc: "Kedatangan Kristus yang kedua kali.", ref: "Yohanes 14:1-3; 1 Tesalonika 4:16-17" }, { title: "Kematian dan Kebangkitan", desc: "Kematian adalah tidur sampai kebangkitan.", ref: "Pengkhotbah 9:5-6; 1 Korintus 15:51-54" }, { title: "Seribu Tahun dan Akhir Dosa", desc: "Masa seribu tahun sebelum penghakiman terakhir.", ref: "Wahyu 20:1-10" }, { title: "Bumi Baru", desc: "Dunia yang baru sebagai tempat tinggal kekal.", ref: "Wahyu 21:1-5; Yesaya 65:17" } ] }
+            ];
+
+            return (
+                <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8 animate-fade-in">
+                    <button onClick={() => setActiveTab('belajar')} className="text-green-600 font-medium flex items-center hover:underline mb-6 text-sm md:text-base">&larr; Kembali ke Belajar</button>
+                    <div className="prose max-w-none">
+                        <h1 className="text-2xl md:text-3xl font-extrabold text-gray-900 mb-6 border-b pb-4">28 Dasar Kepercayaan</h1>
+                        <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&q=80&w=1200" alt="28 Doctrine Detail" className="w-full h-64 object-cover rounded-xl mb-8" />
+                        <p className="mb-8 text-base md:text-lg text-gray-700">Gereja Masehi Advent Hari Ketujuh menerima Alkitab sebagai satu-satunya kredo mereka dan memegang keyakinan dasar tertentu sebagai ajaran Kitab Suci.</p>
+                        <div className="space-y-3 not-prose">
+                            {doktrinData.map((section, idx) => (
+                                <div key={idx} className="border border-green-200 rounded-xl overflow-hidden shadow-sm">
+                                    <button onClick={() => setOpenIndex(openIndex === idx ? null : idx)} className="w-full flex justify-between items-center bg-green-50 p-4 font-bold text-green-900 hover:bg-green-100 transition-colors text-sm md:text-base">
+                                        <span className="flex items-center space-x-3"><span className="text-xl md:text-2xl">{section.emoji}</span><span>{section.category}</span></span><Icon name="ChevronDown" className={`w-5 h-5 md:w-6 md:h-6 text-green-700 transition-transform duration-300 ${openIndex === idx ? 'rotate-180' : ''}`} />
+                                    </button>
+                                    {openIndex === idx && (
+                                        <div className="p-4 bg-white divide-y divide-gray-100 border-t border-green-100 animate-fade-in">
+                                            {section.items.map((item, itemIdx) => (
+                                                <div key={itemIdx} className="py-3 first:pt-1 last:pb-1">
+                                                    <div className="font-semibold text-gray-800 text-sm md:text-base">{item.title}</div><div className="text-sm md:text-base text-gray-600 mt-1">{item.desc}</div><div className="text-xs md:text-sm font-medium text-green-600 mt-1.5 flex items-center"><Icon name="BookOpen" className="w-3.5 h-3.5 mr-1.5" /> {item.ref}</div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+                        <ContactGembala dataPejabat={dataPejabat} />
+                    </div>
+                </div>
+            );
+        };
+
+        const DetailEGW = ({ setActiveTab, dataPejabat }) => (
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8 animate-fade-in">
+                <button onClick={() => setActiveTab('belajar')} className="text-purple-600 font-medium flex items-center hover:underline mb-6 text-sm md:text-base">&larr; Kembali ke Belajar</button>
+                <div className="prose max-w-none">
+                    <h1 className="text-2xl md:text-3xl font-extrabold text-gray-900 mb-6 border-b pb-4">Karunia Nubuat: Ellen G. White</h1>
+                    <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&q=80&w=1200" alt="EGW Detail" className="w-full h-64 object-cover rounded-xl mb-8" />
+                    <div className="space-y-4 text-base md:text-lg text-gray-700">
+                        <p>Salah satu karunia Roh Kudus adalah nubuat. Karunia ini adalah tanda pengenal gereja yang sisa dan itu diwujudkan dalam pelayanan Ellen G. White.</p>
+                        <h3 className="text-xl md:text-2xl text-gray-800">Peran dalam Gereja</h3>
+                        <p>Sebagai utusan Tuhan, tulisan-tulisannya adalah sumber kebenaran yang terus menerus dan berwibawa yang memberikan hiburan, bimbingan, instruksi, dan koreksi kepada gereja.</p>
+                        <h3 className="text-xl md:text-2xl text-gray-800">Menunjuk ke Alkitab</h3>
+                        <p>Tulisan-tulisannya juga memperjelas bahwa Alkitab adalah standar di mana semua pengajaran dan pengalaman harus diuji. Beliau menyebut tulisan-tulisannya sebagai "terang yang lebih kecil untuk menuntun pria dan wanita kepada terang yang lebih besar" yaitu Alkitab.</p>
+                        <div className="bg-purple-50 p-6 rounded-xl border-l-4 border-purple-600 my-8"><h4 className="font-bold text-purple-900 mb-2">Tahukah Anda?</h4><p className="text-sm md:text-base text-purple-800">Ellen G. White adalah salah satu penulis wanita yang karyanya paling banyak diterjemahkan dalam sejarah kesusastraan dunia, dengan fokus utama pada pendidikan, kesehatan, dan kehidupan rohani.</p></div>
+                        <ContactGembala dataPejabat={dataPejabat} />
+                    </div>
+                </div>
+            </div>
+        );
+
+        // Helper Rendering Sub-Group untuk Perjamuan
+        const renderPerjamuanGroup = (title, items) => (
+            <div className="bg-white border border-purple-100 rounded-lg overflow-hidden shadow-sm">
+                <h3 className="font-bold text-purple-800 text-sm md:text-base mb-0 bg-purple-50 p-2.5 md:p-3 border-b border-purple-100 text-center uppercase tracking-wider">{title}</h3>
+                <div className="flex flex-col">
+                    {items.map((p, i) => (
+                        <div key={i} className="flex justify-between items-center px-3 py-2.5 border-b border-purple-50 last:border-0 hover:bg-purple-50/50 transition">
+                            <span className="text-xs md:text-sm text-purple-600 font-semibold w-1/2">{p.tugas}</span>
+                            <span className="text-sm md:text-base font-bold text-gray-800 text-right w-1/2">{p.nama}</span>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        );
+
+        const Jadwal = ({ activeRabu, activeSabat, rabuYMD, sabatYMD, showPerjamuan, perjamuanYMD, activePerjamuan }) => (
+            <div className="space-y-6 animate-fade-in">
+                {/* Banner Spesial Perjamuan Kudus */}
+                {showPerjamuan && (
+                    <div className="bg-gradient-to-br from-purple-50 to-white p-5 md:p-6 rounded-xl shadow-md border border-purple-200 relative overflow-hidden animate-fade-in">
+                        <div className="absolute top-0 right-0 bg-purple-600 text-white text-xs font-bold px-4 py-1.5 rounded-bl-xl uppercase tracking-widest shadow-sm">Jadwal Spesial</div>
+                        <div className="flex items-center space-x-3 mb-5 border-b border-purple-200 pb-3">
+                            <div className="w-10 h-10 md:w-12 md:h-12 bg-purple-100 rounded-full flex items-center justify-center text-purple-600"><Icon name="Gift" className="w-5 h-5 md:w-6 md:h-6" /></div>
+                            <div>
+                                <h2 className="text-xl md:text-2xl font-black text-purple-900 leading-tight">Pelayanan Perjamuan Kudus</h2>
+                                <p className="text-sm md:text-base font-bold text-purple-600 mt-0.5">{formatIndoDate(perjamuanYMD)}</p>
+                            </div>
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            {renderPerjamuanGroup("Persiapan Roti & Anggur", activePerjamuan.slice(0, 5))}
+                            {renderPerjamuanGroup("Persiapan & Basuh Kaki", activePerjamuan.slice(5, 11))}
+                            {renderPerjamuanGroup("Pelayan Perjamuan", activePerjamuan.slice(11, 15))}
+                            {renderPerjamuanGroup("Pembersihan Alat", activePerjamuan.slice(15, 20))}
+                        </div>
+                    </div>
+                )}
+
+                {/* Rabu */}
+                <div className="bg-white p-5 md:p-6 rounded-xl shadow-sm border border-gray-100">
+                    <div className="flex flex-col md:flex-row md:items-center justify-between mb-4 border-b pb-3 border-gray-100">
+                        <div className="flex items-center space-x-3">
+                            <Icon name="Calendar" className="w-6 h-6 md:w-8 md:h-8 text-blue-600" />
+                            <div><h2 className="text-xl md:text-2xl font-bold text-gray-800">{activeRabu.title}</h2><p className="text-sm md:text-base font-semibold text-gray-500">{formatIndoDate(rabuYMD)}</p></div>
+                        </div>
+                        <span className="text-xs md:text-sm font-bold text-blue-700 bg-blue-50 px-3 py-1.5 rounded-full mt-3 md:mt-0 w-fit border border-blue-100">{activeRabu.time}</span>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2">
+                        {activeRabu.petugas.map((p, idx) => (
+                            <div key={idx} className="flex justify-between items-center py-2.5 border-b border-gray-50 last:border-0 md:[&:nth-last-child(-n+2)]:border-0 px-2 hover:bg-gray-50 transition-colors rounded"><span className="text-sm md:text-base text-gray-500">{p.tugas}</span><span className="text-sm md:text-base font-semibold text-gray-800 text-right">{p.nama}</span></div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Sabat */}
+                <div className="bg-white p-5 md:p-6 rounded-xl shadow-sm border-t-4 border-blue-600">
+                    <div className="flex flex-col md:flex-row md:items-center justify-between mb-5 border-b pb-3 border-gray-100">
+                        <div className="flex items-center space-x-3">
+                            <Icon name="Calendar" className="w-6 h-6 md:w-8 md:h-8 text-blue-600" />
+                            <div><h2 className="text-xl md:text-2xl font-bold text-gray-800">{activeSabat.title}</h2><p className="text-sm md:text-base font-semibold text-gray-500">{formatIndoDate(sabatYMD)}</p></div>
+                        </div>
+                        <span className="text-xs md:text-sm font-bold text-blue-700 bg-blue-50 px-3 py-1.5 rounded-full mt-3 md:mt-0 w-fit border border-blue-100">Waktu: {activeSabat.time}</span>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 items-start">
+                        <div className="space-y-6">
+                            <div>
+                                <div className="flex justify-between items-end mb-2 bg-gray-50 p-3 rounded-lg border border-gray-100"><h3 className="font-bold text-gray-700 text-sm md:text-base uppercase tracking-wide">Sekolah Sabat</h3><span className="text-xs md:text-sm text-gray-500 font-bold">{activeSabat.sekolahSabatTime}</span></div>
+                                <div className="flex flex-col">{activeSabat.sekolahSabat.map((p, idx) => (<div key={idx} className="flex justify-between items-center py-2 border-b border-gray-50 last:border-0 hover:bg-gray-50 transition-colors rounded px-2"><span className="text-sm md:text-base text-gray-500">{p.tugas}</span><span className="text-sm md:text-base font-semibold text-gray-800 text-right">{p.nama}</span></div>))}</div>
+                            </div>
+                            <div>
+                                <div className="mb-2 bg-gray-50 p-3 rounded-lg border border-gray-100"><h3 className="font-bold text-gray-700 text-sm md:text-base uppercase tracking-wide">Diakon & Diakones</h3></div>
+                                <div className="flex flex-col">{activeSabat.diakon.map((p, idx) => (<div key={idx} className="flex justify-between items-center py-2 border-b border-gray-50 last:border-0 hover:bg-gray-50 transition-colors rounded px-2"><span className="text-sm md:text-base text-gray-500">{p.tugas}</span><span className="text-sm md:text-base font-semibold text-gray-800 text-right">{p.nama}</span></div>))}</div>
+                            </div>
+                        </div>
+
+                        <div className="space-y-6">
+                            <div>
+                                <div className="flex justify-between items-end mb-2 bg-gray-50 p-3 rounded-lg border border-gray-100"><h3 className="font-bold text-gray-700 text-sm md:text-base uppercase tracking-wide">Khotbah / Ibadah Umum</h3><span className="text-xs md:text-sm text-gray-500 font-bold">{activeSabat.khotbahTime}</span></div>
+                                <div className="flex flex-col">{activeSabat.khotbah.map((p, idx) => (<div key={idx} className="flex justify-between items-center py-2 border-b border-gray-50 last:border-0 hover:bg-gray-50 transition-colors rounded px-2"><span className="text-sm md:text-base text-gray-500">{p.tugas}</span><span className="text-sm md:text-base font-semibold text-gray-800 text-right">{p.nama}</span></div>))}</div>
+                            </div>
+                            <div>
+                                <div className="mb-2 bg-gray-50 p-3 rounded-lg border border-gray-100"><h3 className="font-bold text-gray-700 text-sm md:text-base uppercase tracking-wide">Pelayanan Musik</h3></div>
+                                <div className="flex flex-col">{activeSabat.musik.map((p, idx) => (<div key={idx} className="flex justify-between items-center py-2 border-b border-gray-50 last:border-0 hover:bg-gray-50 transition-colors rounded px-2"><span className="text-sm md:text-base text-gray-500">{p.tugas}</span><span className="text-sm md:text-base font-semibold text-gray-800 text-right">{p.nama}</span></div>))}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+
+        const Live = ({ setActiveTab, activeRabu, activeSabat, rabuYMD, sabatYMD, showPerjamuan, perjamuanYMD, activePerjamuan, videos }) => {
+            const today = new Date();
+            const todayDay = today.getDay();
+            
+            let isToday = false;
+            let targetJadwal = null;
+            let targetDateStr = '';
+            
+            if (todayDay === 3) { targetJadwal = activeRabu; targetDateStr = rabuYMD; isToday = true; } 
+            else if (todayDay === 6) { targetJadwal = activeSabat; targetDateStr = sabatYMD; isToday = true; } 
+            else if (todayDay < 3) { targetJadwal = activeRabu; targetDateStr = rabuYMD; } 
+            else { targetJadwal = activeSabat; targetDateStr = sabatYMD; }
+
+            const isRabu = new Date(targetDateStr + 'T00:00:00').getDay() === 3;
+
+            return (
+                <div className="space-y-6 animate-fade-in">
+                    <div className="bg-black rounded-xl overflow-hidden shadow-lg">
+                        <div className="relative w-full" style={{ paddingTop: '56.25%' }}>
+                            <iframe className="absolute top-0 left-0 w-full h-full" src={videos.liveVideo} title="YouTube Live Stream" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                        </div>
+                        <div className="p-4 bg-gray-900 text-white">
+                            <h2 className="font-bold text-lg md:text-xl flex items-center"><span className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-red-600 animate-pulse mr-2.5"></span> Live Streaming ART1STV</h2>
+                        </div>
+                    </div>
+
+                    {showPerjamuan && !isRabu && (
+                        <div className="bg-purple-600 text-white p-4 rounded-xl shadow-md flex items-center justify-between animate-fade-in">
+                            <div>
+                                <h3 className="font-bold text-lg md:text-xl flex items-center"><Icon name="Gift" className="w-5 h-5 md:w-6 md:h-6 mr-2" /> Sabat Perjamuan Kudus</h3>
+                                <p className="text-sm md:text-base text-purple-200 mt-0.5">{formatIndoDate(perjamuanYMD)}</p>
+                            </div>
+                            <button onClick={() => setActiveTab('jadwal')} className="bg-white text-purple-700 px-4 py-2 rounded-lg text-sm md:text-base font-bold shadow hover:bg-purple-50 transition">Lihat Petugas</button>
+                        </div>
+                    )}
+
+                    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                        <div className="flex justify-between items-start sm:items-center mb-6 flex-col sm:flex-row gap-4">
+                            <div>
+                                <h3 className={`text-sm md:text-base font-bold uppercase tracking-wider mb-2 ${isToday ? 'text-red-600' : 'text-blue-600'}`}>{isToday ? "🔥 Jadwal Hari Ini" : "⏳ Jadwal Terdekat"}</h3>
+                                <div className="flex items-center space-x-2"><Icon name="Calendar" className="w-6 h-6 md:w-8 md:h-8 text-gray-800" /><h2 className="text-xl md:text-2xl font-bold text-gray-800">{targetJadwal.title}</h2></div>
+                                <p className="text-sm md:text-base text-gray-500 mt-1.5 font-semibold">{formatIndoDate(targetDateStr)} &bull; Pukul: {targetJadwal.time}</p>
+                            </div>
+                            <button onClick={() => setActiveTab('jadwal')} className="hidden sm:flex items-center text-sm md:text-base font-medium text-blue-600 hover:text-blue-800 transition bg-blue-50 hover:bg-blue-100 px-4 py-2.5 rounded-lg">Lihat Semua Jadwal &rarr;</button>
+                        </div>
+
+                        {isRabu ? (
+                            <div className="overflow-x-auto border rounded-lg border-gray-100">
+                                <table className="w-full text-left text-sm md:text-base border-collapse">
+                                    <tbody>
+                                        {targetJadwal.petugas.map((p, idx) => (<tr key={idx} className="border-b border-gray-100 last:border-0 hover:bg-gray-50"><td className="py-3.5 px-4 text-gray-600 w-1/2">{p.tugas}</td><td className="py-3.5 px-4 font-medium text-gray-800 w-1/2">{p.nama}</td></tr>))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        ) : (
+                            <div className="space-y-4 md:space-y-6">
+                                <div className="border rounded-lg border-gray-100 overflow-hidden">
+                                    <div className="bg-gray-50 px-4 py-3 border-b border-gray-100 font-bold text-gray-700 text-sm md:text-base">Ibadah Umum / Khotbah</div>
+                                    <table className="w-full text-left text-sm md:text-base border-collapse">
+                                        <tbody>
+                                            {targetJadwal.khotbah.map((p, idx) => (<tr key={idx} className="border-b border-gray-100 last:border-0 hover:bg-gray-50"><td className="py-2.5 px-4 text-gray-600 w-1/2">{p.tugas}</td><td className="py-2.5 px-4 font-medium text-gray-800 w-1/2">{p.nama}</td></tr>))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div className="border rounded-lg border-gray-100 overflow-hidden">
+                                    <div className="bg-gray-50 px-4 py-3 border-b border-gray-100 font-bold text-gray-700 text-sm md:text-base">Sekolah Sabat</div>
+                                    <table className="w-full text-left text-sm md:text-base border-collapse">
+                                        <tbody>
+                                            {targetJadwal.sekolahSabat.map((p, idx) => (<tr key={idx} className="border-b border-gray-100 last:border-0 hover:bg-gray-50"><td className="py-2.5 px-4 text-gray-600 w-1/2">{p.tugas}</td><td className="py-2.5 px-4 font-medium text-gray-800 w-1/2">{p.nama}</td></tr>))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        )}
+                        <button onClick={() => setActiveTab('jadwal')} className="sm:hidden w-full mt-5 flex justify-center items-center text-sm md:text-base font-medium text-blue-600 hover:text-blue-800 transition bg-blue-50 hover:bg-blue-100 px-4 py-3.5 rounded-lg">Lihat Semua Jadwal &rarr;</button>
+                    </div>
+                </div>
+            );
+        };
+
+        const Persembahan = ({ dataPejabat }) => {
+            const bendaharas = dataPejabat.filter(p => ['bendahara1', 'bendahara2'].includes(p.id));
+            const qrisUrl = "https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/811ba11f-520e-4307-89d3-34cd3011d3c8/WhatsApp_Image_2025-05-16_at_12.01.55_65684299/w=1920,quality=90,fit=scale-down";
+            return (
+                <div className="space-y-4 md:space-y-6 animate-fade-in">
+                    <div className="bg-white p-5 md:p-6 rounded-xl shadow-sm border border-gray-100">
+                        <div className="flex items-center space-x-3 mb-5 border-b border-gray-100 pb-3"><Icon name="Gift" className="w-6 h-6 md:w-8 md:h-8 text-blue-600" /><h2 className="text-xl md:text-2xl font-bold text-gray-800">Saluran Berkat</h2></div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 items-stretch mb-6">
+                            <div className="flex flex-col items-center p-5 bg-gray-50 rounded-xl border border-gray-100 h-full justify-center">
+                                <div className="w-48 md:w-56 bg-white border border-gray-200 p-2.5 rounded-xl shadow-sm mb-4"><img src={qrisUrl} alt="QRIS GMAHK Tidar 1" className="w-full h-auto object-contain rounded-lg" crossOrigin="anonymous" /></div>
+                                <a href={qrisUrl} target="_blank" rel="noopener noreferrer" download="QRIS_GMAHK_Tidar1.jpg" className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg text-sm md:text-base font-medium transition flex items-center space-x-2 shadow-sm"><Icon name="Download" className="w-4 h-4" /><span>Download QRIS</span></a>
+                            </div>
+                            <div className="flex flex-col justify-center text-center p-6 bg-blue-50 border border-blue-100 rounded-xl h-full shadow-inner">
+                                <p className="text-sm md:text-base text-blue-800 mb-2">Atau Transfer Bank ke:</p><p className="font-bold text-3xl md:text-4xl tracking-wider my-2 font-mono text-blue-900">511-44-7777-8</p><p className="text-sm md:text-base font-medium text-blue-800">BCA a/n GMAHK Tidar 1 Surabaya</p>
+                            </div>
+                        </div>
+                        <div className="bg-gray-50 p-5 rounded-xl border border-gray-200">
+                            <div className="mb-6">
+                                <h3 className="font-bold text-gray-800 text-sm md:text-base mb-1.5 flex items-center"><span className="bg-green-100 text-green-700 w-6 h-6 rounded-full inline-flex items-center justify-center text-xs md:text-sm mr-2.5">1</span>Hubungi Bendahara</h3>
+                                <p className="text-xs md:text-sm text-gray-600 mb-3 pl-8">Kirim bukti transfer ke salah satu Bendahara kami:</p>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pl-0 md:pl-8">
+                                    {bendaharas.map((p, idx) => (
+                                        <a key={idx} href={`https://wa.me/${p.wa}`} target="_blank" rel="noopener noreferrer" className="flex items-center p-2.5 rounded-lg border border-gray-200 bg-white hover:bg-green-50 hover:border-green-200 transition group shadow-sm"><img src={p.img} alt={p.nama} className="w-10 h-10 rounded-full object-cover mr-3.5 border border-gray-100" /><div><p className="text-xs font-bold text-gray-500 group-hover:text-green-600 uppercase tracking-wider mb-0.5">{p.jabatan}</p><p className="font-semibold text-gray-800 text-sm">{p.nama}</p></div></a>
+                                    ))}
+                                </div>
+                            </div>
+                            <div>
+                                <h3 className="font-bold text-gray-800 text-sm md:text-base mb-1.5 flex items-center"><span className="bg-blue-100 text-blue-700 w-6 h-6 rounded-full inline-flex items-center justify-center text-xs md:text-sm mr-2.5">2</span>Sertakan Keterangan</h3>
+                                <p className="text-xs md:text-sm text-gray-500 mb-3 pl-8">Sebutkan rincian nominal persembahan Anda pada chat WhatsApp:</p>
+                                <div className="flex flex-wrap gap-2 pl-0 md:pl-8">
+                                    {['Perpuluhan', 'Persembahan Terpadu', 'Persembahan Khusus', 'Persembahan Syukur', 'Donasi Kas Gereja', 'Donasi Kas Departemen', 'Lain-lain'].map((item, i) => { const colors = ['bg-blue-500', 'bg-green-500', 'bg-purple-500', 'bg-yellow-500', 'bg-orange-500', 'bg-teal-500', 'bg-gray-500']; return (<span key={i} className="flex items-center bg-white border border-gray-200 px-3 py-1.5 rounded-full text-xs md:text-sm text-gray-700 shadow-sm font-medium"><span className={`w-2 h-2 rounded-full ${colors[i]} mr-2`}></span>{item}</span>); })}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const Keanggotaan = ({ setActiveTab }) => (
+            <div className="space-y-6 animate-fade-in">
+                <button onClick={() => setActiveTab('home')} className="text-blue-600 font-medium flex items-center hover:underline mb-2 text-sm md:text-base">&larr; Kembali ke Home</button>
+                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                    <h2 className="text-xl md:text-2xl font-bold mb-4 text-gray-800 border-b pb-2">Layanan Keanggotaan</h2>
+                    <p className="text-sm md:text-base text-gray-600 mb-6">Pilih jenis permohonan keanggotaan yang sesuai dengan status Anda saat ini.</p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-stretch">
+                        <button onClick={() => setActiveTab('member_baru')} className="w-full text-left p-4 rounded-lg border border-blue-100 bg-blue-50 hover:bg-blue-100 transition flex items-center justify-between h-full"><div><h3 className="font-bold text-base md:text-lg text-blue-900">Member Baru</h3><p className="text-sm md:text-base text-blue-700 mt-1">Untuk yang belum pernah menjadi anggota GMAHK (Non-Adventist).</p></div><span className="text-blue-600 font-bold text-xl md:text-2xl ml-4">&rarr;</span></button>
+                        <button onClick={() => setActiveTab('pindah_masuk')} className="w-full text-left p-4 rounded-lg border border-green-100 bg-green-50 hover:bg-green-100 transition flex items-center justify-between h-full"><div><h3 className="font-bold text-base md:text-lg text-green-900">Pindah Masuk - ACMS</h3><p className="text-sm md:text-base text-green-700 mt-1">Untuk anggota GMAHK yang ingin pindah ke Tidar 1.</p></div><span className="text-green-600 font-bold text-xl md:text-2xl ml-4">&rarr;</span></button>
+                    </div>
+                </div>
+                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100 pb-safe">
+                    <h2 className="text-xl md:text-2xl font-bold mb-4 text-gray-800 border-b pb-2">Jadwal Kegiatan & Pelayanan</h2>
+                    <p className="text-sm md:text-base text-gray-600 mb-6">Lihat jadwal ibadah rutin dan daftar petugas pelayanan jemaat Tidar 1.</p>
+                    <button onClick={() => setActiveTab('jadwal')} className="w-full text-left p-4 rounded-lg border border-purple-100 bg-purple-50 hover:bg-purple-100 transition flex items-center justify-between"><div className="flex items-center"><div className="w-12 h-12 md:w-14 md:h-14 bg-purple-500 rounded-full flex items-center justify-center text-white mr-4 shrink-0"><Icon name="Calendar" className="w-6 h-6 md:w-7 md:h-7" /></div><div><h3 className="font-bold text-base md:text-lg text-purple-900">Lihat Jadwal Jemaat</h3><p className="text-sm md:text-base text-purple-700 mt-1">Jadwal petugas ibadah hari Rabu dan Sabat.</p></div></div><span className="text-purple-600 font-bold text-xl md:text-2xl ml-4">&rarr;</span></button>
+                </div>
+            </div>
+        );
+
+        const MemberBaru = ({ setActiveTab, dataPejabat }) => {
+            const contacts = dataPejabat.filter(p => ['gembala', 'ketua1', 'ketua2'].includes(p.id));
+            return (
+                <div className="space-y-6 animate-fade-in">
+                    <button onClick={() => setActiveTab('keanggotaan')} className="text-blue-600 font-medium flex items-center hover:underline mb-2 text-sm md:text-base">&larr; Kembali ke Pilihan Keanggotaan</button>
+                    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                        <h2 className="text-xl md:text-2xl font-bold mb-4 text-gray-800 border-b pb-2">Hubungi Pelayan Jemaat</h2>
+                        <p className="text-sm md:text-base text-gray-600 mb-5">Silakan hubungi Pendeta atau Ketua Jemaat kami untuk bimbingan rohani dan persiapan keanggotaan:</p>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-stretch">
+                            {contacts.map(p => (<a key={p.id} href={`https://wa.me/${p.wa}`} target="_blank" className="flex items-center justify-between p-4 rounded-lg border border-blue-200 bg-blue-50 hover:bg-blue-100 transition h-full"><div className="flex items-center"><img src={p.img} alt={p.nama} className="w-12 h-12 md:w-14 md:h-14 rounded-full object-cover mr-4 border border-blue-200 shrink-0" /><div><p className="font-bold text-blue-900 text-sm md:text-base leading-tight">{p.jabatan}</p><p className="text-xs md:text-sm text-blue-700 mt-1">{p.nama}</p></div></div><span className="text-blue-600 font-bold ml-2 text-lg md:text-xl">&rarr;</span></a>))}
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const PindahMasuk = ({ setActiveTab, dataPejabat }) => {
+            const contacts = dataPejabat.filter(p => ['sekretaris1', 'sekretaris2'].includes(p.id));
+            return (
+                <div className="space-y-6 animate-fade-in">
+                    <button onClick={() => setActiveTab('keanggotaan')} className="text-blue-600 font-medium flex items-center hover:underline mb-2 text-sm md:text-base">&larr; Kembali ke Pilihan Keanggotaan</button>
+                    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                        <h2 className="text-xl md:text-2xl font-bold mb-4 text-gray-800 border-b pb-2">Pengurusan ACMS</h2>
+                        <p className="text-sm md:text-base text-gray-600 mb-5">Silakan isi formulir ACMS atau hubungi Sekretaris Jemaat kami untuk bantuan kepindahan:</p>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-stretch">
+                            <button onClick={() => setActiveTab('form_acms')} className="flex items-center justify-between p-4 rounded-lg border border-green-200 bg-green-50 hover:bg-green-100 transition h-full w-full text-left shadow-sm"><div className="flex items-center"><div className="w-12 h-12 md:w-14 md:h-14 bg-green-500 rounded-full flex items-center justify-center text-white mr-4 shrink-0"><Icon name="BookOpen" className="w-6 h-6 md:w-7 md:h-7" /></div><div><p className="font-bold text-green-900 text-sm md:text-base leading-tight">Formulir Pindah Masuk</p><p className="text-xs md:text-sm text-green-700 mt-1">Isi Data Online</p></div></div><span className="text-green-600 font-bold ml-2 text-lg md:text-xl">&rarr;</span></button>
+                            {contacts.map(p => (<a key={p.id} href={`https://wa.me/${p.wa}`} target="_blank" className="flex items-center justify-between p-4 rounded-lg border border-gray-200 bg-gray-50 hover:bg-gray-100 transition h-full"><div className="flex items-center"><img src={p.img} alt={p.nama} className="w-12 h-12 md:w-14 md:h-14 rounded-full object-cover mr-4 border border-gray-200 shrink-0" /><div><p className="font-bold text-gray-800 text-sm md:text-base leading-tight">{p.jabatan}</p><p className="text-xs md:text-sm text-gray-500 mt-1">{p.nama}</p></div></div><span className="text-gray-400 font-bold ml-2 text-lg md:text-xl">&rarr;</span></a>))}
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const Hubungi = ({ setActiveTab, dataPejabat }) => {
+            return (
+                <div className="space-y-6 animate-fade-in">
+                    <button onClick={() => setActiveTab('home')} className="text-blue-600 font-medium flex items-center hover:underline mb-2 text-sm md:text-base">&larr; Kembali ke Home</button>
+                    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                        <h2 className="text-xl md:text-2xl font-bold mb-3 text-gray-800 border-b pb-2">Kontak Pelayan Jemaat</h2>
+                        <p className="text-sm md:text-base text-gray-600 mb-6">Silakan klik pada salah satu nama pelayan jemaat di bawah ini untuk terhubung langsung via WhatsApp.</p>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 items-stretch">
+                            {dataPejabat.map((p, idx) => (<a key={idx} href={`https://wa.me/${p.wa}`} target="_blank" rel="noopener noreferrer" className="flex items-center p-4 rounded-xl border border-gray-100 bg-white hover:bg-orange-50 hover:border-orange-200 hover:shadow-md transition group h-full"><img src={p.img} alt={p.nama} className="w-14 h-14 md:w-16 md:h-16 rounded-full object-cover mr-4 md:mr-5 border-2 border-gray-100 group-hover:border-orange-300 transition shrink-0" /><div className="flex-1"><p className="text-xs font-bold text-orange-600 uppercase tracking-wider mb-0.5 md:mb-1">{p.jabatan}</p><p className="font-bold text-gray-800 leading-tight text-sm md:text-base">{p.nama}</p><p className="text-xs md:text-sm text-gray-500 mt-1.5 flex items-center"><Icon name="MessageCircle" className="w-3.5 h-3.5 mr-1" /> WhatsApp</p></div></a>))}
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const FormACMS = ({ setActiveTab }) => {
+            const [step, setStep] = React.useState('fill');
+            const [isGenerating, setIsGenerating] = React.useState(false);
+            const [formData, setFormData] = React.useState({ namaLengkap: '', jenisKelamin: 'Laki-laki', tanggalLahir: '', namaIbu: '', baptisanTanggal: '', baptisanTempat: '', baptisanPendeta: '', masaDisiplin: 'TIDAK', pernahPindah: 'BELUM', jemaatAsalNama: '', jemaatAsalAlamat: '', jemaatAsalSekretaris: '', jemaatAsalKontak: '' });
+            const [showCaptcha, setShowCaptcha] = React.useState(false);
+            const [captcha, setCaptcha] = React.useState({ num1: 0, num2: 0 });
+            const [captchaInput, setCaptchaInput] = React.useState('');
+            const [captchaError, setCaptchaError] = React.useState(false);
+
+            const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+            const handleSubmit = (e) => { e.preventDefault(); setStep('preview'); window.scrollTo(0, 0); };
+            const generateCaptcha = () => { setCaptcha({ num1: Math.floor(Math.random() * 10) + 1, num2: Math.floor(Math.random() * 10) + 1 }); setCaptchaInput(''); setCaptchaError(false); };
+            const handleKirimClick = () => { generateCaptcha(); setShowCaptcha(true); };
+            const verifyAndKirim = () => { if (parseInt(captchaInput) === captcha.num1 + captcha.num2) { setShowCaptcha(false); processPDF(); } else { setCaptchaError(true); generateCaptcha(); } };
+
+            const processPDF = () => {
+                setIsGenerating(true);
+                const element = document.getElementById('pdf-content');
+                const filename = `ACMS_03_${formData.namaLengkap.replace(/\s+/g, '_')}.pdf`;
+                const opt = { margin: [15, 15, 15, 15], filename: filename, image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2, useCORS: true }, jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' } };
+                html2pdf().set(opt).from(element).save().then(() => {
+                    setIsGenerating(false); setStep('success');
+                    const subject = encodeURIComponent(`Permohonan Pindah Masuk ACMS - ${formData.namaLengkap}`);
+                    const body = encodeURIComponent(`Syalom Admin,\n\nBerikut saya lampirkan dokumen PDF permohonan pindah keanggotaan (ACMS) atas nama ${formData.namaLengkap} yang baru saja saya unduh dari aplikasi ART1S.\n\nTerima kasih.\n\n(Mohon jangan lupa untuk melampirkan file ${filename} yang baru saja terdownload ke dalam email ini)`);
+                    window.location.href = `mailto:admin@tidar1.org?subject=${subject}&body=${body}`;
+                });
+            };
+
+            if (step === 'success') {
+                return (
+                    <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100 text-center animate-fade-in"><div className="w-16 h-16 md:w-20 md:h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-5"><Icon name="Download" className="w-8 h-8 md:w-10 md:h-10" /></div><h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-3">Dokumen Berhasil Dibuat!</h2><p className="text-sm md:text-base text-gray-600 mb-3">File PDF permohonan Anda telah berhasil <b>diunduh</b> ke perangkat Anda.</p><p className="text-sm md:text-base text-gray-500 mb-8 bg-yellow-50 p-5 rounded-xl text-left border border-yellow-200"><b>Langkah Selanjutnya:</b> Aplikasi email Anda akan terbuka secara otomatis. <b>Silakan "Attach / Lampirkan" file PDF yang baru saja terunduh tersebut ke dalam email</b>, lalu klik Kirim ke admin@tidar1.org.</p><button onClick={() => setActiveTab('pindah_masuk')} className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-bold transition text-sm md:text-base shadow-md">Selesai & Kembali</button></div>
+                );
+            }
+
+            if (step === 'preview') {
+                return (
+                    <div className="space-y-6 animate-fade-in relative">
+                        {showCaptcha && (
+                            <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black bg-opacity-60 px-4 backdrop-blur-sm">
+                                <div className="bg-white rounded-xl shadow-2xl p-6 md:p-8 max-w-sm w-full animate-fade-in"><div className="flex items-center space-x-2 mb-3 text-green-600"><Icon name="LogIn" className="w-6 h-6" /><h3 className="text-xl md:text-2xl font-bold text-gray-800">Verifikasi Keamanan</h3></div><p className="text-sm md:text-base text-gray-600 mb-5">Untuk menghindari spam otomatis, silakan selesaikan perhitungan berikut sebelum mengunduh & mengirim formulir:</p><div className="flex items-center justify-center space-x-4 mb-5 bg-gray-50 p-5 rounded-xl border border-gray-200"><span className="text-2xl md:text-3xl font-bold text-gray-800">{captcha.num1} + {captcha.num2} =</span><input type="number" value={captchaInput} onChange={(e) => setCaptchaInput(e.target.value)} className={`w-24 p-2 md:p-3 border ${captchaError ? 'border-red-400 bg-red-50' : 'border-gray-300'} rounded-lg focus:ring-2 focus:ring-green-500 text-xl md:text-2xl text-center outline-none transition`} autoFocus onKeyDown={(e) => { if (e.key === 'Enter') verifyAndKirim(); }} /></div>{captchaError && <p className="text-red-500 text-sm mb-4 text-center font-bold animate-pulse">Jawaban salah, silakan coba lagi.</p>}<div className="flex justify-end space-x-3 mt-6"><button onClick={() => setShowCaptcha(false)} className="px-5 py-2.5 text-gray-600 hover:bg-gray-100 rounded-lg transition font-bold text-sm md:text-base">Batal</button><button onClick={verifyAndKirim} className="px-6 py-2.5 bg-green-600 hover:bg-green-700 text-white rounded-lg transition font-bold shadow-md text-sm md:text-base">Verifikasi & Kirim</button></div></div>
+                            </div>
+                        )}
+                        <div className="flex justify-between items-center"><button onClick={() => setStep('fill')} className="text-gray-600 font-medium flex items-center hover:text-gray-900 text-sm md:text-base">&larr; Edit Kembali Formulir</button><button onClick={handleKirimClick} disabled={isGenerating} className={`${isGenerating ? 'bg-gray-400' : 'bg-green-600 hover:bg-green-700'} text-white px-5 py-2.5 rounded-lg font-bold transition flex items-center shadow-md text-sm md:text-base`}>{isGenerating ? 'Memproses PDF...' : 'Kirim (Unduh PDF)'}</button></div>
+                        <div className="bg-gray-200 shadow-inner overflow-x-auto border border-gray-300 rounded-xl p-4 sm:p-8">
+                            <div className="w-max mx-auto shadow-xl bg-white"><div id="pdf-content" className="p-10 bg-white text-black text-sm relative" style={{ width: '210mm', minHeight: '297mm', fontFamily: '"Open Sans", sans-serif', boxSizing: 'border-box' }}><p className="text-[10px] text-gray-500 absolute top-4 right-10">Form ACMS-03</p><div className="flex justify-between items-center mb-10 mt-6"><div className="w-[180px] flex justify-start"><img src="https://i.postimg.cc/dQhq2HGf/png-acms-new-logo.png" alt="ACMS Logo" crossOrigin="anonymous" className="h-[60px] object-contain" /></div><div className="flex-1 text-center px-4"><h2 className="font-bold text-[16px] leading-tight">PERMOHONAN PERPINDAHAN ANGGOTA</h2><h2 className="font-bold text-[16px] leading-tight mt-1">GMAHK KONFERENS JAWA KAWASAN TIMUR</h2><h2 className="font-bold text-[16px] leading-tight mt-1">JEMAAT TIDAR 1 SURABAYA</h2></div><div className="w-[180px] flex flex-col items-center"><div className="border border-black bg-[#dce6f1] font-bold py-1 w-full text-center text-[12px]">DIISI OLEH PEMOHON</div><p className="italic text-center mt-1 text-[12px] leading-snug">Bagi Pemohon yang namanya <br/><span className="font-bold not-italic">SUDAH</span> ada di ACMS</p></div></div><div className="mb-6"><p className="font-bold mb-2">A. PROFIL PEMOHON <span className="font-normal text-xs">(Mohon diisi sesuai dengan KTP/Akte Kelahiran / identitas lainnya menggunakan huruf besar)</span></p><table className="w-full ml-4"><tbody><tr><td className="w-1/4 py-1">1. Nama Lengkap</td><td className="w-3/4 py-1">: <span className="uppercase">{formData.namaLengkap}</span></td></tr><tr><td className="w-1/4 py-1">2. Jenis Kelamin</td><td className="w-3/4 py-1">: {formData.jenisKelamin}</td></tr><tr><td className="w-1/4 py-1">3. Tanggal Lahir</td><td className="w-3/4 py-1">: {formatDate(formData.tanggalLahir)}</td></tr><tr><td className="w-1/4 py-1">4. Nama Ibu</td><td className="w-3/4 py-1">: <span className="uppercase">{formData.namaIbu}</span></td></tr><tr><td className="w-1/4 py-1">5. Baptisan</td><td className="w-3/4 py-1"></td></tr><tr><td className="w-1/4 py-1 pl-4">- tanggal</td><td className="w-3/4 py-1">: {formatDate(formData.baptisanTanggal)}</td></tr><tr><td className="w-1/4 py-1 pl-4">- tempat</td><td className="w-3/4 py-1">: {formData.baptisanTempat}</td></tr><tr><td className="w-1/4 py-1 pl-4">- pendeta</td><td className="w-3/4 py-1">: {formData.baptisanPendeta}</td></tr></tbody></table></div><div className="mb-8"><p className="font-bold mb-2">B. PERNYATAAN PEMOHON</p><table className="w-full ml-4 mb-4"><tbody><tr><td className="w-[80%] py-1">1. Apakah Anda dalam masa disiplin Gereja?</td><td className="w-[20%] py-1 font-bold">: {formData.masaDisiplin}</td></tr><tr><td className="w-[80%] py-1">2. Apakah Anda sudah pernah mengajukan permohonan perpindahan keanggotaan?</td><td className="w-[20%] py-1 font-bold">: {formData.pernahPindah}</td></tr></tbody></table><p className="mb-2">Dengan ini saya memohon agar memindahkan keanggotaan saya dari:</p><table className="w-full ml-4 mb-4"><tbody><tr><td className="w-1/4 py-1">1. Nama Jemaat Asal</td><td className="w-3/4 py-1">: <span className="uppercase">{formData.jemaatAsalNama}</span></td></tr><tr><td className="w-1/4 py-1 align-top">2. Alamat Jemaat Asal</td><td className="w-3/4 py-1">: {formData.jemaatAsalAlamat}</td></tr><tr><td className="w-1/4 py-1">3. Nama Sekretaris</td><td className="w-3/4 py-1">: <span className="uppercase">{formData.jemaatAsalSekretaris}</span></td></tr><tr><td className="w-1/4 py-1">4. Telp/Email Aktif</td><td className="w-3/4 py-1">: {formData.jemaatAsalKontak}</td></tr></tbody></table><p className="mb-6">Demikian permohonan ini saya ajukan tanpa ada paksaan dari pihak manapun.</p><div className="flex justify-end pr-10"><div className="text-center w-64"><p>Tempat/Tanggal diajukan:</p><p className="mb-16">Surabaya, {formatDate(new Date())}</p><p className="border-t border-black pt-1 uppercase">( {formData.namaLengkap || '..........................'} )</p><p>Nama dan Tanda Tangan Pemohon</p></div></div></div><div className="mb-6 mt-12 pt-8 border-t-2 border-dashed border-gray-400"><p className="font-bold text-center mb-6">DIISI OLEH SEKRETARIS JEMAAT</p><p className="font-bold mb-2">C. DATA KEPUTUSAN MAJELIS</p><table className="w-full ml-4"><tbody><tr><td className="w-1/3 py-2">1. Keputusan Majelis Tanggal</td><td className="w-2/3 py-2 border-b border-dotted border-gray-400">: </td></tr><tr><td className="w-1/3 py-2">Nomor Keputusan</td><td className="w-2/3 py-2 border-b border-dotted border-gray-400">: </td></tr><tr><td className="w-1/3 py-2">2. Di proses tanggal</td><td className="w-2/3 py-2 border-b border-dotted border-gray-400">: </td></tr><tr><td className="w-1/3 py-2">3. Ketua Jemaat</td><td className="w-2/3 py-2 border-b border-dotted border-gray-400">: </td></tr><tr><td className="w-1/3 py-2">4. Gembala Jemaat</td><td className="w-2/3 py-2 border-b border-dotted border-gray-400">: </td></tr></tbody></table><div className="flex justify-end pr-10 mt-8"><div className="text-center w-64"><p className="mb-16">20........</p><p className="border-t border-black pt-1">( ........................................ )</p><p>Nama dan Tanda Tangan Sekretaris Jemaat</p></div></div></div><div className="mt-8 pt-4 border-t border-gray-100 flex justify-between items-center text-[11px] text-gray-400 font-sans"><p>ACMS v.3.03</p><p>&copy; Copyright by ART1S Tech Team 2026</p></div></div></div>
+                        </div>
+                    </div>
+                );
+            }
+
+            return (
+                <div className="space-y-6 animate-fade-in">
+                    <button onClick={() => setActiveTab('pindah_masuk')} className="text-blue-600 font-medium flex items-center hover:underline mb-2 text-sm md:text-base">&larr; Kembali ke Pilihan Keanggotaan</button>
+                    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                        <div className="flex items-center space-x-3 mb-6 border-b pb-4"><Icon name="BookOpen" className="w-8 h-8 md:w-10 md:h-10 text-green-600" /><div><h2 className="text-xl md:text-2xl font-bold text-gray-800">Formulir Pindah Masuk (ACMS)</h2><p className="text-sm md:text-base text-gray-500">Isi data di bawah ini untuk membuat dokumen perpindahan.</p></div></div>
+                        <form onSubmit={handleSubmit} className="space-y-8">
+                            <div>
+                                <h3 className="font-bold text-gray-800 border-b pb-1.5 mb-4 text-base md:text-lg">A. PROFIL PEMOHON</h3>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div className="md:col-span-2"><label className="block text-sm md:text-base font-bold text-gray-700 mb-1.5">1. Nama Lengkap (Sesuai KTP/Akte)</label><input type="text" name="namaLengkap" value={formData.namaLengkap} onChange={handleChange} required className="w-full p-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 uppercase text-sm md:text-base outline-none transition" /></div>
+                                    <div><label className="block text-sm md:text-base font-bold text-gray-700 mb-1.5">2. Jenis Kelamin</label><select name="jenisKelamin" value={formData.jenisKelamin} onChange={handleChange} required className="w-full p-2.5 border border-gray-300 rounded-lg bg-white text-sm md:text-base outline-none focus:ring-2 focus:ring-green-500 transition"><option value="Laki-laki">Laki-laki</option><option value="Perempuan">Perempuan</option></select></div>
+                                    <div><label className="block text-sm md:text-base font-bold text-gray-700 mb-1.5">3. Tanggal Lahir</label><input type="date" name="tanggalLahir" value={formData.tanggalLahir} onChange={handleChange} required className="w-full p-2.5 border border-gray-300 rounded-lg text-sm md:text-base outline-none focus:ring-2 focus:ring-green-500 transition" /></div>
+                                    <div className="md:col-span-2"><label className="block text-sm md:text-base font-bold text-gray-700 mb-1.5">4. Nama Ibu</label><input type="text" name="namaIbu" value={formData.namaIbu} onChange={handleChange} required className="w-full p-2.5 border border-gray-300 rounded-lg uppercase text-sm md:text-base outline-none focus:ring-2 focus:ring-green-500 transition" /></div>
+                                    <div className="md:col-span-2 border border-gray-200 p-4 rounded-xl bg-gray-50 mt-2">
+                                        <label className="block text-sm md:text-base font-bold text-gray-800 mb-3">5. Data Baptisan</label>
+                                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                            <div><label className="block text-xs md:text-sm font-semibold text-gray-600 mb-1.5">Tanggal Baptis</label><input type="date" name="baptisanTanggal" value={formData.baptisanTanggal} onChange={handleChange} className="w-full p-2.5 border border-gray-300 rounded-lg text-sm md:text-base outline-none focus:ring-2 focus:ring-green-500 transition" /></div>
+                                            <div><label className="block text-xs md:text-sm font-semibold text-gray-600 mb-1.5">Tempat</label><input type="text" name="baptisanTempat" value={formData.baptisanTempat} onChange={handleChange} className="w-full p-2.5 border border-gray-300 rounded-lg text-sm md:text-base outline-none focus:ring-2 focus:ring-green-500 transition" /></div>
+                                            <div><label className="block text-xs md:text-sm font-semibold text-gray-600 mb-1.5">Pendeta yang melayani</label><input type="text" name="baptisanPendeta" value={formData.baptisanPendeta} onChange={handleChange} className="w-full p-2.5 border border-gray-300 rounded-lg text-sm md:text-base outline-none focus:ring-2 focus:ring-green-500 transition" /></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 className="font-bold text-gray-800 border-b pb-1.5 mb-4 text-base md:text-lg">B. PERNYATAAN PEMOHON</h3>
+                                <div className="space-y-4">
+                                    <div className="flex flex-col sm:flex-row sm:items-center justify-between bg-gray-50 p-4 rounded-xl border border-gray-200"><label className="text-sm md:text-base font-bold text-gray-700">1. Apakah Anda dalam masa disiplin Gereja?</label><select name="masaDisiplin" value={formData.masaDisiplin} onChange={handleChange} className="mt-3 sm:mt-0 p-2.5 border border-gray-300 rounded-lg bg-white w-full sm:w-32 text-sm md:text-base outline-none focus:ring-2 focus:ring-green-500 transition font-bold"><option value="TIDAK">TIDAK</option><option value="YA">YA</option></select></div>
+                                    <div className="flex flex-col sm:flex-row sm:items-center justify-between bg-gray-50 p-4 rounded-xl border border-gray-200"><label className="text-sm md:text-base font-bold text-gray-700">2. Apakah Anda sudah pernah mengajukan pindah?</label><select name="pernahPindah" value={formData.pernahPindah} onChange={handleChange} className="mt-3 sm:mt-0 p-2.5 border border-gray-300 rounded-lg bg-white w-full sm:w-32 text-sm md:text-base outline-none focus:ring-2 focus:ring-green-500 transition font-bold"><option value="BELUM">BELUM</option><option value="SUDAH">SUDAH</option></select></div>
+                                    <div className="mt-6"><p className="text-sm md:text-base font-bold text-gray-800 mb-3 border-b pb-2">Dengan ini saya memohon agar memindahkan keanggotaan saya dari:</p>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pl-0 md:pl-2">
+                                            <div className="md:col-span-2"><label className="block text-xs md:text-sm font-semibold text-gray-600 mb-1.5">1. Nama Jemaat Asal</label><input type="text" name="jemaatAsalNama" value={formData.jemaatAsalNama} onChange={handleChange} required className="w-full p-2.5 border border-gray-300 rounded-lg uppercase text-sm md:text-base outline-none focus:ring-2 focus:ring-green-500 transition" /></div>
+                                            <div className="md:col-span-2"><label className="block text-xs md:text-sm font-semibold text-gray-600 mb-1.5">2. Alamat Jemaat Asal</label><input type="text" name="jemaatAsalAlamat" value={formData.jemaatAsalAlamat} onChange={handleChange} required className="w-full p-2.5 border border-gray-300 rounded-lg text-sm md:text-base outline-none focus:ring-2 focus:ring-green-500 transition" /></div>
+                                            <div><label className="block text-xs md:text-sm font-semibold text-gray-600 mb-1.5">3. Nama Sekretaris Jemaat Asal</label><input type="text" name="jemaatAsalSekretaris" value={formData.jemaatAsalSekretaris} onChange={handleChange} required className="w-full p-2.5 border border-gray-300 rounded-lg uppercase text-sm md:text-base outline-none focus:ring-2 focus:ring-green-500 transition" /></div>
+                                            <div><label className="block text-xs md:text-sm font-semibold text-gray-600 mb-1.5">4. Telp/Email Aktif Sekretaris Asal</label><input type="text" name="jemaatAsalKontak" value={formData.jemaatAsalKontak} onChange={handleChange} required className="w-full p-2.5 border border-gray-300 rounded-lg text-sm md:text-base outline-none focus:ring-2 focus:ring-green-500 transition" /></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="opacity-60 pointer-events-none grayscale mt-8">
+                                <h3 className="font-bold text-gray-800 border-b pb-1.5 mb-4 text-base md:text-lg">C. DATA KEPUTUSAN MAJELIS <span className="text-red-600 text-xs md:text-sm ml-2 font-normal">(Hanya diisi oleh Sekretaris Jemaat)</span></h3>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-gray-100 p-5 rounded-xl border border-gray-200">
+                                    <div><label className="block text-xs md:text-sm font-semibold text-gray-600 mb-1.5">Keputusan Majelis Tanggal</label><input type="text" disabled className="w-full p-2.5 border border-gray-300 rounded-lg bg-gray-200 text-sm md:text-base" /></div>
+                                    <div><label className="block text-xs md:text-sm font-semibold text-gray-600 mb-1.5">Nomor Keputusan</label><input type="text" disabled className="w-full p-2.5 border border-gray-300 rounded-lg bg-gray-200 text-sm md:text-base" /></div>
+                                    <div className="md:col-span-2"><label className="block text-xs md:text-sm font-semibold text-gray-600 mb-1.5">Diproses Tanggal</label><input type="text" disabled className="w-full p-2.5 border border-gray-300 rounded-lg bg-gray-200 text-sm md:text-base" /></div>
+                                </div>
+                            </div>
+                            <button type="submit" className="w-full bg-gray-900 hover:bg-gray-800 text-white font-bold py-4 rounded-xl transition mt-10 text-lg flex justify-center items-center shadow-lg">Lanjut Preview Formulir &rarr;</button>
+                        </form>
+                    </div>
+                </div>
+            );
+        };
+
+        const ResetPassword = ({ token, setActiveTab }) => {
+            const [newPassword, setNewPassword] = React.useState('');
+            const [confirmPassword, setConfirmPassword] = React.useState('');
+            const [status, setStatus] = React.useState(''); // '', 'loading', 'error_match', 'error_length', 'error_token', 'success'
+            const [showNewPassword, setShowNewPassword] = React.useState(false);
+            const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
+
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                if (newPassword !== confirmPassword) { setStatus('error_match'); return; }
+                if (newPassword.length < 6) { setStatus('error_length'); return; }
+                
+                setStatus('loading');
+
+                fetch(GAS_API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ action: 'changePassword', token: token, newPassword: newPassword })
+                })
+                .then(res => res.json())
+                .then(result => {
+                    if (result.success) {
+                        setStatus('success');
+                        setTimeout(() => {
+                            window.history.replaceState({}, document.title, window.location.pathname);
+                            setActiveTab('home');
+                        }, 3500);
+                    } else {
+                        setStatus('error_token');
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                    setStatus('error_network');
+                });
+            };
+
+            if (status === 'success') {
+                return (
+                    <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100 text-center animate-fade-in max-w-lg mx-auto mt-10">
+                        <div className="w-16 h-16 md:w-20 md:h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-5"><Icon name="Check" className="w-8 h-8 md:w-10 md:h-10" /></div>
+                        <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-3">Password Berhasil Diubah!</h2>
+                        <p className="text-sm md:text-base text-gray-600 mb-6">Mengarahkan Anda kembali ke halaman Home...</p>
+                    </div>
+                );
+            }
+
+            return (
+                <div className="bg-white p-6 md:p-8 rounded-xl shadow-sm border border-gray-100 max-w-lg mx-auto mt-10 animate-fade-in">
+                    <div className="flex justify-center mb-5"><div className="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center"><Icon name="Edit" className="w-8 h-8" /></div></div>
+                    <h2 className="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-2">Buat Password Baru</h2>
+                    <p className="text-sm md:text-base text-center text-gray-500 mb-8">Silakan masukkan kombinasi password admin yang baru.</p>
+                    
+                    <form onSubmit={handleSubmit} className="space-y-5">
+                        <div>
+                            <label className="block text-sm md:text-base font-bold text-gray-700 mb-2">Password Baru (Minimal 6 karakter)</label>
+                            <div className="relative">
+                                <input type={showNewPassword ? "text" : "password"} value={newPassword} onChange={e => setNewPassword(e.target.value)} autoFocus className={`w-full p-3.5 pr-12 border ${status.startsWith('error') ? 'border-red-500' : 'border-gray-300'} rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition text-base`} placeholder="Masukkan password baru..." />
+                                <button type="button" onClick={() => setShowNewPassword(!showNewPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none p-1">
+                                    <Icon name={showNewPassword ? 'EyeOff' : 'Eye'} className="w-5 h-5" />
+                                </button>
+                            </div>
+                        </div>
+                        <div>
+                            <label className="block text-sm md:text-base font-bold text-gray-700 mb-2">Konfirmasi Password Baru</label>
+                            <div className="relative">
+                                <input type={showConfirmPassword ? "text" : "password"} value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} className={`w-full p-3.5 pr-12 border ${status === 'error_match' ? 'border-red-500' : 'border-gray-300'} rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition text-base`} placeholder="Ketik ulang password..." />
+                                <button type="button" onClick={() => setShowConfirmPassword(!showConfirmPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none p-1">
+                                    <Icon name={showConfirmPassword ? 'EyeOff' : 'Eye'} className="w-5 h-5" />
+                                </button>
+                            </div>
+                        </div>
+
+                        {status === 'error_match' && <p className="text-red-500 text-sm font-bold animate-pulse text-center">Konfirmasi password tidak cocok.</p>}
+                        {status === 'error_length' && <p className="text-red-500 text-sm font-bold animate-pulse text-center">Password harus minimal 6 karakter.</p>}
+                        {status === 'error_token' && <p className="text-red-500 text-sm font-bold animate-pulse text-center bg-red-50 p-3 rounded-lg border border-red-200">Gagal mengubah! Link ini mungkin sudah kadaluwarsa (lebih dari 15 menit) atau sudah pernah digunakan.</p>}
+                        {status === 'error_network' && <p className="text-red-500 text-sm font-bold animate-pulse text-center">Terjadi kesalahan jaringan.</p>}
+
+                        <button type="submit" disabled={status === 'loading'} className={`w-full ${status === 'loading' ? 'bg-blue-400' : 'bg-blue-600 hover:bg-blue-700'} text-white font-bold py-3.5 rounded-xl transition shadow-md text-base mt-4`}>
+                            {status === 'loading' ? 'Menyimpan...' : 'Simpan Password Baru'}
+                        </button>
+                    </form>
+                </div>
+            );
+        };
+
+        const LoginModal = ({ isOpen, onClose, onSuccess }) => {
+            const [password, setPassword] = React.useState('');
+            const [error, setError] = React.useState(false);
+            const [isChecking, setIsChecking] = React.useState(false);
+            const [isSendingReset, setIsSendingReset] = React.useState(false);
+            const [showPassword, setShowPassword] = React.useState(false);
+
+            if (!isOpen) return null;
+
+            const handleLogin = (e) => {
+                e.preventDefault();
+                setIsChecking(true);
+                setError(false);
+                
+                fetch(GAS_API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ action: 'verifyPassword', password: password })
+                })
+                .then(res => res.json())
+                .then(result => {
+                    setIsChecking(false);
+                    if (result.success) { setPassword(''); onSuccess(); } else { setError(true); }
+                })
+                .catch(err => {
+                    setIsChecking(false);
+                    console.error("Error verifikasi:", err);
+                    alert("Terjadi kesalahan jaringan saat mengecek password.");
+                });
+            };
+
+            const handleLupaPassword = () => {
+                if(isSendingReset) return;
+                setIsSendingReset(true);
+                
+                const frontendUrl = window.location.origin + window.location.pathname;
+                
+                fetch(GAS_API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ action: 'requestReset', frontendUrl: frontendUrl })
+                })
+                .then(res => res.json())
+                .then(result => {
+                    setIsSendingReset(false);
+                    if (result.success) {
+                        alert("Berhasil! Tautan rahasia untuk mereset password telah dikirim ke email tidar1.gmahk@gmail.com.\n\nSilakan cek Kotak Masuk atau folder Spam Anda. Link hanya berlaku selama 15 menit.");
+                        onClose();
+                    }
+                })
+                .catch(err => {
+                    setIsSendingReset(false);
+                    alert("Gagal memproses permintaan reset password.");
+                });
+            };
+
+            return (
+                <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black bg-opacity-60 px-4 backdrop-blur-sm animate-fade-in">
+                    <div className="bg-white rounded-2xl shadow-2xl p-6 md:p-8 max-w-sm w-full relative">
+                        <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-gray-600">&times;</button>
+                        <div className="flex justify-center mb-5"><div className="w-16 h-16 md:w-20 md:h-20 bg-gray-900 rounded-full flex items-center justify-center text-white"><Icon name="Settings" className="w-8 h-8 md:w-10 md:h-10" /></div></div>
+                        <h2 className="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-2">Admin Login</h2>
+                        <p className="text-sm md:text-base text-center text-gray-500 mb-6 md:mb-8">Masuk untuk mengelola jadwal, data jemaat, dan media konten.</p>
+                        <form onSubmit={handleLogin}>
+                            <div className="mb-5">
+                                <label className="block text-sm md:text-base font-bold text-gray-700 mb-2">Password</label>
+                                <div className="relative">
+                                    <input type={showPassword ? "text" : "password"} value={password} onChange={(e) => setPassword(e.target.value)} autoFocus className={`w-full p-3.5 pr-12 border ${error ? 'border-red-500 bg-red-50' : 'border-gray-300'} rounded-xl focus:ring-2 focus:ring-gray-800 outline-none transition text-base`} placeholder="Masukkan password..." />
+                                    <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none p-1">
+                                        <Icon name={showPassword ? 'EyeOff' : 'Eye'} className="w-5 h-5" />
+                                    </button>
+                                </div>
                                 {error && <p className="text-red-500 text-sm mt-2 font-bold">Password salah, coba lagi.</p>}
                             </div>
                             <button type="submit" disabled={isChecking || isSendingReset} className={`w-full ${isChecking || isSendingReset ? 'bg-gray-600' : 'bg-gray-900 hover:bg-gray-800'} text-white font-bold py-3.5 rounded-xl transition shadow-md text-base`}>
