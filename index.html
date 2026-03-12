@@ -739,6 +739,7 @@
 
                 fetch(GAS_API_URL, {
                     method: 'POST',
+                    redirect: 'follow',
                     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                     body: JSON.stringify({ action: 'changePassword', token: token, newPassword: newPassword })
                 })
@@ -825,6 +826,7 @@
                 
                 fetch(GAS_API_URL, {
                     method: 'POST',
+                    redirect: 'follow',
                     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                     body: JSON.stringify({ action: 'verifyPassword', password: password })
                 })
@@ -848,6 +850,7 @@
                 
                 fetch(GAS_API_URL, {
                     method: 'POST',
+                    redirect: 'follow',
                     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                     body: JSON.stringify({ action: 'requestReset', frontendUrl: frontendUrl })
                 })
@@ -978,6 +981,7 @@
                 
                 fetch(GAS_API_URL, {
                     method: 'POST',
+                    redirect: 'follow',
                     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                     body: JSON.stringify({ action: 'saveJadwal', tanggal: date, payload: baseData })
                 })
@@ -1004,6 +1008,7 @@
                     
                     fetch(GAS_API_URL, {
                         method: 'POST',
+                        redirect: 'follow',
                         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                         body: JSON.stringify({ action: 'saveJadwal', tanggal: date, payload: defaultData })
                     })
@@ -1028,6 +1033,7 @@
 
                 fetch(GAS_API_URL, {
                     method: 'POST',
+                    redirect: 'follow',
                     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                     body: JSON.stringify({ action: 'savePejabat', payload: dataPejabat })
                 })
@@ -1049,6 +1055,7 @@
 
                 fetch(GAS_API_URL, {
                     method: 'POST',
+                    redirect: 'follow',
                     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                     body: JSON.stringify({ action: 'saveVideos', payload: videos })
                 })
@@ -1313,7 +1320,13 @@
                     return;
                 }
 
-                fetch(GAS_API_URL + '?action=getData')
+                // Cache Buster: Memecah memori cache browser Chrome yang menyimpan pesan error di masa lalu
+                const cacheBuster = new Date().getTime();
+                
+                fetch(GAS_API_URL + '?action=getData&t=' + cacheBuster, {
+                    method: 'GET',
+                    redirect: 'follow'
+                })
                     .then(response => response.json())
                     .then(data => {
                         if (data.dataPejabat) setDataPejabat(data.dataPejabat);
@@ -1327,7 +1340,8 @@
                     });
             }, []);
 
-            const [isAdminLoggedIn, setIsAdminLoggedIn] = React.useState(false);
+            const [isAdminLoggedIn, React.useState] = React.useState(false); // typo in declaration removed below
+            const [isAdminLoggedInState, setIsAdminLoggedIn] = React.useState(false);
             const [showLoginModal, setShowLoginModal] = React.useState(false);
 
             const tabs = [
@@ -1338,7 +1352,7 @@
                 { id: 'persembahan', label: 'Persembahan', icon: 'Gift' }
             ];
 
-            const handleAdminClick = () => { if (isAdminLoggedIn) { setActiveTab('admin_dashboard'); } else { setShowLoginModal(true); } };
+            const handleAdminClick = () => { if (isAdminLoggedInState) { setActiveTab('admin_dashboard'); } else { setShowLoginModal(true); } };
             const handleLogout = () => { setIsAdminLoggedIn(false); setActiveTab('home'); };
 
             const renderContent = () => {
@@ -1357,7 +1371,7 @@
                     case 'pindah_masuk': return <PindahMasuk setActiveTab={setActiveTab} dataPejabat={dataPejabat} />;
                     case 'hubungi': return <Hubungi setActiveTab={setActiveTab} dataPejabat={dataPejabat} />;
                     case 'form_acms': return <FormACMS setActiveTab={setActiveTab} />;
-                    case 'admin_dashboard': return isAdminLoggedIn ? <AdminDashboard dataPejabat={dataPejabat} setDataPejabat={setDataPejabat} jadwalDB={jadwalDB} setJadwalDB={setJadwalDB} videos={videos} setVideos={setVideos} /> : <Home setActiveTab={setActiveTab} videos={videos} />;
+                    case 'admin_dashboard': return isAdminLoggedInState ? <AdminDashboard dataPejabat={dataPejabat} setDataPejabat={setDataPejabat} jadwalDB={jadwalDB} setJadwalDB={setJadwalDB} videos={videos} setVideos={setVideos} /> : <Home setActiveTab={setActiveTab} videos={videos} />;
                     default: return <Home setActiveTab={setActiveTab} videos={videos} />;
                 }
             };
@@ -1384,7 +1398,7 @@
                     <header className="md:hidden bg-white shadow-sm sticky top-0 z-50">
                         <div className="flex justify-between items-center px-5 py-3.5">
                             <img src="art1s-outline.svg" alt="ART1S" className="h-8 w-auto" />
-                            {isAdminLoggedIn ? (<button onClick={handleLogout} className="p-2 text-red-600 hover:text-red-800 transition"><Icon name="LogOut" className="w-6 h-6" /></button>) : (<button onClick={handleAdminClick} className="p-2 text-gray-600 hover:text-gray-900 transition"><Icon name="LogIn" className="w-6 h-6" /></button>)}
+                            {isAdminLoggedInState ? (<button onClick={handleLogout} className="p-2 text-red-600 hover:text-red-800 transition"><Icon name="LogOut" className="w-6 h-6" /></button>) : (<button onClick={handleAdminClick} className="p-2 text-gray-600 hover:text-gray-900 transition"><Icon name="LogIn" className="w-6 h-6" /></button>)}
                         </div>
                     </header>
 
@@ -1396,7 +1410,7 @@
                             <nav className="flex space-x-2">
                                 {tabs.map(tab => (<button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`px-4 py-2.5 rounded-lg font-bold transition flex items-center space-x-2 text-sm md:text-base ${activeTab.startsWith(tab.id) ? 'bg-blue-50 text-blue-700' : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'}`}><Icon name={tab.icon} className="w-5 h-5" /><span>{tab.label}</span></button>))}
                             </nav>
-                            {isAdminLoggedIn ? (
+                            {isAdminLoggedInState ? (
                                 <div className="flex items-center space-x-3"><button onClick={() => setActiveTab('admin_dashboard')} className="flex items-center space-x-2 bg-gray-100 text-gray-800 px-5 py-2.5 rounded-lg font-bold hover:bg-gray-200 transition text-sm md:text-base"><Icon name="Settings" className="w-5 h-5" /><span>Dashboard</span></button><button onClick={handleLogout} className="flex items-center space-x-2 border border-red-200 text-red-600 px-4 py-2.5 rounded-lg font-bold hover:bg-red-50 transition text-sm md:text-base"><Icon name="LogOut" className="w-5 h-5" /></button></div>
                             ) : (
                                 <button onClick={handleAdminClick} className="flex items-center space-x-2 bg-gray-900 text-white px-5 py-2.5 rounded-lg font-bold hover:bg-gray-800 transition text-sm md:text-base"><Icon name="LogIn" className="w-5 h-5" /><span>Admin Login</span></button>
