@@ -31,7 +31,7 @@ function checkAndInitSheets() {
   if (!sPengaturan) {
     sPengaturan = ss.insertSheet("Pengaturan");
     sPengaturan.appendRow(["Konfigurasi", "Nilai"]);
-    sPengaturan.appendRow(["PASSWORD", "admin954"]);
+    sPengaturan.appendRow(["PASSWORD", "admin"]);
     sPengaturan.appendRow(["YOUTUBE_URL", "https://www.youtube-nocookie.com/embed?listType=playlist&list=UUz6rQ_5zP0Y0c8V7aKx2jLQ"]);
     sPengaturan.getRange("A1:B1").setFontWeight("bold");
     sPengaturan.setColumnWidth(1, 150);
