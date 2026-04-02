@@ -1878,13 +1878,47 @@
 
                     <main className="flex-1 max-w-5xl mx-auto w-full p-4 md:p-8 pb-32 md:pb-12">
                         <div className="mb-6 md:mb-10">
-                            <h1 className="text-2xl md:text-[2rem] font-bold text-navy-900 capitalize tracking-tight">
-                                <img src="./PisgahColor.png" className="h-16 md:h-20 w-auto opacity-80" />
-                                {activeTab === 'home' ? <p className="text-navy-500 tracking-tighter text-xl">PISGAH <span className="text-gold-500">BISDAC</span></p> : activeTab === 'belajar' ? 'Halaman Belajar' : activeTab.startsWith('belajar_') ? 'Detail Pembelajaran' : activeTab === 'keanggotaan' ? 'Keanggotaan Jemaat' : activeTab === 'member_baru' ? 'Permohonan Member Baru' : activeTab === 'pindah_masuk' ? 'Permohonan Pindah Masuk' : activeTab === 'hubungi' ? 'Hubungi Kami' : activeTab === 'form_acms' ? 'Formulir Pindah Masuk' : activeTab === 'susunan_ibadah' ? 'Susunan Ibadah' : activeTab === 'admin_dashboard' ? 'Dashboard Admin' : activeTab}
-                                </h1>
-                            {activeTab === 'home' && <p className="text-navy-500 font-medium mt-1">Batam International Seventh-Day Adventist Church</p>}
-                            {activeTab === 'admin_dashboard' && <p className="text-navy-500 font-medium mt-1">Kelola data dinamis untuk website PISGAH-BISDAC</p>}
-                        </div>
+
+ {/* LOGO PISGAH DI HOME */}                          
+  <div className="flex items-center space-x-3 mb-6 border-b border-navy-50 pb-4">
+    <img src="./PisgahColor.png" className="h-16 md:h-20 w-auto opacity-80" /> 
+    <div>
+      <h1 className="text-xl md:text-2xl font-bold text-navy-500 tracking-tight">PISGAH <span className="text-gold-500">BISDAC</span></h1>
+      <p className="text-navy-500 tracking-tighter">Batam International Seventh-Day Adventist Church</p>
+    </div>
+  </div>
+ {/* Sampai di sini */} 
+ 
+  <h1 className="text-2xl md:text-[2rem] font-bold text-navy-900 capitalize tracking-tight">
+    {activeTab === 'home' ? (
+      <p className=""></p>
+    ) : activeTab === 'belajar' ? (
+      'Halaman Belajar'
+    ) : activeTab.startsWith('belajar_') ? (
+      'Detail Pembelajaran'
+    ) : activeTab === 'keanggotaan' ? (
+      'Keanggotaan Jemaat'
+    ) : activeTab === 'member_baru' ? (
+      'Permohonan Member Baru'
+    ) : activeTab === 'pindah_masuk' ? (
+      'Permohonan Pindah Masuk'
+    ) : activeTab === 'hubungi' ? (
+      'Hubungi Kami'
+    ) : activeTab === 'form_acms' ? (
+      'Formulir Pindah Masuk'
+    ) : activeTab === 'susunan_ibadah' ? (
+      'Susunan Ibadah'
+    ) : activeTab === 'admin_dashboard' ? (
+      'Dashboard Admin'
+    ) : (
+      activeTab
+    )}
+  </h1>
+  
+  {activeTab === 'admin_dashboard' && (
+    <p className="text-navy-500 font-medium mt-1">Kelola data dinamis untuk website PISGAH-BISDAC</p>
+  )}
+</div>
                         {renderContent()}
                     </main>
 
