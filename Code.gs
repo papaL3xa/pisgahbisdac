@@ -1,421 +1,664 @@
-// =========================================================================
-// KONFIGURASI TABEL JADWAL
-// Menyimpan peta antara nama Tab di Sheets dengan format data di Web App
-// =========================================================================
-var SCHEDULE_CONFIGS = [
-  { sheetName: "Jadwal Rabu", key: "petugas", headers: ["Tanggal", "Pemimpin Acara", "Renungan", "Tempat", "Persembahan Kas", "Lagu Pujian"] },
-  { sheetName: "Jadwal SS", key: "sekolahSabat", headers: ["Tanggal", "Pianis", "Presider", "Ayat Inti & Doa Buka", "Berita Misi", "Doa Tutup"] },
-  { sheetName: "Jadwal Khotbah", key: "khotbah", headers: ["Tanggal", "Pianis", "Khotbah", "Doa Syafaat", "Presider", "Cerita Anak-anak", "Song Leader", "Lagu Pujian"] },
-  { sheetName: "Jadwal Diakon", key: "diakon", headers: ["Tanggal", "Diakon"] },
-  { sheetName: "Jadwal Musik", key: "musik", headers: ["Tanggal", "Pianis SS", "Pianis Khotbah"] },
-  { sheetName: "Jadwal Perjamuan", key: "perjamuan", headers: [
-    "Tanggal",
-    "Pelayan Perjamuan (L1)", "Pelayan Perjamuan (L2)", "Pelayan Perjamuan (P1)", "Pelayan Perjamuan (P2)",
-  ]}
-];
+// ========================================================
+// GOOGLE APPS SCRIPT - PISGAH BISDAC
+// ========================================================
+// File ini harus ditempatkan di Google Apps Script project
+// dan di-deploy sebagai Web App dengan akses "Anyone"
 
-// =========================================================================
-// FUNGSI INISIALISASI: Membuat format tabel otomatis jika belum ada
-// =========================================================================
-function checkAndInitSheets() {
-  // Mengarahkan database langsung ke ID Google Sheet spesifik milikmu
-  var ss = SpreadsheetApp.openById("1-dT9JhlAm41ZxQMzkdGBD3Mhv1Hzd0qDiRMV59zjdxw");
-  
-  // 1. Sheet Pengaturan
-  var sPengaturan = ss.getSheetByName("Pengaturan");
-  if (!sPengaturan) {
-    sPengaturan = ss.insertSheet("Pengaturan");
-    sPengaturan.appendRow(["Konfigurasi", "Nilai"]);
-    sPengaturan.appendRow(["PASSWORD", "admin"]);
-    sPengaturan.appendRow(["YOUTUBE_URL", "https://www.youtube-nocookie.com/embed?listType=playlist&list=UUz6rQ_5zP0Y0c8V7aKx2jLQ"]);
-    sPengaturan.getRange("A1:B1").setFontWeight("bold");
-    sPengaturan.setColumnWidth(1, 150);
-    sPengaturan.setColumnWidth(2, 400);
-  }
-  
-  // 2. Sheet Pejabat
-  var sPejabat = ss.getSheetByName("Pejabat");
-  if (!sPejabat) {
-    sPejabat = ss.insertSheet("Pejabat");
-    sPejabat.appendRow(["ID", "Jabatan", "Nama", "WhatsApp", "Link Foto"]);
-    sPejabat.getRange("A1:E1").setFontWeight("bold");
-    sPejabat.setFrozenRows(1);
-    
-    var initialPejabat = [
-			["gembala", "Gembala Jemaat", "Pdt. [Nama Gembala]", "62800000000", "https://ui-avatars.com/api/?name=Gembala+Jemaat&background=eff6ff&color=1e3a8a&size=128"],
-            ["ketua", "Ketua Jemaat", "Bpk. [Nama Ketua]", "62800000000", "https://ui-avatars.com/api/?name=Ketua+Jemaat&background=eff6ff&color=1e3a8a&size=128"],
-            ["sekertaris", "Sekertaris", "Bpk. [Nama Sekertaris]", "62800000000", "https://ui-avatars.com/api/?name=Sekertaris&background=eff6ff&color=1e3a8a&size=128"],
-            ["bendahara", "Bendahara", "Ibu [Nama Bendahara]", "62800000000", "https://ui-avatars.com/api/?name=Bendahara&background=f0fdf4&color=14532d&size=128"],
-            ["penginjilan", "Penginjilan", "Bpk. [Nama Penginjilan]", "62800000000", "https://ui-avatars.com/api/?name=Penginjilan+2&background=f0fdf4&color=14532d&size=128"],
-            ["ss", "Sekolah Sabat", "Ibu. [Nama Sekolah Sabat]", "62800000000", "https://ui-avatars.com/api/?name=Sekolah+Sabat&background=fffbeb&color=78350f&size=128"],
-            ["diakon", "Ketua Diakon", "Ibu. [Nama Ketua Diakon", "62800000000", "https://ui-avatars.com/api/?name=Ketua+Diakon&background=fffbeb&color=78350f&size=128"],
-            ["rumah", "Rumah Tangga", "Sdr. [Nama Rumah Tangga]", "62800000000", "https://ui-avatars.com/api/?name=Rumah+Tangga&background=e0e7ff&color=3730a3&size=128"],
-            ["pemuda", "Pemuda", "Sdr. [Nama Pemuda]", "62800000000", "https://ui-avatars.com/api/?name=Pemuda&background=e0e7ff&color=3730a3&size=128"],
-            ["hotline", "Hotline", "Bpk. [Nama Hotline]", "62800000000", "https://ui-avatars.com/api/?name=Hotline&background=f3f4f6&color=1f2937&size=128"],
-            ["komunikasi", "Komunikasi", "Sdr. [Nama Komunikasi]", "62800000000", "https://ui-avatars.com/api/?name=Kominikasi&background=faf5ff&color=581c87&size=128"]
-];
-    sPejabat.getRange(2, 1, initialPejabat.length, 5).setValues(initialPejabat);
-  }
-  
-  // 3. Loop untuk membuat semua Tab Jadwal jika belum ada
-  for (var i = 0; i < SCHEDULE_CONFIGS.length; i++) {
-    var conf = SCHEDULE_CONFIGS[i];
-    var sheet = ss.getSheetByName(conf.sheetName);
-    if (!sheet) {
-      sheet = ss.insertSheet(conf.sheetName);
-      sheet.appendRow(conf.headers);
-      sheet.getRange(1, 1, 1, conf.headers.length).setFontWeight("bold").setBackground("#eef2f6");
-      sheet.setFrozenRows(1);
-    }
-  }
+// ========================================================
+// KONFIGURASI SHEETS ID
+// ========================================================
+// Ganti dengan ID Google Sheets Anda
+const SPREADSHEET_ID = '1YOUR_SPREADSHEET_ID_HERE';
+const SHEET_JADWAL = 'JadwalIbadah';
+const SHEET_PEJABAT = 'DataPejabat';
+const SHEET_KATEGORI = 'KategoriPejabat';
+const SHEET_SETTINGS = 'Settings';
+const SHEET_USERS = 'Users';
 
-  // Jika Sheet JSON lama bernama "Jadwal" masih ada, biarkan saja (jangan dihapus otomatis demi keamanan), 
-  // admin bisa menghapusnya secara manual nanti di Google Sheets.
-  
-  return ss;
+// ========================================================
+// FUNGSI UTAMA DO GET & DO POST
+// ========================================================
+function doGet(e) {
+  return handleRequest(e);
 }
 
-// =========================================================================
-// MENGAMBIL DATA: Membaca tabel dan mengubahnya jadi objek JSON ke Web
-// =========================================================================
-function doGet(e) {
-  var ss = checkAndInitSheets();
-  
-  // --- Baca Pengaturan ---
-  var sPengaturan = ss.getSheetByName("Pengaturan");
-  var pengData = sPengaturan.getDataRange().getValues();
-  var youtubeUrl = "https://www.youtube-nocookie.com/embed?listType=playlist&list=UUz6rQ_5zP0Y0c8V7aKx2jLQ";
-  var kategoriPejabat = ["Gembala", "Officers", "Departemen & Pelayanan", "Lainnya"];
-  
-  for (var i = 1; i < pengData.length; i++) {
-    if (pengData[i][0] === "YOUTUBE_URL") youtubeUrl = pengData[i][1].toString();
-    if (pengData[i][0] === "KATEGORI_PEJABAT") {
-      try {
-        kategoriPejabat = JSON.parse(pengData[i][1].toString());
-      } catch (e) {}
-    }
-  }
-  
-  // --- Baca Data Pejabat ---
-  var sPejabat = ss.getSheetByName("Pejabat");
-  var pData = sPejabat.getDataRange().getValues();
-  var dataPejabat = [];
-  for (var i = 1; i < pData.length; i++) {
-    if (pData[i][0]) {
-      dataPejabat.push({
-        id: pData[i][0].toString(),
-        jabatan: pData[i][1].toString(),
-        nama: pData[i][2].toString(),
-        wa: pData[i][3].toString().replace(/'/g, ''),
-        img: pData[i][4].toString(),
-        kategori: pData[i][5] ? pData[i][5].toString() : 'Umum'
-      });
-    }
-  }
-  
-  // --- Baca Data Jadwal dari Berbagai Tab ---
-  var jadwalDB = {};
-  
-  for (var i = 0; i < SCHEDULE_CONFIGS.length; i++) {
-    var conf = SCHEDULE_CONFIGS[i];
-    var sheet = ss.getSheetByName(conf.sheetName);
-    if (!sheet) continue;
+function doPost(e) {
+  return handleRequest(e);
+}
+
+function handleRequest(e) {
+  try {
+    const params = e.parameter || {};
+    const postData = e.postData ? JSON.parse(e.postData.contents) : {};
+    const action = params.action || postData.action || 'getData';
     
-    var data = sheet.getDataRange().getValues();
-    
-    for (var r = 1; r < data.length; r++) {
-      var tglObj = data[r][0];
-      if (!tglObj || tglObj === "") continue;
-      
-      var dateStr = typeof tglObj === 'object' ? Utilities.formatDate(tglObj, Session.getScriptTimeZone(), "yyyy-MM-dd") : String(tglObj);
-      
-      // Setup objek default untuk hari ini jika belum ada
-      if (!jadwalDB[dateStr]) {
-        var isRabu = new Date(dateStr + "T00:00:00").getDay() === 3;
-        if (isRabu) {
-          jadwalDB[dateStr] = { title: "Ibadah Permintaan Doa (Rabu)", time: "19:30 WIB - selesai", petugas: [] };
-        } else {
-          jadwalDB[dateStr] = { title: "Ibadah Sabat (Sabtu)", time: "10:00 - 13:00 WIB", sekolahSabatTime: "11:45 - 12:40 WIB", khotbahTime: "10:00 - 11:40 WIB", sekolahSabat: [], khotbah: [], diakon: [], musik: [], perjamuan: [] };
+    switch(action) {
+      case 'getData':
+        return getData();
+      case 'verifyPassword':
+        return verifyPassword(postData);
+      case 'saveJadwal':
+        return saveJadwal(postData);
+      case 'savePejabat':
+        return savePejabat(postData);
+      case 'saveYoutubeUrl':
+        return saveYoutubeUrl(postData);
+      case 'changePassword':
+        return changePassword(postData);
+      case 'getUsers':
+        return getUsers(postData);
+      case 'saveUser':
+        return saveUser(postData);
+      case 'deleteUser':
+        return deleteUser(postData);
+      default:
+        return ContentService.createTextOutput(JSON.stringify({
+          success: false,
+          message: 'Action tidak dikenal'
+        })).setMimeType(ContentService.MimeType.JSON);
+    }
+  } catch(error) {
+    return ContentService.createTextOutput(JSON.stringify({
+      success: false,
+      message: error.toString()
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+// ========================================================
+// FUNGSI GET DATA (LOAD SEMUA DATA)
+// ========================================================
+function getData() {
+  const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+  
+  // Load jadwal ibadah
+  let jadwalDB = {};
+  const jadwalSheet = ss.getSheetByName(SHEET_JADWAL);
+  if (jadwalSheet) {
+    const data = jadwalSheet.getDataRange().getValues();
+    if (data.length > 1) {
+      for (let i = 1; i < data.length; i++) {
+        const tanggal = data[i][0];
+        const jsonData = data[i][1];
+        if (tanggal && jsonData) {
+          try {
+            jadwalDB[tanggal] = JSON.parse(jsonData);
+          } catch(e) {}
         }
       }
-      
-      // Ambil nilai setiap kolom dan hubungkan kembali dengan nama tugasnya
-      var taskArray = [];
-      for (var c = 1; c < conf.headers.length; c++) {
-        taskArray.push({
-          tugas: conf.headers[c],
-          nama: data[r][c] ? data[r][c].toString() : ""
+    }
+  }
+  
+  // Load data pejabat
+  let dataPejabat = [];
+  const pejabatSheet = ss.getSheetByName(SHEET_PEJABAT);
+  if (pejabatSheet) {
+    const data = pejabatSheet.getDataRange().getValues();
+    if (data.length > 1) {
+      const headers = data[0];
+      for (let i = 1; i < data.length; i++) {
+        let obj = {};
+        headers.forEach((header, idx) => {
+          obj[header] = data[i][idx];
         });
+        dataPejabat.push(obj);
       }
-      
-      jadwalDB[dateStr][conf.key] = taskArray;
     }
   }
   
-  // --- Baca Susunan Lagu Khusus ---
-  var sheetSusunan = ss.getSheetByName("Susunan_Lagu");
-  if (sheetSusunan) {
-    var dataSusunan = sheetSusunan.getDataRange().getValues();
-    for (var r = 1; r < dataSusunan.length; r++) {
-      var tglObj = dataSusunan[r][0];
-      if (!tglObj || tglObj === "") continue;
-      
-      var dateStr = typeof tglObj === 'object' ? Utilities.formatDate(tglObj, Session.getScriptTimeZone(), "yyyy-MM-dd") : String(tglObj);
-      
-      if (!jadwalDB[dateStr]) {
-        var isRabu = new Date(dateStr + "T00:00:00").getDay() === 3;
-        if (isRabu) {
-          jadwalDB[dateStr] = { title: "Ibadah Permintaan Doa (Rabu)", time: "19:30 - selesai", petugas: [] };
-        } else {
-          jadwalDB[dateStr] = { title: "Ibadah Sabat (Sabtu)", time: "10:00 - 13:00 WIB", sekolahSabatTime: "11:45 - 12:40 WIB", khotbahTime: "10:00 - 11:40 WIB", sekolahSabat: [], khotbah: [], diakon: [], musik: [], perjamuan: [] };
-        }
+  // Load kategori pejabat
+  let kategoriPejabat = ["Gembala", "Officers", "Departemen & Pelayanan", "Lainnya"];
+  const kategoriSheet = ss.getSheetByName(SHEET_KATEGORI);
+  if (kategoriSheet) {
+    const data = kategoriSheet.getDataRange().getValues();
+    if (data.length > 0) {
+      kategoriPejabat = data.flat().filter(v => v);
+    }
+  }
+  
+  // Load settings (YouTube URL)
+  let youtubeUrl = "https://www.youtube.com/embed/EAO55pnNsgs";
+  const settingsSheet = ss.getSheetByName(SHEET_SETTINGS);
+  if (settingsSheet) {
+    const data = settingsSheet.getDataRange().getValues();
+    for (let i = 0; i < data.length; i++) {
+      if (data[i][0] === 'youtubeUrl' && data[i][1]) {
+        youtubeUrl = data[i][1];
+        break;
       }
-      
-      jadwalDB[dateStr].susunan = {
-        ssLaguBuka: dataSusunan[r][1] ? String(dataSusunan[r][1]) : "",
-        ssLaguTutup: dataSusunan[r][2] ? String(dataSusunan[r][2]) : "",
-        kAyatBersahutan: dataSusunan[r][3] ? String(dataSusunan[r][3]) : "",
-        kLaguBuka: dataSusunan[r][4] ? String(dataSusunan[r][4]) : "",
-        kLaguPujian1_show: dataSusunan[r][5] === "YA",
-        kLaguPujian1_judul: dataSusunan[r][6] ? String(dataSusunan[r][6]) : "",
-        kLaguPujian2_show: dataSusunan[r][7] === "YA",
-        kLaguPujian2_judul: dataSusunan[r][8] ? String(dataSusunan[r][8]) : "",
-        kLaguPujian3_show: dataSusunan[r][9] === "YA",
-        kLaguPujian3_judul: dataSusunan[r][10] ? String(dataSusunan[r][10]) : "",
-        kAyatInti: dataSusunan[r][11] ? String(dataSusunan[r][11]) : "",
-        kLaguTutup: dataSusunan[r][12] ? String(dataSusunan[r][12]) : ""
-      };
     }
   }
   
   return ContentService.createTextOutput(JSON.stringify({
-    dataPejabat: dataPejabat,
+    success: true,
     jadwalDB: jadwalDB,
-    youtubeUrl: youtubeUrl,
-    kategoriPejabat: kategoriPejabat
+    dataPejabat: dataPejabat,
+    kategoriPejabat: kategoriPejabat,
+    youtubeUrl: youtubeUrl
   })).setMimeType(ContentService.MimeType.JSON);
 }
 
-// =========================================================================
-// MENYIMPAN DATA: Menerima JSON dari Web dan menuliskannya di Tabel Sheets
-// =========================================================================
-function doPost(e) {
-  var ss = checkAndInitSheets();
-  var payload = JSON.parse(e.postData.contents);
-  var action = payload.action;
+// ========================================================
+// FUNGSI VERIFIKASI PASSWORD (LOGIN)
+// ========================================================
+function verifyPassword(data) {
+  const password = data.password;
+  const username = data.username;
   
-  var sPengaturan = ss.getSheetByName("Pengaturan");
-  var currentPassword = sPengaturan.getRange("B2").getValue().toString();
+  // Cek di sheet Users
+  const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+  const usersSheet = ss.getSheetByName(SHEET_USERS);
   
-  // --- Aksi: Verifikasi Login ---
-  if (action === "verifyPassword") {
-    if (payload.password === currentPassword) {
-      return ContentService.createTextOutput(JSON.stringify({success: true})).setMimeType(ContentService.MimeType.JSON);
-    } else {
-      return ContentService.createTextOutput(JSON.stringify({success: false, message: "Password salah"})).setMimeType(ContentService.MimeType.JSON);
+  if (!usersSheet) {
+    // Jika sheet belum ada, buat default admin
+    initializeSheets();
+    return verifyPassword(data);
+  }
+  
+  const users = usersSheet.getDataRange().getValues();
+  
+  // Cari user
+  for (let i = 1; i < users.length; i++) {
+    if (users[i][0] === username && users[i][1] === password) {
+      return ContentService.createTextOutput(JSON.stringify({
+        success: true,
+        role: users[i][2] || 'editor',
+        username: username
+      })).setMimeType(ContentService.MimeType.JSON);
     }
   }
   
-  // --- Aksi: Ganti Password ---
-  if (action === "changePassword") {
-    if (payload.oldPassword === currentPassword) {
-      sPengaturan.getRange("B2").setValue(payload.newPassword);
-      return ContentService.createTextOutput(JSON.stringify({success: true})).setMimeType(ContentService.MimeType.JSON);
-    } else {
-      return ContentService.createTextOutput(JSON.stringify({success: false, message: "Password lama salah"})).setMimeType(ContentService.MimeType.JSON);
-    }
-  }
-
-  // --- Aksi: Simpan URL YouTube ---
-  if (action === "saveYoutubeUrl") {
-    if (payload.password !== currentPassword) { return ContentService.createTextOutput(JSON.stringify({success: false, message: "Akses Ditolak"})).setMimeType(ContentService.MimeType.JSON); }
-    
-    var pengData = sPengaturan.getDataRange().getValues();
-    var found = false;
-    for (var i = 1; i < pengData.length; i++) {
-      if (pengData[i][0] === "YOUTUBE_URL") {
-        sPengaturan.getRange(i + 1, 2).setValue(payload.url);
-        found = true;
-        break;
-      }
-    }
-    if (!found) { sPengaturan.appendRow(["YOUTUBE_URL", payload.url]); }
-    
-    return ContentService.createTextOutput(JSON.stringify({success: true})).setMimeType(ContentService.MimeType.JSON);
-  }
-  
-  // --- Aksi: Simpan Jadwal (Memisahkan data ke tab yang tepat) ---
-  if (action === "saveJadwal") {
-    if (payload.password !== currentPassword) { return ContentService.createTextOutput(JSON.stringify({success: false, message: "Akses Ditolak"})).setMimeType(ContentService.MimeType.JSON); }
-    
-    // PERBAIKAN: Menggunakan 'payload' (karena variabelnya bernama payload di baris 150)
-    // dan menyertakan 'ss' ke dalam fungsi
-    if (payload.data && payload.data.susunan) {
-      simpanSusunanAcaraKeTab(ss, payload.tanggal, payload.data.susunan);
-    }
-
-    var targetDateObj = new Date(payload.tanggal + "T00:00:00");
-    var isRabu = targetDateObj.getDay() === 3;
-    
-    // Loop melalui semua konfigurasi tab
-    for (var i = 0; i < SCHEDULE_CONFIGS.length; i++) {
-      var conf = SCHEDULE_CONFIGS[i];
-      
-      // Skip tab yang tidak sesuai harinya (Rabu hanya update 'petugas', Sabat update yang lain)
-      if (isRabu && conf.key !== "petugas") continue;
-      if (!isRabu && conf.key === "petugas") continue;
-      
-      var sheet = ss.getSheetByName(conf.sheetName);
-      if (!sheet) continue;
-      
-      // Ambil array tugas dari payload frontend, jika tidak ada (kosong) jadikan array kosong
-      var tasksFromPayload = payload.data[conf.key] || [];
-      
-      // Siapkan baris data baru sesuai urutan header kolom
-      var rowDataToSave = ["'" + payload.tanggal];
-      
-      // Mulai dari indeks 1 karena indeks 0 adalah Tanggal
-      for (var c = 1; c < conf.headers.length; c++) {
-        var taskHeader = conf.headers[c];
-        var personName = "";
-        
-        // Cari nama petugas berdasarkan nama tugasnya di array payload
-        for (var p = 0; p < tasksFromPayload.length; p++) {
-          if (tasksFromPayload[p].tugas === taskHeader) {
-            personName = tasksFromPayload[p].nama;
-            break;
-          }
-        }
-        rowDataToSave.push(personName);
-      }
-      
-      // Cari apakah tanggal ini sudah ada di dalam Sheet (untuk Update)
-      var sheetData = sheet.getDataRange().getValues();
-      var foundRow = -1;
-      for (var r = 1; r < sheetData.length; r++) {
-        var dStr = typeof sheetData[r][0] === 'object' ? Utilities.formatDate(sheetData[r][0], Session.getScriptTimeZone(), "yyyy-MM-dd") : String(sheetData[r][0]);
-        if (dStr === payload.tanggal) {
-          foundRow = r + 1; // Ditambah 1 karena array mulai dari 0, baris sheet mulai dari 1
-          break;
-        }
-      }
-      
-      // Jika ketemu tanggalnya, timpa barisnya. Jika belum ada, append baris baru.
-      if (foundRow > -1) {
-        sheet.getRange(foundRow, 1, 1, rowDataToSave.length).setValues([rowDataToSave]);
-      } else {
-        sheet.appendRow(rowDataToSave);
-      }
-    }
-    
-    return ContentService.createTextOutput(JSON.stringify({success: true})).setMimeType(ContentService.MimeType.JSON);
-  }
-  
-  // --- Aksi: Simpan Pejabat ---
-  if (action === "savePejabat") {
-    if (payload.password !== currentPassword) { return ContentService.createTextOutput(JSON.stringify({success: false, message: "Akses Ditolak"})).setMimeType(ContentService.MimeType.JSON); }
-    
-    var sPejabat = ss.getSheetByName("Pejabat");
-    
-    // Bersihkan isi sheet Pejabat kecuali Header (Ubah sampai kolom ke-6)
-    if (sPejabat.getLastRow() > 1) {
-      sPejabat.getRange(2, 1, sPejabat.getLastRow() - 1, 6).clearContent();
-    }
-    
-    var newRows = [];
-    for (var i = 0; i < payload.data.length; i++) {
-      var p = payload.data[i];
-      newRows.push([p.id, p.jabatan, p.nama, "'" + p.wa, p.img, p.kategori || 'Umum']);
-    }
-    
-    if (newRows.length > 0) {
-      sPejabat.getRange(2, 1, newRows.length, 6).setValues(newRows);
-    }
-
-    // Simpan Kategori Pejabat jika disertakan
-    if (payload.kategoriPejabat) {
-      var pengData = sPengaturan.getDataRange().getValues();
-      var foundKat = false;
-      for (var i = 1; i < pengData.length; i++) {
-        if (pengData[i][0] === "KATEGORI_PEJABAT") {
-          sPengaturan.getRange(i + 1, 2).setValue(JSON.stringify(payload.kategoriPejabat));
-          foundKat = true;
-          break;
-        }
-      }
-      if (!foundKat) { sPengaturan.appendRow(["KATEGORI_PEJABAT", JSON.stringify(payload.kategoriPejabat)]); }
-    }
-    
-    return ContentService.createTextOutput(JSON.stringify({success: true})).setMimeType(ContentService.MimeType.JSON);
-  }
-  
-  return ContentService.createTextOutput(JSON.stringify({success: false, message: "Aksi tidak dikenali"})).setMimeType(ContentService.MimeType.JSON);
+  return ContentService.createTextOutput(JSON.stringify({
+    success: false,
+    message: 'Username atau password salah'
+  })).setMimeType(ContentService.MimeType.JSON);
 }
 
-/**
- * Fungsi untuk menyimpan atau memperbarui data Susunan Acara ke tab terpisah
- * PERBAIKAN: Menambahkan parameter `ss` agar fungsi ini memakai koneksi spreadsheet yang sama
- */
-function simpanSusunanAcaraKeTab(ss, tanggal, susunan) {
-  var sheetName = "Susunan_Lagu";
-  var sheet = ss.getSheetByName(sheetName);
-  
-  // Jika tab "Susunan_Lagu" belum ada, buat otomatis beserta Header kolomnya
-  if (!sheet) {
-    sheet = ss.insertSheet(sheetName);
-    sheet.appendRow([
-      "Tanggal", 
-      "SS Lagu Buka", 
-      "SS Lagu Tutup", 
-      "Khotbah Ayat Bersahutan", 
-      "Khotbah Lagu Buka", 
-      "Pujian 1 Tampil", 
-      "Pujian 1 Judul", 
-      "Pujian 2 Tampil", 
-      "Pujian 2 Judul", 
-      "Pujian 3 Tampil", 
-      "Pujian 3 Judul", 
-      "Ayat Inti", 
-      "Lagu Tutup"
-    ]);
-    // Bekukan baris pertama agar rapi saat di-scroll
-    sheet.setFrozenRows(1);
+// ========================================================
+// FUNGSI SIMPAN JADWAL
+// ========================================================
+function saveJadwal(data) {
+  // Verifikasi akses (admin atau editor bisa simpan jadwal)
+  const authResult = verifyAccess(data.password);
+  if (!authResult.success) {
+    return ContentService.createTextOutput(JSON.stringify({
+      success: false,
+      message: 'Akses ditolak'
+    })).setMimeType(ContentService.MimeType.JSON);
   }
   
-  var data = sheet.getDataRange().getValues();
-  var rowIndex = -1;
+  const tanggal = data.tanggal;
+  const jadwalData = data.data;
   
-  // Cek apakah tanggal ini sudah ada di database
-  for (var i = 1; i < data.length; i++) {
-    var rowDate = typeof data[i][0] === 'object' ? Utilities.formatDate(data[i][0], Session.getScriptTimeZone(), "yyyy-MM-dd") : String(data[i][0]);
-    if (rowDate === tanggal) {
-      rowIndex = i + 1; // +1 karena index array dari 0, sedangkan baris sheet dari 1
+  if (!tanggal || !jadwalData) {
+    return ContentService.createTextOutput(JSON.stringify({
+      success: false,
+      message: 'Data tidak lengkap'
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+  
+  const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+  let sheet = ss.getSheetByName(SHEET_JADWAL);
+  
+  if (!sheet) {
+    sheet = ss.insertSheet(SHEET_JADWAL);
+    sheet.appendRow(['Tanggal', 'DataJadwal', 'LastUpdated']);
+  }
+  
+  // Cek apakah tanggal sudah ada
+  const dataRange = sheet.getDataRange().getValues();
+  let found = false;
+  
+  for (let i = 1; i < dataRange.length; i++) {
+    if (dataRange[i][0] === tanggal) {
+      sheet.getRange(i + 1, 2).setValue(JSON.stringify(jadwalData));
+      sheet.getRange(i + 1, 3).setValue(new Date().toISOString());
+      found = true;
       break;
     }
   }
   
-  // Susun data per kolom yang akan dimasukkan ke spreadsheet
-  var rowData = [
-    "'" + tanggal, // Gunakan tanda kutip agar diformat sebagai text/string murni di Sheets
-    susunan.ssLaguBuka || "",
-    susunan.ssLaguTutup || "",
-    susunan.kAyatBersahutan || "",
-    susunan.kLaguBuka || "",
-    susunan.kLaguPujian1_show ? "YA" : "TIDAK",
-    susunan.kLaguPujian1_judul || "",
-    susunan.kLaguPujian2_show ? "YA" : "TIDAK",
-    susunan.kLaguPujian2_judul || "",
-    susunan.kLaguPujian3_show ? "YA" : "TIDAK",
-    susunan.kLaguPujian3_judul || "",
-    susunan.kAyatInti || "",
-    susunan.kLaguTutup || ""
-  ];
-  
-  // Jika tanggal sudah ada, timpa (update) baris tersebut.
-  // Jika belum ada, tambahkan baris baru di bawah.
-  if (rowIndex > -1) {
-    sheet.getRange(rowIndex, 1, 1, rowData.length).setValues([rowData]);
-  } else {
-    sheet.appendRow(rowData);
+  if (!found) {
+    sheet.appendRow([tanggal, JSON.stringify(jadwalData), new Date().toISOString()]);
   }
+  
+  return ContentService.createTextOutput(JSON.stringify({
+    success: true,
+    message: 'Jadwal berhasil disimpan'
+  })).setMimeType(ContentService.MimeType.JSON);
+}
+
+// ========================================================
+// FUNGSI SIMPAN DATA PEJABAT
+// ========================================================
+function savePejabat(data) {
+  // Hanya admin yang bisa menyimpan pejabat
+  const authResult = verifyAccess(data.password, 'admin');
+  if (!authResult.success) {
+    return ContentService.createTextOutput(JSON.stringify({
+      success: false,
+      message: 'Akses ditolak. Hanya Admin yang dapat mengelola pejabat.'
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+  
+  const pejabatData = data.data;
+  const kategoriData = data.kategoriPejabat;
+  
+  if (!pejabatData) {
+    return ContentService.createTextOutput(JSON.stringify({
+      success: false,
+      message: 'Data tidak lengkap'
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+  
+  const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+  
+  // Simpan data pejabat
+  let sheet = ss.getSheetByName(SHEET_PEJABAT);
+  if (!sheet) {
+    sheet = ss.insertSheet(SHEET_PEJABAT);
+  }
+  
+  // Hapus semua data lama
+  sheet.clear();
+  
+  // Tulis header
+  if (pejabatData.length > 0) {
+    const headers = Object.keys(pejabatData[0]);
+    sheet.appendRow(headers);
+    
+    // Tulis data
+    pejabatData.forEach(row => {
+      const rowData = headers.map(h => row[h] || '');
+      sheet.appendRow(rowData);
+    });
+  }
+  
+  // Simpan kategori
+  if (kategoriData && kategoriData.length > 0) {
+    let kategoriSheet = ss.getSheetByName(SHEET_KATEGORI);
+    if (!kategoriSheet) {
+      kategoriSheet = ss.insertSheet(SHEET_KATEGORI);
+    }
+    kategoriSheet.clear();
+    kategoriData.forEach(kat => {
+      kategoriSheet.appendRow([kat]);
+    });
+  }
+  
+  return ContentService.createTextOutput(JSON.stringify({
+    success: true,
+    message: 'Data pejabat berhasil disimpan'
+  })).setMimeType(ContentService.MimeType.JSON);
+}
+
+// ========================================================
+// FUNGSI SIMPAN YOUTUBE URL
+// ========================================================
+function saveYoutubeUrl(data) {
+  // Hanya admin yang bisa mengubah URL
+  const authResult = verifyAccess(data.password, 'admin');
+  if (!authResult.success) {
+    return ContentService.createTextOutput(JSON.stringify({
+      success: false,
+      message: 'Akses ditolak. Hanya Admin yang dapat mengubah URL.'
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+  
+  const url = data.url;
+  
+  if (!url) {
+    return ContentService.createTextOutput(JSON.stringify({
+      success: false,
+      message: 'URL tidak boleh kosong'
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+  
+  const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+  let sheet = ss.getSheetByName(SHEET_SETTINGS);
+  
+  if (!sheet) {
+    sheet = ss.insertSheet(SHEET_SETTINGS);
+    sheet.appendRow(['Setting', 'Value']);
+  }
+  
+  // Cek apakah sudah ada
+  const dataRange = sheet.getDataRange().getValues();
+  let found = false;
+  
+  for (let i = 1; i < dataRange.length; i++) {
+    if (dataRange[i][0] === 'youtubeUrl') {
+      sheet.getRange(i + 1, 2).setValue(url);
+      found = true;
+      break;
+    }
+  }
+  
+  if (!found) {
+    sheet.appendRow(['youtubeUrl', url]);
+  }
+  
+  return ContentService.createTextOutput(JSON.stringify({
+    success: true,
+    message: 'URL YouTube berhasil disimpan'
+  })).setMimeType(ContentService.MimeType.JSON);
+}
+
+// ========================================================
+// FUNGSI GANTI PASSWORD
+// ========================================================
+function changePassword(data) {
+  const oldPassword = data.oldPassword;
+  const newPassword = data.newPassword;
+  
+  // Verifikasi password lama (harus admin)
+  const authResult = verifyAccess(oldPassword, 'admin');
+  if (!authResult.success) {
+    return ContentService.createTextOutput(JSON.stringify({
+      success: false,
+      message: 'Password lama salah atau Anda bukan admin'
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+  
+  const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+  const usersSheet = ss.getSheetByName(SHEET_USERS);
+  
+  if (!usersSheet) {
+    initializeSheets();
+    return changePassword(data);
+  }
+  
+  const users = usersSheet.getDataRange().getValues();
+  
+  // Update password admin
+  for (let i = 1; i < users.length; i++) {
+    if (users[i][0] === authResult.username && users[i][2] === 'admin') {
+      usersSheet.getRange(i + 1, 2).setValue(newPassword);
+      return ContentService.createTextOutput(JSON.stringify({
+        success: true,
+        message: 'Password berhasil diubah'
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+  }
+  
+  return ContentService.createTextOutput(JSON.stringify({
+    success: false,
+    message: 'Admin tidak ditemukan'
+  })).setMimeType(ContentService.MimeType.JSON);
+}
+
+// ========================================================
+// FUNGSI GET USERS (UNTUK MANAJEMEN USER)
+// ========================================================
+function getUsers(data) {
+  // Hanya admin yang bisa melihat daftar user
+  const authResult = verifyAccess(data.password, 'admin');
+  if (!authResult.success) {
+    return ContentService.createTextOutput(JSON.stringify({
+      success: false,
+      message: 'Akses ditolak'
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+  
+  const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+  const usersSheet = ss.getSheetByName(SHEET_USERS);
+  
+  if (!usersSheet) {
+    initializeSheets();
+    return getUsers(data);
+  }
+  
+  const users = usersSheet.getDataRange().getValues();
+  const userList = [];
+  
+  for (let i = 1; i < users.length; i++) {
+    userList.push({
+      username: users[i][0],
+      password: users[i][1],
+      role: users[i][2] || 'editor'
+    });
+  }
+  
+  return ContentService.createTextOutput(JSON.stringify({
+    success: true,
+    users: userList
+  })).setMimeType(ContentService.MimeType.JSON);
+}
+
+// ========================================================
+// FUNGSI SIMPAN USER (TAMBAH/EDIT)
+// ========================================================
+function saveUser(data) {
+  // Hanya admin yang bisa mengelola user
+  const authResult = verifyAccess(data.password, 'admin');
+  if (!authResult.success) {
+    return ContentService.createTextOutput(JSON.stringify({
+      success: false,
+      message: 'Akses ditolak. Hanya Admin yang dapat mengelola user.'
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+  
+  const { username, password, role, oldUsername } = data;
+  
+  if (!username || !password) {
+    return ContentService.createTextOutput(JSON.stringify({
+      success: false,
+      message: 'Username dan password harus diisi'
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+  
+  const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+  let usersSheet = ss.getSheetByName(SHEET_USERS);
+  
+  if (!usersSheet) {
+    initializeSheets();
+    usersSheet = ss.getSheetByName(SHEET_USERS);
+  }
+  
+  const users = usersSheet.getDataRange().getValues();
+  
+  if (oldUsername) {
+    // Edit user
+    for (let i = 1; i < users.length; i++) {
+      if (users[i][0] === oldUsername) {
+        usersSheet.getRange(i + 1, 1).setValue(username);
+        usersSheet.getRange(i + 1, 2).setValue(password);
+        usersSheet.getRange(i + 1, 3).setValue(role || 'editor');
+        return ContentService.createTextOutput(JSON.stringify({
+          success: true,
+          message: 'User berhasil diperbarui'
+        })).setMimeType(ContentService.MimeType.JSON);
+      }
+    }
+  } else {
+    // Cek duplikat
+    for (let i = 1; i < users.length; i++) {
+      if (users[i][0] === username) {
+        return ContentService.createTextOutput(JSON.stringify({
+          success: false,
+          message: 'Username sudah ada'
+        })).setMimeType(ContentService.MimeType.JSON);
+      }
+    }
+    
+    // Tambah user baru
+    usersSheet.appendRow([username, password, role || 'editor']);
+  }
+  
+  return ContentService.createTextOutput(JSON.stringify({
+    success: true,
+    message: oldUsername ? 'User berhasil diperbarui' : 'User berhasil ditambahkan'
+  })).setMimeType(ContentService.MimeType.JSON);
+}
+
+// ========================================================
+// FUNGSI HAPUS USER
+// ========================================================
+function deleteUser(data) {
+  // Hanya admin yang bisa menghapus user
+  const authResult = verifyAccess(data.password, 'admin');
+  if (!authResult.success) {
+    return ContentService.createTextOutput(JSON.stringify({
+      success: false,
+      message: 'Akses ditolak. Hanya Admin yang dapat menghapus user.'
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+  
+  const { username } = data;
+  
+  if (!username) {
+    return ContentService.createTextOutput(JSON.stringify({
+      success: false,
+      message: 'Username harus diisi'
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+  
+  const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+  const usersSheet = ss.getSheetByName(SHEET_USERS);
+  
+  if (!usersSheet) {
+    initializeSheets();
+    return ContentService.createTextOutput(JSON.stringify({
+      success: false,
+      message: 'Data user tidak ditemukan'
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+  
+  const users = usersSheet.getDataRange().getValues();
+  
+  for (let i = 1; i < users.length; i++) {
+    if (users[i][0] === username) {
+      if (users[i][2] === 'admin') {
+        return ContentService.createTextOutput(JSON.stringify({
+          success: false,
+          message: 'Tidak dapat menghapus user admin'
+        })).setMimeType(ContentService.MimeType.JSON);
+      }
+      usersSheet.deleteRow(i + 1);
+      return ContentService.createTextOutput(JSON.stringify({
+        success: true,
+        message: 'User berhasil dihapus'
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+  }
+  
+  return ContentService.createTextOutput(JSON.stringify({
+    success: false,
+    message: 'User tidak ditemukan'
+  })).setMimeType(ContentService.MimeType.JSON);
+}
+
+// ========================================================
+// FUNGSI VERIFIKASI AKSES (HELPER)
+// ========================================================
+function verifyAccess(password, requiredRole = null) {
+  const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+  const usersSheet = ss.getSheetByName(SHEET_USERS);
+  
+  if (!usersSheet) {
+    initializeSheets();
+    return verifyAccess(password, requiredRole);
+  }
+  
+  const users = usersSheet.getDataRange().getValues();
+  
+  for (let i = 1; i < users.length; i++) {
+    if (users[i][1] === password) {
+      const role = users[i][2] || 'editor';
+      if (requiredRole && role !== requiredRole) {
+        return { success: false, message: 'Role tidak sesuai' };
+      }
+      return { success: true, username: users[i][0], role: role };
+    }
+  }
+  
+  return { success: false, message: 'Password tidak valid' };
+}
+
+// ========================================================
+// FUNGSI INISIALISASI SHEETS (DEFAULT)
+// ========================================================
+function initializeSheets() {
+  const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+  
+  // Create Users sheet
+  let usersSheet = ss.getSheetByName(SHEET_USERS);
+  if (!usersSheet) {
+    usersSheet = ss.insertSheet(SHEET_USERS);
+    usersSheet.appendRow(['Username', 'Password', 'Role']);
+    usersSheet.appendRow(['admin', 'admin123', 'admin']);
+  }
+  
+  // Create Settings sheet
+  let settingsSheet = ss.getSheetByName(SHEET_SETTINGS);
+  if (!settingsSheet) {
+    settingsSheet = ss.insertSheet(SHEET_SETTINGS);
+    settingsSheet.appendRow(['Setting', 'Value']);
+    settingsSheet.appendRow(['youtubeUrl', 'https://www.youtube.com/embed/EAO55pnNsgs']);
+  }
+  
+  // Create Kategori sheet
+  let kategoriSheet = ss.getSheetByName(SHEET_KATEGORI);
+  if (!kategoriSheet) {
+    kategoriSheet = ss.insertSheet(SHEET_KATEGORI);
+    const defaultKategori = ['Gembala', 'Officers', 'Departemen & Pelayanan', 'Lainnya'];
+    defaultKategori.forEach(kat => {
+      kategoriSheet.appendRow([kat]);
+    });
+  }
+  
+  // Create Jadwal sheet
+  let jadwalSheet = ss.getSheetByName(SHEET_JADWAL);
+  if (!jadwalSheet) {
+    jadwalSheet = ss.insertSheet(SHEET_JADWAL);
+    jadwalSheet.appendRow(['Tanggal', 'DataJadwal', 'LastUpdated']);
+  }
+  
+  // Create Pejabat sheet
+  let pejabatSheet = ss.getSheetByName(SHEET_PEJABAT);
+  if (!pejabatSheet) {
+    pejabatSheet = ss.insertSheet(SHEET_PEJABAT);
+    const defaultPejabat = [
+      { id: 'gembala', jabatan: "Gembala Jemaat", nama: "Pdt. [Nama Gembala]", wa: "62800000000", img: "https://ui-avatars.com/api/?name=Gembala+Jemaat&background=eff6ff&color=1e3a8a&size=128", kategori: "Gembala" },
+      { id: 'ketua', jabatan: "Ketua Jemaat", nama: "Bpk. [Nama Ketua]", wa: "62800000000", img: "https://ui-avatars.com/api/?name=Ketua+Jemaat&background=eff6ff&color=1e3a8a&size=128", kategori: "Officers" }
+    ];
+    
+    const headers = Object.keys(defaultPejabat[0]);
+    pejabatSheet.appendRow(headers);
+    defaultPejabat.forEach(row => {
+      const rowData = headers.map(h => row[h] || '');
+      pejabatSheet.appendRow(rowData);
+    });
+  }
+}
+
+// ========================================================
+// FUNGSI UNTUK RESET DATA (OPSIONAL)
+// ========================================================
+function resetAllData() {
+  const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+  
+  // Hapus semua sheet yang ada
+  const sheets = ss.getSheets();
+  sheets.forEach(sheet => {
+    if (sheet.getName() !== 'Sheet1') {
+      ss.deleteSheet(sheet);
+    }
+  });
+  
+  // Inisialisasi ulang
+  initializeSheets();
+  
+  Logger.log('Semua data telah direset');
+}
+
+// ========================================================
+// FUNGSI UNTUK TESTING
+// ========================================================
+function testConnection() {
+  return ContentService.createTextOutput(JSON.stringify({
+    success: true,
+    message: 'Koneksi ke Google Apps Script berhasil!',
+    timestamp: new Date().toISOString()
+  })).setMimeType(ContentService.MimeType.JSON);
 }
