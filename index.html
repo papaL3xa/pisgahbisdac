@@ -119,9 +119,9 @@
 
     <script type="text/babel">
         // ========================================================
-        // URL WEB APP MILIKMU (GANTI DENGAN URL DEPLOY ANDA)
+        // URL WEB APP MILIKMU
         // ========================================================
-        const GAS_API_URL = "https://script.google.com/macros/s/AKfycbws8YDwmVLTE9yTzpgOs6xuopGIfHMVqk5rlIYQ6V07UOmCgkeHSBhDTSFTZqbt2mOY/exec";
+        const GAS_API_URL = "https://script.google.com/macros/s/AKfycbwVPmot0CUM39NA45QZR_4goadwSypnsMoHbziXj-ZGHNd6AF0cr7UpeTX6HhYmwl_U/exec";
 
         // --- HELPER UNTUK MENGUBAH HTML ENTITIES DARI SPREADSHEET ---
         const decodeHTML = (htmlStr) => {
@@ -131,7 +131,7 @@
             return txt.value;
         };
 
-        // --- INITIAL DATA (sama seperti sebelumnya) ---
+        // --- INITIAL DATA ---
         const defaultSusunan = {
             ssLaguBuka: "LS ...",
             ssLaguTutup: "LS ...",
@@ -215,7 +215,6 @@
                 Plus: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>,
                 Trash2: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><polyline points="3 6 5 6 21 6" /><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /><line x1="10" y1="11" x2="10" y2="17" /><line x1="14" y1="11" x2="14" y2="17" /></svg>,
                 Camera: <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-                
             };
             return icons[name] || null;
         };
@@ -253,7 +252,7 @@
             return `${d}/${m}/${y}`;
         };
 
-         // --- COMPONENTS ---
+        // --- COMPONENTS ---
         const Home = ({ setActiveTab, youtubeUrl, pengumuman }) => (
             <div className="space-y-6 md:space-y-8 animate-fade-in relative z-10">
                 
@@ -459,6 +458,7 @@
             ];
 
             return (
+                        
                 <div className="space-y-6 animate-fade-in">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         {items.map((item) => (
@@ -707,9 +707,10 @@
             const isRabu = new Date(targetDateStr + 'T00:00:00').getDay() === 3;
 
             return (
+
             		<div className="space-y-6 md:space-y-8 animate-fade-in">
                     
-                    <div className="bg-white p-6 md:p-8 rounded-[1.5rem] shadow-sm border border-navy-100/60">
+                        <div className="bg-white p-6 md:p-8 rounded-[1.5rem] shadow-sm border border-navy-100/60">
                         <div className="flex justify-between items-start sm:items-center mb-6 flex-col sm:flex-row gap-4 border-b pb-5 border-navy-50">
                             <div>
                                 <h3 className={`text-sm font-bold uppercase tracking-widest mb-3 flex items-center ${isToday ? 'text-red-500' : 'text-gold-500'}`}>{isToday ? "🔥 Hari Ini" : "⏳ Terdekat"}</h3>
@@ -822,7 +823,6 @@
 
         const Keanggotaan = ({ setActiveTab }) => (
             <div className="space-y-6 animate-fade-in relative z-10">
-                <button onClick={() => setActiveTab('home')} className="text-navy-600 font-bold flex items-center hover:text-gold-600 transition-colors mb-2">&larr; Kembali ke Home</button>
                 <div className="bg-white p-6 md:p-8 rounded-[1.5rem] shadow-sm border border-navy-100/60">
                     <h2 className="text-[1.3rem] font-black mb-4 text-navy-900 border-b pb-3 border-navy-50">Layanan Keanggotaan</h2>
                     <p className="text-sm font-medium text-navy-600 mb-6">Pilih jenis permohonan keanggotaan yang sesuai dengan status Anda saat ini.</p>
@@ -881,8 +881,6 @@
 
             return (
                 <div className="space-y-6 animate-fade-in relative z-10">
-                    <button onClick={() => setActiveTab('home')} className="text-navy-600 font-bold flex items-center hover:text-gold-600 transition-colors mb-2">&larr; Kembali ke Home</button>
-
                     <div className="space-y-6">
                         {categories.map((cat, idx) => {
                             const items = dataPejabat.filter(cat.filter);
@@ -1087,122 +1085,130 @@
         };
 
         const WartaPage = ({ daftarWarta, setActiveTab }) => {
-  // Urutkan dari tanggal terbaru ke terlama
-  const sortedWarta = React.useMemo(() => {
-    return [...daftarWarta].sort((a, b) => new Date(b.tanggal) - new Date(a.tanggal));
-  }, [daftarWarta]);
+    // Urutkan dari tanggal terbaru ke terlama
+    const sortedWarta = React.useMemo(() => {
+      return [...daftarWarta].sort((a, b) => new Date(b.tanggal) - new Date(a.tanggal));
+    }, [daftarWarta]);
 
-  return (
-    <div className="space-y-6 animate-fade-in">
-      <button onClick={() => setActiveTab('home')} className="text-navy-600 font-bold flex items-center hover:text-gold-600 transition-colors mb-2">&larr; Kembali ke Home</button>
-      <div className="bg-white rounded-[1.5rem] p-6 shadow-sm border border-navy-100/60">
-        <h2 className="text-2xl font-bold mb-4 text-navy-900">Warta Gereja</h2>
-        {sortedWarta.length === 0 ? (
-          <p className="text-gray-500">Belum ada warta.</p>
-        ) : (
-          <div className="space-y-6">
-            {sortedWarta.map((warta, idx) => (
-              <div key={idx} className="border-b border-navy-100 pb-4 last:border-0">
-                <h3 className="font-bold text-lg text-navy-800">{warta.judul}</h3>
-                <p className="text-sm text-gray-500">{warta.tanggal}</p>
-                {warta.gambarUrl && <img src={warta.gambarUrl} className="max-w-full h-auto my-2 rounded-lg shadow-sm" alt="Gambar warta" />}
-                <p className="mt-2 whitespace-pre-wrap text-navy-700">{warta.isi}</p>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-    </div>
-  );
-};
-        
+    return (
+        <div className="space-y-6 animate-fade-in">
+        <div className="bg-white rounded-[1.5rem] p-6 shadow-sm border border-navy-100/60">
+            {sortedWarta.length === 0 ? (
+            <p className="text-gray-500">Belum ada warta.</p>
+            ) : ( 
+            <div className="space-y-6">
+                {sortedWarta.map((warta, idx) => (
+                <div key={idx} className="border-b border-navy-100 pb-4 last:border-0">
+                    <h3 className="font-bold text-lg text-navy-800">{warta.judul}</h3>
+                    <p className="text-sm text-gray-500">{warta.tanggal}</p>
+                    {warta.gambarUrl && <img src={warta.gambarUrl} className="max-w-full h-auto my-2 rounded-lg shadow-sm" alt="Gambar warta" />}
+                    <p className="mt-2 whitespace-pre-wrap text-navy-700">{warta.isi}</p>
+                </div>
+                ))}
+            </div>
+            )}
+        </div>
+        </div>
+    );
+    };
+
         // --- KOMPONEN AdminDashboard yang DIPERBAIKI (dengan fitur warta) ---
             const AdminDashboard = ({ dataPejabat, setDataPejabat, jadwalDB, setJadwalDB, adminToken, setAdminToken, youtubeUrl, setYoutubeUrl, kategoriPejabat, setKategoriPejabat, pengumuman, setPengumuman, refreshWarta }) => {
-            const [adminTab, setAdminTab] = React.useState('pengaturan');
-            
+            const [adminTab, setAdminTab] = React.useState('pengaturan'); // jadwal, pelayan, warta, pengaturan
+
             // State Ganti Password
             const [oldPassword, setOldPassword] = React.useState('');
             const [newPassword, setNewPassword] = React.useState('');
             const [showOldPass, setShowOldPass] = React.useState(false);
             const [showNewPass, setShowNewPass] = React.useState(false);
             const [isChangingPass, setIsChangingPass] = React.useState(false);
-            
+
             // State URL YouTube
             const [editYoutubeUrl, setEditYoutubeUrl] = React.useState(youtubeUrl);
             const [isSavingUrl, setIsSavingUrl] = React.useState(false);
-            
+
             // State Pengumuman
             const [editPengumuman, setEditPengumuman] = React.useState(pengumuman);
             const [isSavingPengumuman, setIsSavingPengumuman] = React.useState(false);
             const textareaRef = React.useRef(null);
-            
+
             // State Warta (form)
             const [wartaJudul, setWartaJudul] = React.useState('');
             const [wartaIsi, setWartaIsi] = React.useState('');
             const [wartaGambar, setWartaGambar] = React.useState(null);
             const [isSavingWarta, setIsSavingWarta] = React.useState(false);
-            
+
             // Fungsi simpan warta
             const handleWartaFormSubmit = async (e) => {
-  e.preventDefault();
-  setIsSavingWarta(true);
-  let gambarUrl = "";
-  if (wartaGambar) {
-    const reader = new FileReader();
-    reader.readAsDataURL(wartaGambar);
-    await new Promise(resolve => { reader.onload = resolve; });
-    gambarUrl = reader.result;
-  }
-  try {
-    const res = await fetch(GAS_API_URL, {
-      method: 'POST',
-      body: JSON.stringify({
-        action: 'saveWarta',
-        password: adminToken,
-        judul: wartaJudul,
-        isi: wartaIsi,
-        gambarUrl: gambarUrl
-      })
-    });
-    const result = await res.json();
-    if (result.success) {
-      alert("Warta berhasil disimpan!");
-      setWartaJudul('');
-      setWartaIsi('');
-      setWartaGambar(null);
-      if (refreshWarta) refreshWarta();
-    } else {
-      alert("Gagal menyimpan: " + (result.message || "Unknown error"));
-    }
-  } catch (err) {
-    alert("Terjadi kesalahan: " + err.message);
-  }
-  setIsSavingWarta(false);
-};
-            
+              e.preventDefault();
+              setIsSavingWarta(true);
+              let gambarUrl = "";
+              if (wartaGambar) {
+              const reader = new FileReader();
+              reader.readAsDataURL(wartaGambar);
+              await new Promise(resolve => { reader.onload = resolve; });
+              gambarUrl = reader.result;
+            }
+            try {
+            const res = await fetch(GAS_API_URL, {
+            method: 'POST',
+            body: JSON.stringify({
+            action: 'saveWarta',
+            password: adminToken,
+            judul: wartaJudul,
+            isi: wartaIsi,
+            gambarUrl: gambarUrl
+            })
+            });
+            const result = await res.json();
+            if (result.success) {
+            alert("Warta berhasil disimpan!");
+            setWartaJudul('');
+            setWartaIsi('');
+            setWartaGambar(null);
+            if (refreshWarta) refreshWarta();
+            } else {
+            alert("Gagal menyimpan: " + (result.message || "Unknown error"));
+            }
+            } catch (err) {
+            alert("Terjadi kesalahan: " + err.message);
+            }
+            setIsSavingWarta(false);
+            };
+
             // Fungsi untuk menyisipkan tag HTML BOLD
             const insertFormatting = (tag) => {
                 const textarea = textareaRef.current;
                 if (!textarea) return;
+                
                 const start = textarea.selectionStart;
                 const end = textarea.selectionEnd;
                 const text = editPengumuman.isi;
                 const selectedText = text.substring(start, end);
+                
                 let newText = text;
                 if (tag === 'bold') {
                     newText = text.substring(0, start) + '<strong>' + selectedText + '</strong>' + text.substring(end);
                 }
+                
                 setEditPengumuman({ ...editPengumuman, isi: newText });
-                setTimeout(() => { textarea.focus(); }, 0);
+                
+                // Kembalikan fokus ke textarea
+                setTimeout(() => {
+                    textarea.focus();
+                }, 0);
             };
-            
-            // ========== KELOLA JADWAL (sama seperti sebelumnya, tidak diubah) ==========
+
+            // ==========================================
+            // State & Fungsi untuk Kelola Jadwal
+            // ==========================================
             const scrollContainerRef = React.useRef(null);
             const scrollTabs = (direction) => {
                 if (scrollContainerRef.current) {
                     scrollContainerRef.current.scrollBy({ left: direction === 'left' ? -200 : 200, behavior: 'smooth' });
                 }
             };
+
             const subTabs = [
                 { id: 'rabu', label: 'Ibadah Rabu' },
                 { id: 'khotbah', label: 'Khotbah / Umum' },
@@ -1212,16 +1218,20 @@
                 { id: 'susunanAcara', label: 'Susunan Acara' },
                 { id: 'perjamuan', label: 'Perjamuan Kudus' }
             ];
+
             const [subTab, setSubTab] = React.useState('rabu');
             const [editingDate, setEditingDate] = React.useState(null);
             const [viewMonth, setViewMonth] = React.useState(new Date().getMonth());
             const [viewYear, setViewYear] = React.useState(new Date().getFullYear());
+
             const monthNames = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
             const prevMonth = () => { if (viewMonth === 0) { setViewMonth(11); setViewYear(viewYear - 1); } else { setViewMonth(viewMonth - 1); } setEditingDate(null); };
             const nextMonth = () => { if (viewMonth === 11) { setViewMonth(0); setViewYear(viewYear + 1); } else { setViewMonth(viewMonth + 1); } setEditingDate(null); };
             const getTriwulan = (m) => Math.floor(m / 3) + 1;
+            
             const isRabu = subTab === 'rabu';
             const currentSubTabLabel = subTabs.find(t => t.id === subTab)?.label || '';
+
             const targetDates = React.useMemo(() => {
                 const dates = [];
                 const date = new Date(viewYear, viewMonth, 1);
@@ -1237,7 +1247,10 @@
                 }
                 return dates;
             }, [viewYear, viewMonth, isRabu, subTab]);
-            
+
+            // ===============================================
+            // FIX: JUDUL KOLOM DINAMIS BERDASARKAN TUGAS
+            // ===============================================
             const getActiveArray = (row, tab) => {
                 if (tab === 'rabu') return row.petugas || [];
                 if (tab === 'ss') return row.sekolahSabat || [];
@@ -1247,12 +1260,15 @@
                 if (tab === 'perjamuan') return row.perjamuan || [];
                 return [];
             };
+
             const defaultRowData = isRabu ? initialJadwalRabu : initialJadwalSabat;
             const defaultDataArray = getActiveArray(defaultRowData, subTab);
             const columns = subTab === 'susunanAcara' ? ['Detail'] : defaultDataArray.map(p => p.tugas);
+
+
             const [editForm, setEditForm] = React.useState({});
             const [isSavingJadwal, setIsSavingJadwal] = React.useState(false);
-            
+
             const handleEditClick = (date) => {
                 setEditingDate(date);
                 const rowData = jadwalDB[date] || (isRabu ? initialJadwalRabu : initialJadwalSabat);
@@ -1262,14 +1278,17 @@
                     setEditForm(JSON.parse(JSON.stringify(getActiveArray(rowData, subTab))));
                 }
             };
+
             const handleEditFormChange = (index, value) => {
                 const newForm = [...editForm];
                 newForm[index].nama = value;
                 setEditForm(newForm);
             };
+
             const handleEditFormChangeSusunan = (field, value) => {
                 setEditForm(prev => ({ ...prev, [field]: value }));
             };
+
             const handleSaveRow = async (date) => {
                 setIsSavingJadwal(true);
                 try {
@@ -1279,6 +1298,7 @@
                     else if (subTab === 'rabu') updatedRow.petugas = editForm;
                     else if (subTab === 'ss') updatedRow.sekolahSabat = editForm;
                     else updatedRow[subTab] = editForm;
+
                     const res = await fetch(GAS_API_URL, {
                         method: 'POST',
                         body: JSON.stringify({ action: 'saveJadwal', password: adminToken, date: date, data: updatedRow })
@@ -1291,6 +1311,7 @@
                 } catch (err) { alert("Terjadi kesalahan."); }
                 setIsSavingJadwal(false);
             };
+
             const handleDeleteRow = async (date) => {
                 if(!window.confirm("Kembalikan ke jadwal default?")) return;
                 setIsSavingJadwal(true);
@@ -1318,23 +1339,29 @@
                 } catch (err) { alert("Terjadi kesalahan."); }
                 setIsSavingJadwal(false);
             };
-            
-            // ========== DRAG & DROP PEJABAT (sama seperti sebelumnya) ==========
+
+            // ==========================================
+            // State & Fungsi untuk Drag & Drop Pejabat
+            // ==========================================
             const [draggedItem, setDraggedItem] = React.useState(null);
             const [isSavingPejabat, setIsSavingPejabat] = React.useState(false);
+
             const handleDragStart = (e, item) => {
                 setDraggedItem(item);
                 e.dataTransfer.effectAllowed = 'move';
                 setTimeout(() => { e.target.classList.add('opacity-50'); }, 0);
             };
+            
             const handleDragEnd = (e) => {
                 setDraggedItem(null);
                 e.target.classList.remove('opacity-50');
             };
+
             const handleDragOver = (e) => {
                 e.preventDefault();
                 e.dataTransfer.dropEffect = 'move';
             };
+
             const handleDrop = (e, targetKategori) => {
                 e.preventDefault();
                 if (draggedItem && draggedItem.kategori !== targetKategori) {
@@ -1342,20 +1369,24 @@
                     setDataPejabat(newData);
                 }
             };
+
             const handleTambahKategori = () => {
                 const name = prompt("Masukkan nama kategori baru:");
                 if (name && !kategoriPejabat.includes(name)) setKategoriPejabat([...kategoriPejabat, name]);
             };
+
             const handleHapusKategori = (kat) => {
                 if (window.confirm(`Hapus kategori "${kat}"? Semua pejabat di dalamnya akan pindah ke "Lainnya".`)) {
                     setKategoriPejabat(kategoriPejabat.filter(k => k !== kat));
                     setDataPejabat(dataPejabat.map(p => p.kategori === kat ? { ...p, kategori: "Lainnya" } : p));
                 }
             };
+
             const handleTambahPejabatBaru = (kat) => {
                 const newP = { id: 'pej_' + Date.now(), jabatan: "Jabatan Baru", nama: "Nama Pejabat", wa: "62800000000", img: "https://ui-avatars.com/api/?name=Baru&background=random", kategori: kat };
                 setDataPejabat([...dataPejabat, newP]);
             };
+
             const handleSimpanPejabat = async () => {
                 setIsSavingPejabat(true);
                 try {
@@ -1369,34 +1400,43 @@
                 } catch (err) { alert("Terjadi kesalahan saat menyimpan data pejabat."); }
                 setIsSavingPejabat(false);
             };
-            
-            // ========== PASSWORD, YOUTUBE, PENGUMUMAN ==========
+
+            // ==========================================
+            // PERBAIKAN: Menambahkan Kembali Kolom Password Lama
+            // ==========================================
             const handleChangePassword = async (e) => {
                 e.preventDefault();
                 if (!oldPassword || !newPassword) {
                     alert("Harap isi password lama dan password baru.");
                     return;
                 }
+                
                 setIsChangingPass(true);
                 try {
                     const res = await fetch(GAS_API_URL, {
                         method: 'POST',
-                        body: JSON.stringify({ action: 'changePassword', password: oldPassword, newPassword: newPassword })
+                        body: JSON.stringify({ 
+                            action: 'changePassword', 
+                            password: oldPassword,     // Memasukkan input password lama yang di ketik user
+                            newPassword: newPassword   // Password baru yang diinput
+                        })
                     });
                     const result = await res.json();
                     if (result.success) {
                         alert("Password berhasil diperbarui!");
-                        setAdminToken(newPassword);
-                        setOldPassword('');
-                        setNewPassword('');
+                        setAdminToken(newPassword); // Update token session saat ini
+                        setOldPassword('');         // Kosongkan input lama
+                        setNewPassword('');         // Kosongkan input baru
                     } else {
-                        alert("Gagal merubah password: " + (result.message || "Password lama salah."));
+                        alert("Gagal merubah password: " + (result.message || "Password lama yang Anda masukkan salah."));
                     }
                 } catch (err) {
-                    alert("Gagal terhubung ke server.");
+                    alert("Gagal terhubung ke server saat mengganti password.");
                 }
                 setIsChangingPass(false);
             };
+
+            // SIMPAN YOUTUBE URL
             const handleSaveYoutubeUrl = async (e) => {
                 e.preventDefault();
                 setIsSavingUrl(true);
@@ -1410,33 +1450,44 @@
                         alert("URL YouTube berhasil diperbarui!");
                         setYoutubeUrl(editYoutubeUrl);
                     } else {
-                        alert("Gagal merubah URL.");
+                        alert("Gagal merubah URL: " + (result.message || "Akses ditolak."));
                     }
-                } catch (err) { alert("Gagal terhubung ke server."); }
+                } catch (err) {
+                    alert("Gagal terhubung ke server.");
+                }
                 setIsSavingUrl(false);
             };
+
+            // SIMPAN PENGUMUMAN
             const handleSavePengumuman = async (e) => {
                 e.preventDefault();
                 setIsSavingPengumuman(true);
                 try {
                     const res = await fetch(GAS_API_URL, {
                         method: 'POST',
-                        body: JSON.stringify({ action: 'savePengumuman', password: adminToken, pengumuman: JSON.stringify(editPengumuman) })
+                        body: JSON.stringify({ 
+                            action: 'savePengumuman', 
+                            password: adminToken, 
+                            pengumuman: JSON.stringify(editPengumuman)
+                        })
                     });
                     const result = await res.json();
                     if (result.success) {
                         alert("Pengumuman berhasil diperbarui!");
                         setPengumuman(editPengumuman);
                     } else {
-                        alert("Gagal merubah pengumuman.");
+                        alert("Gagal merubah pengumuman: " + (result.message || "Akses ditolak."));
                     }
-                } catch (err) { alert("Gagal terhubung ke server."); }
+                } catch (err) {
+                    alert("Gagal terhubung ke server.");
+                }
                 setIsSavingPengumuman(false);
             };
-            
+
             const handleFileChange = (e, id) => {
                 const file = e.target.files[0];
                 if (!file) return;
+
                 const reader = new FileReader();
                 reader.readAsDataURL(file);
                 reader.onload = (event) => {
@@ -1447,26 +1498,30 @@
                         const MAX_HEIGHT = 150;
                         let width = img.width;
                         let height = img.height;
+
                         if (width > height) {
                             if (width > MAX_WIDTH) { height *= MAX_WIDTH / width; width = MAX_WIDTH; }
                         } else {
                             if (height > MAX_HEIGHT) { width *= MAX_HEIGHT / height; height = MAX_HEIGHT; }
                         }
+
                         const canvas = document.createElement('canvas');
                         canvas.width = width;
                         canvas.height = height;
                         const ctx = canvas.getContext('2d');
                         ctx.drawImage(img, 0, 0, width, height);
+
                         const dataUrl = canvas.toDataURL('image/jpeg', 0.6);
+
                         const updated = dataPejabat.map(p => p.id === id ? { ...p, img: dataUrl } : p);
                         setDataPejabat(updated);
                     };
                 };
             };
+
             const handleUbahText = (id, field, value) => { const updated = dataPejabat.map(p => p.id === id ? { ...p, [field]: value } : p); setDataPejabat(updated); };
             const handleHapusPejabat = (id) => { if (window.confirm("Yakin ingin menghapus data pelayan ini?")) { setDataPejabat(dataPejabat.filter(p => p.id !== id)); } };
-            
-            // ========== RENDER ==========
+
             return (
                 <div className="space-y-6 animate-fade-in relative z-10">
                     <div className="bg-white rounded-[1.5rem] shadow-sm border border-navy-100/60 overflow-hidden">
@@ -1476,27 +1531,35 @@
                             <button onClick={() => setAdminTab('pelayan')} className={`flex-1 py-4 font-bold text-sm md:text-base text-center transition-colors border-l sm:border-t-0 border-t border-navy-50 ${adminTab === 'pelayan' ? 'bg-navy-900 text-gold-400 shadow-inner' : 'text-navy-600 hover:text-navy-900 hover:bg-navy-50/50'}`}>Kelola Pejabat</button>
                             <button onClick={() => setAdminTab('pengaturan')} className={`flex-1 py-4 font-bold text-sm md:text-base text-center transition-colors border-l sm:border-t-0 border-t border-navy-50 ${adminTab === 'pengaturan' ? 'bg-navy-900 text-gold-400 shadow-inner' : 'text-navy-600 hover:text-navy-900 hover:bg-navy-50/50'}`}>Pengaturan Admin</button>
                         </div>
-                        
+
                         <div className={`p-4 md:p-6 ${adminTab === 'jadwal' ? 'bg-navy-50/30' : 'bg-white'}`}>
                             {adminTab === 'jadwal' && (
                                 <div className="animate-fade-in space-y-4">
                                     <div className="flex items-center gap-2">
-                                        <button onClick={() => scrollTabs('left')} className="hidden md:flex p-2.5 bg-white border border-navy-100 rounded-xl shadow-sm text-navy-500 hover:text-gold-500 hover:border-gold-200 shrink-0 transition"><Icon name="ChevronLeft" className="w-5 h-5" /></button>
+                                        <button onClick={() => scrollTabs('left')} className="hidden md:flex p-2.5 bg-white border border-navy-100 rounded-xl shadow-sm text-navy-500 hover:text-gold-500 hover:border-gold-200 shrink-0 transition" title="Scroll Kiri">
+                                            <Icon name="ChevronLeft" className="w-5 h-5" />
+                                        </button>
+
                                         <div ref={scrollContainerRef} className="bg-white rounded-[1.25rem] flex-1 flex overflow-x-auto border border-navy-100/50 p-2 gap-2 hide-scrollbar scroll-smooth shadow-sm">
                                             {subTabs.map(tab => (
-                                                <button key={tab.id} onClick={() => { setSubTab(tab.id); setEditingDate(null); }} className={`px-4 py-2.5 rounded-xl text-xs md:text-sm whitespace-nowrap transition-colors ${subTab === tab.id ? 'bg-navy-900 shadow-sm font-bold text-gold-400' : 'font-bold text-navy-500 hover:bg-navy-50 hover:text-navy-800'}`}>
+                                                <button key={tab.id} onClick={() => { setSubTab(tab.id); setEditingDate(null); }} className={`px-4 py-2.5 rounded-xl text-xs md:text-sm whitespace-nowrap transition-colors whitespace-nowrap ${subTab === tab.id ? 'bg-navy-900 shadow-sm font-bold text-gold-400' : 'font-bold text-navy-500 hover:bg-navy-50 hover:text-navy-800'}`}>
                                                     {tab.label}
                                                 </button>
                                             ))}
                                         </div>
-                                        <button onClick={() => scrollTabs('right')} className="hidden md:flex p-2.5 bg-white border border-navy-100 rounded-xl shadow-sm text-navy-500 hover:text-gold-500 hover:border-gold-200 shrink-0 transition"><Icon name="ChevronRight" className="w-5 h-5" /></button>
+
+                                        <button onClick={() => scrollTabs('right')} className="hidden md:flex p-2.5 bg-white border border-navy-100 rounded-xl shadow-sm text-navy-500 hover:text-gold-500 hover:border-gold-200 shrink-0 transition" title="Scroll Kanan">
+                                            <Icon name="ChevronRight" className="w-5 h-5" />
+                                        </button>
                                     </div>
+
                                     {subTab === 'perjamuan' && (
                                         <div className="bg-gold-50/50 border border-gold-200 p-4 rounded-xl text-navy-800 text-sm flex items-start shadow-sm">
                                             <Icon name="Gift" className="w-5 h-5 text-gold-500 mr-3 shrink-0" />
-                                            <p><b>Jadwal Spesial:</b> Perjamuan Kudus hanya dilaksanakan pada <span className="font-bold underline text-gold-600">Sabtu</span> di bulan Maret, September, dan Desember.</p>
+                                            <p><b>Jadwal Spesial:</b> Perjamuan Kudus hanya dilaksanakan pada <span className="font-bold underline text-gold-600">Sabtu</span> di bulan Maret, September, dan Desember. Mengisi jadwal pada tanggal lain tidak akan memunculkannya secara otomatis di bulan tersebut.</p>
                                         </div>
                                     )}
+
                                     <div className="bg-white border border-navy-100/60 rounded-2xl shadow-sm overflow-hidden">
                                         <div className="flex flex-col md:flex-row justify-between items-center p-5 border-b border-navy-50 gap-4 bg-white">
                                             <div className="flex items-center">
@@ -1510,7 +1573,13 @@
                                             </div>
                                         </div>
                                         <div className="overflow-x-auto">
-                                            <table className={`text-left border-collapse ${subTab === 'perjamuan' ? 'w-full min-w-[800px] mx-auto' : subTab === 'susunanAcara' ? 'w-full min-w-[300px] mx-auto' : 'w-full min-w-[800px] mx-auto'}`}>
+                                            <table className={`text-left border-collapse ${
+                                                    subTab === 'perjamuan' ? 'w-full min-w-[800px] mx-auto' : 
+                                                    subTab === 'susunanAcara' ? 'w-full min-w-[300px] mx-auto' : 
+                                                    subTab === 'diakon' ? 'w-full min:w-[400px] mx-auto' :
+                                                    subTab === 'musik' ? 'w-full min:w-[400px] mx-auto' :
+                                                    'w-full min-w-[800px] mx-auto'
+                                                    }`}>
                                                 <thead className="bg-navy-50/50 border-b border-navy-100/60">
                                                     <tr>
                                                         <th className="p-2 text-[10px] md:text-xs font-black text-navy-500 uppercase tracking-widest text-center w-36">Tanggal</th>
@@ -1524,57 +1593,77 @@
                                                         const rowData = jadwalDB[date] || (isRabu ? initialJadwalRabu : initialJadwalSabat);
                                                         const dataArray = getActiveArray(rowData, subTab);
                                                         let isSaved = false;
-                                                        if (subTab === 'susunanAcara') isSaved = !!jadwalDB[date] && !!jadwalDB[date].susunan;
-                                                        else isSaved = !!jadwalDB[date] && (subTab === 'rabu' ? !!jadwalDB[date].petugas : !!jadwalDB[date][subTab]);
+                                                        if (subTab === 'susunanAcara') {
+                                                            isSaved = !!jadwalDB[date] && !!jadwalDB[date].susunan;
+                                                        } else {
+                                                            isSaved = !!jadwalDB[date] && (subTab === 'rabu' ? !!jadwalDB[date].petugas : !!jadwalDB[date][subTab]);
+                                                        }
+
                                                         return (
                                                             <tr key={date} className="hover:bg-navy-50/20 transition group">
                                                                 <td className="p-4 text-center align-middle border-r border-navy-50/50 bg-navy-50/10">
                                                                     <div className="font-bold text-navy-400 text-xs tracking-wider mb-0.5">{isRabu ? 'RABU' : 'SABTU'}</div>
                                                                     <div className="text-sm font-black text-navy-900">{formatIndoDateShort(date)}</div>
                                                                 </td>
+
                                                                 {subTab === 'susunanAcara' ? (
                                                                     isEditing ? (
                                                                         <td colSpan="2" className="p-4 bg-gold-50/30">
                                                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
                                                                                 <div className="space-y-3 p-5 bg-white rounded-2xl border border-navy-100/60 shadow-sm h-fit">
                                                                                     <h4 className="font-black text-sm text-navy-800 border-b border-navy-50 pb-2">Sekolah Sabat</h4>
-                                                                                    <div><label className="text-[10px] font-bold uppercase tracking-widest text-navy-500 block mb-1">Lagu Buka</label><input type="text" value={editForm.ssLaguBuka || ''} onChange={(e) => handleEditFormChangeSusunan('ssLaguBuka', e.target.value)} className="w-full p-2.5 border border-navy-200 rounded-xl text-sm font-bold" /></div>
-                                                                                    <div><label className="text-[10px] font-bold uppercase tracking-widest text-navy-500 block mb-1">Lagu Tutup</label><input type="text" value={editForm.ssLaguTutup || ''} onChange={(e) => handleEditFormChangeSusunan('ssLaguTutup', e.target.value)} className="w-full p-2.5 border border-navy-200 rounded-xl text-sm font-bold" /></div>
+                                                                                    <div><label className="text-[10px] font-bold uppercase tracking-widest text-navy-500 block mb-1">Lagu Buka</label><input type="text" value={editForm.ssLaguBuka || ''} onChange={(e) => handleEditFormChangeSusunan('ssLaguBuka', e.target.value)} placeholder="Contoh: LS 210" className="w-full p-2.5 border border-navy-200 rounded-xl text-sm font-bold text-navy-900 outline-none focus:border-gold-500 bg-navy-50/50 transition-colors" /></div>
+                                                                                    <div><label className="text-[10px] font-bold uppercase tracking-widest text-navy-500 block mb-1">Lagu Tutup</label><input type="text" value={editForm.ssLaguTutup || ''} onChange={(e) => handleEditFormChangeSusunan('ssLaguTutup', e.target.value)} placeholder="Contoh: LS 251" className="w-full p-2.5 border border-navy-200 rounded-xl text-sm font-bold text-navy-900 outline-none focus:border-gold-500 bg-navy-50/50 transition-colors" /></div>
                                                                                 </div>
                                                                                 <div className="space-y-3 p-5 bg-white rounded-xl border border-navy-100/60 shadow-sm">
                                                                                     <h4 className="font-black text-sm text-gold-600 border-b border-navy-50 pb-2">Khotbah Umum</h4>
-                                                                                    <div><label className="text-[10px] font-bold uppercase tracking-widest text-navy-500 block mb-1">Ayat Bersahutan</label><input type="text" value={editForm.kAyatBersahutan || ''} onChange={(e) => handleEditFormChangeSusunan('kAyatBersahutan', e.target.value)} className="w-full p-2.5 border border-navy-200 rounded-xl text-sm font-bold" /></div>
-                                                                                    <div><label className="text-[10px] font-bold uppercase tracking-widest text-navy-500 block mb-1">Lagu Buka</label><input type="text" value={editForm.kLaguBuka || ''} onChange={(e) => handleEditFormChangeSusunan('kLaguBuka', e.target.value)} className="w-full p-2.5 border border-navy-200 rounded-xl text-sm font-bold" /></div>
+                                                                                    <div><label className="text-[10px] font-bold uppercase tracking-widest text-navy-500 block mb-1">Ayat Bersahutan</label><input type="text" value={editForm.kAyatBersahutan || ''} onChange={(e) => handleEditFormChangeSusunan('kAyatBersahutan', e.target.value)} placeholder="Contoh: No. 12" className="w-full p-2.5 border border-navy-200 rounded-xl text-sm font-bold text-navy-900 outline-none focus:border-gold-500 bg-navy-50/50 transition-colors" /></div>
+                                                                                    <div><label className="text-[10px] font-bold uppercase tracking-widest text-navy-500 block mb-1">Lagu Buka</label><input type="text" value={editForm.kLaguBuka || ''} onChange={(e) => handleEditFormChangeSusunan('kLaguBuka', e.target.value)} placeholder="Contoh: LS 15" className="w-full p-2.5 border border-navy-200 rounded-xl text-sm font-bold text-navy-900 outline-none focus:border-gold-500 bg-navy-50/50 transition-colors" /></div>
+
                                                                                     <div className="flex items-center space-x-3 border border-navy-100 p-3 rounded-xl bg-navy-50/30">
-                                                                                        <input type="checkbox" checked={editForm.kLaguPujian1_show || false} onChange={(e) => handleEditFormChangeSusunan('kLaguPujian1_show', e.target.checked)} className="w-5 h-5 accent-gold-500" />
-                                                                                        <div className="flex-1"><label className="text-[10px] text-navy-600 font-bold">Lagu Pujian 1</label>{editForm.kLaguPujian1_show && <input type="text" value={editForm.kLaguPujian1_judul || ''} onChange={(e) => handleEditFormChangeSusunan('kLaguPujian1_judul', e.target.value)} className="w-full p-2 border rounded-lg text-xs" />}</div>
+                                                                                        <input type="checkbox" checked={editForm.kLaguPujian1_show || false} onChange={(e) => handleEditFormChangeSusunan('kLaguPujian1_show', e.target.checked)} className="w-5 h-5 text-gold-500 rounded focus:ring-gold-500 accent-gold-500" />
+                                                                                        <div className="flex-1">
+                                                                                            <label className="text-[10px] text-navy-600 font-bold uppercase tracking-widest block mb-0.5">Lagu Pujian 1 (Saat Persembahan Khotbah)</label>
+                                                                                            {editForm.kLaguPujian1_show && <input type="text" value={editForm.kLaguPujian1_judul || ''} onChange={(e) => handleEditFormChangeSusunan('kLaguPujian1_judul', e.target.value)} placeholder="Misal: Koor Pemuda" className="w-full p-2 border border-navy-200 rounded-lg text-xs font-bold text-navy-900 outline-none focus:border-gold-500 bg-white" />}
+                                                                                        </div>
                                                                                     </div>
+
                                                                                     <div className="flex items-center space-x-3 border border-navy-100 p-3 rounded-xl bg-navy-50/30">
-                                                                                        <input type="checkbox" checked={editForm.kLaguPujian2_show || false} onChange={(e) => handleEditFormChangeSusunan('kLaguPujian2_show', e.target.checked)} className="w-5 h-5 accent-gold-500" />
-                                                                                        <div className="flex-1"><label className="text-[10px] text-navy-600 font-bold">Lagu Pujian 2</label>{editForm.kLaguPujian2_show && <input type="text" value={editForm.kLaguPujian2_judul || ''} onChange={(e) => handleEditFormChangeSusunan('kLaguPujian2_judul', e.target.value)} className="w-full p-2 border rounded-lg text-xs" />}</div>
+                                                                                        <input type="checkbox" checked={editForm.kLaguPujian2_show || false} onChange={(e) => handleEditFormChangeSusunan('kLaguPujian2_show', e.target.checked)} className="w-5 h-5 text-gold-500 rounded focus:ring-gold-500 accent-gold-500" />
+                                                                                        <div className="flex-1">
+                                                                                            <label className="text-[10px] text-navy-600 font-bold uppercase tracking-widest block mb-0.5">Lagu Pujian 2 (Sebelum Cerita Anak)</label>
+                                                                                            {editForm.kLaguPujian2_show && <input type="text" value={editForm.kLaguPujian2_judul || ''} onChange={(e) => handleEditFormChangeSusunan('kLaguPujian2_judul', e.target.value)} placeholder="Misal: Vocal Group" className="w-full p-2 border border-navy-200 rounded-lg text-xs font-bold text-navy-900 outline-none focus:border-gold-500 bg-white" />}
+                                                                                        </div>
                                                                                     </div>
+
                                                                                     <div className="flex items-center space-x-3 border border-navy-100 p-3 rounded-xl bg-navy-50/30">
-                                                                                        <input type="checkbox" checked={editForm.kLaguPujian3_show || false} onChange={(e) => handleEditFormChangeSusunan('kLaguPujian3_show', e.target.checked)} className="w-5 h-5 accent-gold-500" />
-                                                                                        <div className="flex-1"><label className="text-[10px] text-navy-600 font-bold">Lagu Pujian 3</label>{editForm.kLaguPujian3_show && <input type="text" value={editForm.kLaguPujian3_judul || ''} onChange={(e) => handleEditFormChangeSusunan('kLaguPujian3_judul', e.target.value)} className="w-full p-2 border rounded-lg text-xs" />}</div>
+                                                                                        <input type="checkbox" checked={editForm.kLaguPujian3_show || false} onChange={(e) => handleEditFormChangeSusunan('kLaguPujian3_show', e.target.checked)} className="w-5 h-5 text-gold-500 rounded focus:ring-gold-500 accent-gold-500" />
+                                                                                        <div className="flex-1">
+                                                                                            <label className="text-[10px] text-navy-600 font-bold uppercase tracking-widest block mb-0.5">Lagu Pujian 3 (Sesudah Cerita Anak)</label>
+                                                                                            {editForm.kLaguPujian3_show && <input type="text" value={editForm.kLaguPujian3_judul || ''} onChange={(e) => handleEditFormChangeSusunan('kLaguPujian3_judul', e.target.value)} placeholder="Misal: Solo" className="w-full p-2 border border-navy-200 rounded-lg text-xs font-bold text-navy-900 outline-none focus:border-gold-500 bg-white" />}
+                                                                                        </div>
                                                                                     </div>
-                                                                                    <div><label className="text-[10px] font-bold uppercase tracking-widest text-navy-500 block mb-1">Ayat Inti</label><input type="text" value={editForm.kAyatInti || ''} onChange={(e) => handleEditFormChangeSusunan('kAyatInti', e.target.value)} className="w-full p-2.5 border border-navy-200 rounded-xl text-sm font-bold" /></div>
-                                                                                    <div><label className="text-[10px] font-bold uppercase tracking-widest text-navy-500 block mb-1">Lagu Tutup</label><input type="text" value={editForm.kLaguTutup || ''} onChange={(e) => handleEditFormChangeSusunan('kLaguTutup', e.target.value)} className="w-full p-2.5 border border-navy-200 rounded-xl text-sm font-bold" /></div>
+
+                                                                                    <div><label className="text-[10px] font-bold uppercase tracking-widest text-navy-500 block mb-1">Ayat Inti</label><input type="text" value={editForm.kAyatInti || ''} onChange={(e) => handleEditFormChangeSusunan('kAyatInti', e.target.value)} placeholder="Contoh: Yohanes 3:16" className="w-full p-2.5 border border-navy-200 rounded-xl text-sm font-bold text-navy-900 outline-none focus:border-gold-500 bg-navy-50/50 transition-colors" /></div>
+                                                                                    <div><label className="text-[10px] font-bold uppercase tracking-widest text-navy-500 block mb-1">Lagu Tutup</label><input type="text" value={editForm.kLaguTutup || ''} onChange={(e) => handleEditFormChangeSusunan('kLaguTutup', e.target.value)} placeholder="Contoh: LS 300" className="w-full p-2.5 border border-navy-200 rounded-xl text-sm font-bold text-navy-900 outline-none focus:border-gold-500 bg-navy-50/50 transition-colors" /></div>
                                                                                 </div>
                                                                             </div>
                                                                             <div className="mt-5 flex justify-end space-x-3">
-                                                                                <button onClick={() => setEditingDate(null)} className="px-5 py-2.5 text-navy-600 bg-navy-100 hover:bg-navy-200 rounded-xl text-sm font-bold">Batal</button>
-                                                                                <button onClick={() => handleSaveRow(date)} disabled={isSavingJadwal} className="px-5 py-2.5 text-navy-900 bg-gold-400 hover:bg-gold-500 rounded-xl text-sm font-bold"><Icon name="Check" className="w-4 h-4 mr-1.5 inline" /> Simpan</button>
+                                                                                <button onClick={() => setEditingDate(null)} className="px-5 py-2.5 text-navy-600 bg-navy-100 hover:bg-navy-200 rounded-xl text-sm font-bold transition-colors">Batal</button>
+                                                                                <button onClick={() => handleSaveRow(date)} disabled={isSavingJadwal} className={`px-5 py-2.5 text-navy-900 bg-gold-400 hover:bg-gold-500 rounded-xl text-sm font-bold transition-colors shadow-sm ${isSavingJadwal ? 'opacity-50' : ''}`}><Icon name="Check" className="w-4 h-4 mr-1.5 inline" /> Simpan Susunan</button>
                                                                             </div>
                                                                         </td>
                                                                     ) : (
                                                                         <>
                                                                             <td className="p-4 text-center align-middle border-r border-navy-50/50">
-                                                                                <span className={`text-[10px] px-3 py-1 rounded-full font-bold uppercase tracking-widest shadow-sm ${isSaved ? 'bg-green-100 text-green-700' : 'bg-navy-100 text-navy-500'}`}>{isSaved ? 'Sudah Diatur' : 'Default'}</span>
+                                                                                <span className={`text-[10px] px-3 py-1 rounded-full font-bold uppercase tracking-widest shadow-sm ${isSaved ? 'bg-green-100 text-green-700 border border-green-200' : 'bg-navy-100 text-navy-500 border border-navy-200'}`}>
+                                                                                    {isSaved ? 'Sudah Diatur' : 'Default'}
+                                                                                </span>
                                                                             </td>
                                                                             <td className="p-4 text-center align-middle">
                                                                                 <div className="flex justify-center space-x-2 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity">
-                                                                                    <button onClick={() => handleEditClick(date)} className="p-2.5 text-navy-500 hover:text-gold-500 hover:bg-navy-50 rounded-xl"><Icon name="Edit" className="w-4 h-4" /></button>
-                                                                                    {isSaved && <button onClick={() => handleDeleteRow(date)} className="p-2.5 text-navy-500 hover:text-red-500 hover:bg-red-50 rounded-xl"><Icon name="Trash" className="w-4 h-4" /></button>}
+                                                                                    <button onClick={() => handleEditClick(date)} className="p-2.5 text-navy-500 hover:text-gold-500 hover:bg-navy-50 rounded-xl transition-colors" title="Edit Susunan"><Icon name="Edit" className="w-4 h-4" /></button>
+                                                                                    {isSaved ? (<button onClick={() => handleDeleteRow(date)} className="p-2.5 text-navy-500 hover:text-red-500 hover:bg-red-50 rounded-xl transition-colors" title="Reset Default"><Icon name="Trash" className="w-4 h-4" /></button>) : (<div className="w-10"></div>)}
                                                                                 </div>
                                                                             </td>
                                                                         </>
@@ -1584,11 +1673,11 @@
                                                                         {dataArray.map((p, i) => (
                                                                             <td key={i} className="p-4 text-center align-middle border-r border-navy-50/50">
                                                                                 {isEditing ? (
-                                                                                    <input type="text" value={editForm[i]?.nama || ''} onChange={(e) => handleEditFormChange(i, e.target.value)} className="w-full p-2.5 border border-navy-200 rounded-xl text-sm font-bold text-center" />
+                                                                                    <input type="text" value={editForm[i]?.nama || ''} onChange={(e) => handleEditFormChange(i, e.target.value)} className="w-full p-2.5 border border-navy-200 rounded-xl text-sm font-bold text-navy-900 focus:border-gold-500 outline-none shadow-inner bg-navy-50/50" />
                                                                                 ) : (
                                                                                     <div className="flex flex-col items-center">
                                                                                         <span className="font-bold text-navy-900 text-sm mb-1.5">{p.nama}</span>
-                                                                                        <span className={`text-[9px] px-2.5 py-0.5 rounded-full font-bold uppercase ${isSaved ? 'bg-gold-50 text-gold-600' : 'bg-navy-50 text-navy-400'}`}>{isSaved ? 'Terkunci' : 'Default'}</span>
+                                                                                        <span className={`text-[9px] px-2.5 py-0.5 rounded-full font-bold uppercase tracking-widest shadow-sm ${isSaved ? 'bg-gold-50 text-gold-600 border border-gold-200' : 'bg-navy-50 text-navy-400 border border-navy-100'}`}>{isSaved ? 'Terkunci' : 'Default'}</span>
                                                                                     </div>
                                                                                 )}
                                                                             </td>
@@ -1596,20 +1685,20 @@
                                                                         <td className="p-4 text-center align-middle">
                                                                             {isEditing ? (
                                                                                 <div className="flex justify-center space-x-1.5">
-                                                                                    <button onClick={() => handleSaveRow(date)} disabled={isSavingJadwal} className="p-2.5 text-navy-900 bg-gold-400 hover:bg-gold-500 rounded-xl"><Icon name="Check" className="w-4 h-4" /></button>
-                                                                                    <button onClick={() => setEditingDate(null)} className="p-2.5 text-navy-600 bg-navy-100 hover:bg-navy-200 rounded-xl"><Icon name="X" className="w-4 h-4" /></button>
+                                                                                    <button onClick={() => handleSaveRow(date)} disabled={isSavingJadwal} className={`p-2.5 text-navy-900 bg-gold-400 hover:bg-gold-500 rounded-xl transition-colors shadow-sm ${isSavingJadwal ? 'opacity-50' : ''}`}><Icon name="Check" className="w-4 h-4" /></button>
+                                                                                    <button onClick={() => setEditingDate(null)} className="p-2.5 text-navy-600 bg-navy-100 hover:bg-navy-200 rounded-xl transition-colors"><Icon name="X" className="w-4 h-4" /></button>
                                                                                 </div>
                                                                             ) : (
                                                                                 <div className="flex justify-center space-x-2 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity">
-                                                                                    <button onClick={() => handleEditClick(date)} className="p-2.5 text-navy-500 hover:text-gold-500 hover:bg-navy-50 rounded-xl"><Icon name="Edit" className="w-4 h-4" /></button>
-                                                                                    {isSaved && <button onClick={() => handleDeleteRow(date)} className="p-2.5 text-navy-500 hover:text-red-500 hover:bg-red-50 rounded-xl"><Icon name="Trash" className="w-4 h-4" /></button>}
+                                                                                    <button onClick={() => handleEditClick(date)} className="p-2.5 text-navy-500 hover:text-gold-500 hover:bg-navy-50 rounded-xl transition-colors" title="Edit Baris"><Icon name="Edit" className="w-4 h-4" /></button>
+                                                                                    {isSaved ? (<button onClick={() => handleDeleteRow(date)} className="p-2.5 text-navy-500 hover:text-red-500 hover:bg-red-50 rounded-xl transition-colors" title="Hapus (Kembali ke Default)"><Icon name="Trash" className="w-4 h-4" /></button>) : (<div className="w-10"></div>)}
                                                                                 </div>
                                                                             )}
                                                                         </td>
                                                                     </>
                                                                 )}
                                                             </tr>
-                                                        );
+                                                        )
                                                     })}
                                                 </tbody>
                                             </table>
@@ -1617,7 +1706,7 @@
                                     </div>
                                 </div>
                             )}
-                            
+
                             {adminTab === 'warta' && (
                                 <div className="max-w-2xl mx-auto bg-white rounded-xl shadow-md overflow-hidden p-6 md:p-8">
                                     <div className="mb-8">
@@ -1654,7 +1743,8 @@
                                     </form>
                                 </div>
                             )}
-                            
+
+
                             {adminTab === 'pelayan' && (
                                 <div className="space-y-6 animate-fade-in bg-white p-2 md:p-4 rounded-xl">
                                     <div className="flex flex-col md:flex-row justify-between items-start md:items-center bg-gold-50 p-5 rounded-[1.5rem] border border-gold-200 shadow-sm gap-4">
@@ -1663,45 +1753,71 @@
                                             <p className="text-sm text-navy-800 font-medium leading-relaxed">Geser (Drag & Drop) kartu pejabat untuk memindahkannya antar kelompok. Klik <span className="font-bold">Simpan</span> untuk mensinkronisasi dengan Google Sheets.</p>
                                         </div>
                                         <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
-                                            <button onClick={handleTambahKategori} className="bg-white border border-navy-200 text-navy-800 hover:bg-navy-50 font-bold py-3 px-5 rounded-xl shadow-sm flex items-center"><Icon name="PlusCircle" className="w-4 h-4 mr-2" /> Kategori</button>
-                                            <button onClick={handleSimpanPejabat} disabled={isSavingPejabat} className={`${isSavingPejabat ? 'bg-navy-300 text-navy-500' : 'bg-navy-900 hover:bg-navy-800 text-gold-400'} font-bold py-3 px-6 rounded-xl flex items-center`}><Icon name="Save" className="w-4 h-4 mr-2" /> {isSavingPejabat ? 'Menyimpan...' : 'Simpan Perubahan'}</button>
+                                            <button onClick={handleTambahKategori} className="bg-white border border-navy-200 text-navy-800 hover:bg-navy-50 font-bold py-3 px-5 rounded-xl shadow-sm transition-all flex items-center justify-center whitespace-nowrap"><Icon name="PlusCircle" className="w-4 h-4 mr-2" /> Kategori</button>
+                                            <button onClick={handleSimpanPejabat} disabled={isSavingPejabat} className={`${isSavingPejabat ? 'bg-navy-300 text-navy-500 cursor-not-allowed' : 'bg-navy-900 hover:bg-navy-800 text-gold-400 hover:text-gold-300 shadow-md hover:shadow-lg'} font-bold py-3 px-6 rounded-xl transition-all flex items-center justify-center whitespace-nowrap`}><Icon name="Save" className="w-4 h-4 mr-2" /> {isSavingPejabat ? 'Menyimpan...' : 'Simpan Perubahan'}</button>
                                         </div>
                                     </div>
+
                                     <div className="overflow-x-auto pb-6">
                                         <div className="flex items-start gap-6 min-w-max pb-4 px-2">
                                             {kategoriPejabat.map((kat, index) => (
-                                                <div key={index} className="w-80 bg-navy-50/50 rounded-[1.5rem] border border-navy-100 flex flex-col max-h-[70vh]" onDragOver={handleDragOver} onDrop={(e) => handleDrop(e, kat)}>
+                                                <div
+                                                    key={index}
+                                                    className="w-80 bg-navy-50/50 rounded-[1.5rem] border border-navy-100 flex flex-col max-h-[70vh]"
+                                                    onDragOver={handleDragOver}
+                                                    onDrop={(e) => handleDrop(e, kat)}
+                                                >
+                                                    {/* Kategori Header */}
                                                     <div className="p-4 border-b border-navy-100/60 bg-white rounded-t-[1.5rem] flex justify-between items-center shadow-sm sticky top-0 z-10">
-                                                        <h4 className="font-black text-navy-900 uppercase tracking-widest text-xs flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-gold-500"></span> {kat}</h4>
+                                                        <h4 className="font-black text-navy-900 uppercase tracking-widest text-xs flex items-center gap-2">
+                                                            <span className="w-2 h-2 rounded-full bg-gold-500"></span> {kat}
+                                                        </h4>
                                                         <div className="flex bg-navy-50 rounded-lg p-1">
-                                                            <button onClick={() => handleTambahPejabatBaru(kat)} className="p-1.5 text-navy-600 hover:text-navy-900 hover:bg-white rounded-md"><Icon name="Plus" className="w-4 h-4" /></button>
-                                                            {kat !== "Lainnya" && <button onClick={() => handleHapusKategori(kat)} className="p-1.5 text-navy-400 hover:text-red-600 hover:bg-red-50 rounded-md"><Icon name="Trash2" className="w-4 h-4" /></button>}
+                                                            <button onClick={() => handleTambahPejabatBaru(kat)} className="p-1.5 text-navy-600 hover:text-navy-900 hover:bg-white rounded-md transition-colors shadow-sm" title="Tambah Pejabat"><Icon name="Plus" className="w-4 h-4" /></button>
+                                                            {kat !== "Lainnya" && (
+                                                                <button onClick={() => handleHapusKategori(kat)} className="p-1.5 text-navy-400 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors ml-1" title="Hapus Kategori"><Icon name="Trash2" className="w-4 h-4" /></button>
+                                                            )}
                                                         </div>
                                                     </div>
-                                                    <div className="p-3 overflow-y-auto overflow-x-hidden flex-1 space-y-3">
+
+                                                    {/* List Pejabat (Cards) */}
+                                                    <div className="p-3 overflow-y-auto overflow-x-hidden flex-1 space-y-3 custom-scrollbar">
                                                         {dataPejabat.filter(p => p.kategori === kat || (kat === "Lainnya" && (!p.kategori || !kategoriPejabat.includes(p.kategori)))).map(p => (
-                                                            <div key={p.id} draggable onDragStart={(e) => handleDragStart(e, p)} onDragEnd={handleDragEnd} className="bg-white border border-navy-100/60 rounded-xl p-3 shadow-sm hover:shadow-md cursor-grab active:cursor-grabbing group relative">
+                                                            <div
+                                                                key={p.id}
+                                                                draggable
+                                                                onDragStart={(e) => handleDragStart(e, p)}
+                                                                onDragEnd={handleDragEnd}
+                                                                className="bg-white border border-navy-100/60 rounded-xl p-3 shadow-sm hover:shadow-md hover:border-navy-300 transition-all cursor-grab active:cursor-grabbing group relative"
+                                                            >
                                                                 <div className="absolute -top-2 -right-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                                                    <button onClick={() => handleHapusPejabat(p.id)} className="bg-red-50 text-red-600 p-2 rounded-full shadow-sm"><Icon name="X" className="w-3.5 h-3.5" /></button>
+                                                                    <button onClick={() => handleHapusPejabat(p.id)} className="bg-red-50 text-red-600 p-2 rounded-full shadow-sm hover:bg-red-100 border border-red-200" title="Hapus"><Icon name="X" className="w-3.5 h-3.5" /></button>
                                                                 </div>
                                                                 <div className="flex gap-3">
                                                                     <div className="relative w-12 h-12 flex-shrink-0">
                                                                         <img src={p.img} alt={p.nama} className="w-full h-full rounded-xl object-cover border-2 border-white shadow-sm" />
-                                                                        <label className="absolute -bottom-1.5 -right-1.5 bg-white border border-navy-100/60 rounded-lg p-1 cursor-pointer"><Icon name="Camera" className="w-3 h-3 text-navy-600" /><input type="file" accept="image/*" className="hidden" onChange={(e) => handleFileChange(e, p.id)} /></label>
+                                                                        <label className="absolute -bottom-1.5 -right-1.5 bg-white border border-navy-100/60 rounded-lg p-1 cursor-pointer hover:bg-navy-50 shadow-sm transition-colors">
+                                                                            <Icon name="Camera" className="w-3 h-3 text-navy-600" />
+                                                                            <input type="file" accept="image/*" className="hidden" onChange={(e) => handleFileChange(e, p.id)} />
+                                                                        </label>
                                                                     </div>
                                                                     <div className="flex-1 space-y-2 min-w-0">
-                                                                        <input type="text" value={p.jabatan} onChange={(e) => handleUbahText(p.id, 'jabatan', e.target.value)} placeholder="Jabatan" className="w-full bg-transparent outline-none focus:border-b border-gold-400 text-xs font-bold uppercase truncate" />
-                                                                        <input type="text" value={p.nama} onChange={(e) => handleUbahText(p.id, 'nama', e.target.value)} placeholder="Nama Lengkap" className="w-full bg-transparent outline-none focus:border-b border-navy-400 text-sm font-black truncate" />
+                                                                        <input type="text" value={p.jabatan} onChange={(e) => handleUbahText(p.id, 'jabatan', e.target.value)} placeholder="Jabatan" className="w-full bg-transparent outline-none focus:border-b border-gold-400 text-xs font-bold uppercase tracking-wider text-navy-500 placeholder-navy-300 truncate" />
+                                                                        <input type="text" value={p.nama} onChange={(e) => handleUbahText(p.id, 'nama', e.target.value)} placeholder="Nama Lengkap" className="w-full bg-transparent outline-none focus:border-b border-navy-400 text-sm font-black text-navy-900 truncate" />
                                                                         <div className="flex items-center text-navy-500 pt-1 border-t border-navy-50/50">
-                                                                            <Icon name="Phone" className="w-3 h-3 mr-1.5" />
-                                                                            <input type="text" value={p.wa} onChange={(e) => handleUbahText(p.id, 'wa', e.target.value)} placeholder="628xxxx" className="w-full bg-transparent outline-none font-mono text-xs" />
+                                                                            <Icon name="Phone" className="w-3 h-3 mr-1.5 flex-shrink-0" />
+                                                                            <input type="text" value={p.wa} onChange={(e) => handleUbahText(p.id, 'wa', e.target.value)} placeholder="628xxxx" className="w-full bg-transparent outline-none font-mono text-xs font-medium focus:text-navy-900" />
                                                                         </div>
                                                                     </div>
                                                                 </div>
+                                                                {/* Icon indikator dragable */}
+                                                                <div className="absolute top-1/2 left-0 -translate-x-1/2 -translate-y-1/2 w-1.5 h-8 bg-navy-200/50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
                                                             </div>
                                                         ))}
                                                         {dataPejabat.filter(p => p.kategori === kat || (kat === "Lainnya" && (!p.kategori || !kategoriPejabat.includes(p.kategori)))).length === 0 && (
-                                                            <div className="border border-dashed border-navy-200 rounded-xl p-4 text-center text-navy-400 text-xs font-semibold py-8">Kosong<br />Tarik kartu ke area ini</div>
+                                                            <div className="border border-dashed border-navy-200 rounded-xl p-4 text-center text-navy-400 text-xs font-semibold py-8">
+                                                                Kosong<br />Tarik kartu ke area ini
+                                                            </div>
                                                         )}
                                                     </div>
                                                 </div>
@@ -1710,9 +1826,11 @@
                                     </div>
                                 </div>
                             )}
-                            
+
                             {adminTab === 'pengaturan' && (
                                 <div className="space-y-6 md:space-y-8 animate-fade-in relative z-10">
+                                    
+                                    {/* --- FORM GANTI PASSWORD --- */}
                                     <div className="bg-white border border-navy-100/60 rounded-[1.5rem] p-6 shadow-sm">
                                         <div className="flex items-center space-x-4 mb-6 border-b border-navy-50 pb-5">
                                             <div className="w-12 h-12 bg-navy-50 rounded-full flex items-center justify-center text-navy-600 shadow-inner"><Icon name="Settings" className="w-6 h-6" /></div>
@@ -1722,33 +1840,47 @@
                                             <div>
                                                 <label className="block text-xs font-bold text-navy-700 mb-2 uppercase tracking-widest">Password Lama</label>
                                                 <div className="relative">
-                                                    <input type={showOldPass ? "text" : "password"} value={oldPassword} onChange={e => setOldPassword(e.target.value)} required className="w-full p-3.5 border border-navy-200 rounded-xl focus:border-gold-500 outline-none bg-white text-sm font-bold pr-12" />
-                                                    <button type="button" onClick={() => setShowOldPass(!showOldPass)} className="absolute right-3 top-1/2 transform -translate-y-1/2"><Icon name={showOldPass ? "EyeOff" : "Eye"} className="w-5 h-5" /></button>
+                                                    <input type={showOldPass ? "text" : "password"} value={oldPassword} onChange={e => setOldPassword(e.target.value)} required className="w-full p-3.5 border border-navy-200 rounded-xl focus:border-gold-500 outline-none transition-colors bg-white text-sm font-bold shadow-sm pr-12" placeholder="Masukkan password lama" />
+                                                    <button type="button" onClick={() => setShowOldPass(!showOldPass)} className="absolute right-3 top-1/2 transform -translate-y-1/2 text-navy-400 hover:text-navy-600 transition-colors">
+                                                        <Icon name={showOldPass ? "EyeOff" : "Eye"} className="w-5 h-5" />
+                                                    </button>
                                                 </div>
                                             </div>
                                             <div>
                                                 <label className="block text-xs font-bold text-navy-700 mb-2 uppercase tracking-widest">Password Baru</label>
                                                 <div className="relative">
-                                                    <input type={showNewPass ? "text" : "password"} value={newPassword} onChange={e => setNewPassword(e.target.value)} required className="w-full p-3.5 border border-navy-200 rounded-xl focus:border-gold-500 outline-none bg-navy-50/50 text-sm font-bold pr-12" />
-                                                    <button type="button" onClick={() => setShowNewPass(!showNewPass)} className="absolute right-3 top-1/2 transform -translate-y-1/2"><Icon name={showNewPass ? "EyeOff" : "Eye"} className="w-5 h-5" /></button>
+                                                    <input type={showNewPass ? "text" : "password"} value={newPassword} onChange={e => setNewPassword(e.target.value)} required className="w-full p-3.5 border border-navy-200 rounded-xl focus:border-gold-500 outline-none transition-colors bg-navy-50/50 text-sm font-bold shadow-sm pr-12" placeholder="Masukkan password baru" />
+                                                    <button type="button" onClick={() => setShowNewPass(!showNewPass)} className="absolute right-3 top-1/2 transform -translate-y-1/2 text-navy-400 hover:text-navy-600 transition-colors">
+                                                        <Icon name={showNewPass ? "EyeOff" : "Eye"} className="w-5 h-5" />
+                                                    </button>
                                                 </div>
                                             </div>
-                                            <button type="submit" disabled={isChangingPass} className={`w-full ${isChangingPass ? 'bg-navy-300 text-navy-500' : 'bg-navy-900 hover:bg-navy-800 text-gold-400'} font-bold py-3.5 rounded-xl mt-6 flex justify-center`}>{isChangingPass ? "Menyimpan..." : "Simpan Password Baru"}</button>
+                                            <button type="submit" disabled={isChangingPass} className={`w-full ${isChangingPass ? 'bg-navy-300 text-navy-500 cursor-not-allowed' : 'bg-navy-900 hover:bg-navy-800 text-gold-400 shadow-md hover:shadow-lg'} font-bold py-3.5 rounded-xl transition-all mt-6 flex justify-center items-center`}>
+                                                {isChangingPass ? <><span className="w-4 h-4 border-2 border-navy-500 border-t-white rounded-full animate-spin mr-2"></span> Menyimpan...</> : 'Simpan Password Baru'}
+                                            </button>
                                         </form>
                                     </div>
+
+                                    {/* --- FORM YOUTUBE URL --- */}
                                     <div className="bg-white border border-navy-100/60 rounded-[1.5rem] p-6 shadow-sm">
                                         <div className="flex items-center space-x-4 mb-6 border-b border-navy-50 pb-5">
-                                            <div className="w-12 h-12 bg-red-50 rounded-full flex items-center justify-center text-red-600 shadow-inner"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg></div>
+                                            <div className="w-12 h-12 bg-red-50 rounded-full flex items-center justify-center text-red-600 shadow-inner">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+                                            </div>
                                             <div><h3 className="font-black text-navy-900 text-lg tracking-tight">URL Video YouTube</h3><p className="text-xs text-navy-500 font-bold uppercase tracking-widest mt-1">Video di Halaman Utama</p></div>
                                         </div>
                                         <form onSubmit={handleSaveYoutubeUrl} className="space-y-5">
                                             <div>
                                                 <label className="block text-xs font-bold text-navy-700 mb-2 uppercase tracking-widest">Link Embed YouTube</label>
-                                                <input type="text" value={editYoutubeUrl} onChange={e => setEditYoutubeUrl(e.target.value)} required className="w-full p-3.5 border border-navy-200 rounded-xl focus:border-gold-500 outline-none bg-navy-50/50 text-sm font-medium" />
+                                                <input type="text" value={editYoutubeUrl} onChange={e => setEditYoutubeUrl(e.target.value)} required placeholder="Contoh: https://www.youtube.com/embed/..." className="w-full p-3.5 border border-navy-200 rounded-xl focus:border-gold-500 outline-none transition-colors bg-navy-50/50 text-sm font-medium shadow-sm" />
                                             </div>
-                                            <button type="submit" disabled={isSavingUrl} className={`w-full ${isSavingUrl ? 'bg-navy-300 text-navy-500' : 'bg-navy-900 hover:bg-navy-800 text-gold-400'} font-bold py-3.5 rounded-xl mt-6 flex justify-center`}>{isSavingUrl ? "Menyimpan..." : "Simpan URL YouTube"}</button>
+                                            <button type="submit" disabled={isSavingUrl} className={`w-full ${isSavingUrl ? 'bg-navy-300 text-navy-500 cursor-not-allowed' : 'bg-navy-900 hover:bg-navy-800 text-gold-400 shadow-md hover:shadow-lg'} font-bold py-3.5 rounded-xl transition-all mt-6 flex justify-center items-center`}>
+                                                {isSavingUrl ? <><span className="w-4 h-4 border-2 border-navy-500 border-t-white rounded-full animate-spin mr-2"></span> Menyimpan...</> : 'Simpan URL YouTube'}
+                                            </button>
                                         </form>
                                     </div>
+
+                                    {/* --- FORM PENGUMUMAN --- */}
                                     <div className="bg-white border border-navy-100/60 rounded-[1.5rem] p-6 shadow-sm">
                                         <div className="flex items-center space-x-4 mb-6 border-b border-navy-50 pb-5">
                                             <div className="w-12 h-12 bg-gold-50 rounded-full flex items-center justify-center text-gold-600 shadow-inner"><Icon name="Megaphone" className="w-6 h-6" /></div>
@@ -1757,17 +1889,23 @@
                                         <form onSubmit={handleSavePengumuman} className="space-y-5">
                                             <div>
                                                 <label className="block text-xs font-bold text-navy-700 mb-2 uppercase tracking-widest">Judul Pengumuman</label>
-                                                <input type="text" value={editPengumuman.header} onChange={e => setEditPengumuman({...editPengumuman, header: e.target.value})} className="w-full p-3.5 border border-navy-200 rounded-xl focus:border-gold-500 outline-none bg-navy-50/50 text-sm font-medium mb-4" />
+                                                <input type="text" value={editPengumuman.header} onChange={e => setEditPengumuman({...editPengumuman, header: e.target.value})} placeholder="Misal: Pengumuman Penting" className="w-full p-3.5 border border-navy-200 rounded-xl focus:border-gold-500 outline-none transition-colors bg-navy-50/50 text-sm font-medium shadow-sm mb-4" />
+                                                
                                                 <div className="flex justify-between items-end mb-2">
                                                     <label className="block text-xs font-bold text-navy-700 uppercase tracking-widest">Isi Pengumuman</label>
-                                                    <button type="button" onClick={() => insertFormatting('bold')} className="px-3 py-1 bg-navy-100 hover:bg-navy-200 text-navy-800 rounded font-bold text-sm">B</button>
+                                                    <div className="flex space-x-2">
+                                                        <button type="button" onClick={() => insertFormatting('bold')} className="px-3 py-1 bg-navy-100 hover:bg-navy-200 text-navy-800 rounded font-bold text-sm shadow-sm transition-colors" title="Beri efek tebal pada teks yang dipilih">B</button>
+                                                        </div>
                                                 </div>
-                                                <textarea ref={textareaRef} value={editPengumuman.isi} onChange={e => setEditPengumuman({...editPengumuman, isi: e.target.value})} rows="5" className="w-full p-3.5 border border-navy-200 rounded-xl focus:border-gold-500 outline-none bg-navy-50/50 text-sm font-medium leading-relaxed"></textarea>
-                                                <p className="text-[10px] text-navy-500 mt-2 font-bold bg-navy-50 p-2.5 rounded-lg">Blok teks lalu tekan B untuk tebal. Kosongkan untuk menyembunyikan pengumuman.</p>
+                                                <textarea ref={textareaRef} value={editPengumuman.isi} onChange={e => setEditPengumuman({...editPengumuman, isi: e.target.value})} rows="5" placeholder="Kosongkan isi untuk menyembunyikan kotak pengumuman..." className="w-full p-3.5 border border-navy-200 rounded-xl focus:border-gold-500 outline-none transition-colors bg-navy-50/50 text-sm font-medium shadow-sm leading-relaxed whitespace-pre-wrap"></textarea>
+                                                <p className="text-[10px] text-navy-500 mt-2 font-bold leading-relaxed bg-navy-50 p-2.5 rounded-lg border border-navy-100">Blok teks pada kotak lalu tekan tombol B untuk menambahkan format tebal. Hapus semua isi teks untuk menyembunyikan pengumuman dari layar utama.</p>
                                             </div>
-                                            <button type="submit" disabled={isSavingPengumuman} className={`w-full ${isSavingPengumuman ? 'bg-navy-300 text-navy-500' : 'bg-navy-900 hover:bg-navy-800 text-gold-400'} font-bold py-3.5 rounded-xl flex justify-center`}>{isSavingPengumuman ? "Menyimpan..." : "Simpan Pengumuman"}</button>
+                                            <button type="submit" disabled={isSavingPengumuman} className={`w-full ${isSavingPengumuman ? 'bg-navy-300 text-navy-500 cursor-not-allowed' : 'bg-navy-900 hover:bg-navy-800 text-gold-400 shadow-md hover:shadow-lg'} font-bold py-3.5 rounded-xl transition-all flex justify-center items-center`}>
+                                                {isSavingPengumuman ? <><span className="w-4 h-4 border-2 border-navy-500 border-t-white rounded-full animate-spin mr-2"></span> Menyimpan...</> : 'Simpan Pengumuman'}
+                                            </button>
                                         </form>
                                     </div>
+
                                 </div>
                             )}
                         </div>
@@ -1775,21 +1913,59 @@
                 </div>
             );
         };
-        
-        // ========== KOMPONEN APP (UTAMA) ==========
+
         const App = () => {
             const [isAppLoading, setIsAppLoading] = React.useState(true);
-            const [activeTab, setActiveTab] = React.useState('home');
+
+            // --- HISTORY API (TOMBOL BACK ANDROID) ---
+            const getInitialTab = () => {
+                const hash = window.location.hash.replace('#', '');
+                return hash || 'home';
+            };
+            const [activeTab, setRawActiveTab] = React.useState(getInitialTab());
+
+            const setActiveTab = React.useCallback((tabId) => {
+                setRawActiveTab((prevTab) => {
+                    if (prevTab !== tabId) {
+                        // Menambahkan riwayat ke browser setiap pindah tab
+                        window.history.pushState({ tab: tabId }, '', `#${tabId}`);
+                        return tabId;
+                    }
+                    return prevTab;
+                });
+            }, []);
+
+            React.useEffect(() => {
+                // Inisialisasi state pertama agar tombol back pertama tidak langsung keluar web
+                window.history.replaceState({ tab: activeTab }, '', `#${activeTab}`);
+
+                const handlePopState = (event) => {
+                    if (event.state && event.state.tab) {
+                        setRawActiveTab(event.state.tab);
+                    } else {
+                        const hash = window.location.hash.replace('#', '');
+                        setRawActiveTab(hash || 'home');
+                    }
+                };
+                window.addEventListener('popstate', handlePopState);
+                return () => window.removeEventListener('popstate', handlePopState);
+            }, []);
+            // -----------------------------------------
+
             const [jadwalDB, setJadwalDB] = React.useState({});
             const [dataPejabat, setDataPejabat] = React.useState(initialDataPejabat);
             const [kategoriPejabat, setKategoriPejabat] = React.useState(["Gembala", "Officers", "Departemen & Pelayanan", "Lainnya"]);
             const [youtubeUrl, setYoutubeUrl] = React.useState("https://www.youtube.com/embed/EAO55pnNsgs");
-            const [pengumuman, setPengumuman] = React.useState({ header: "Pengumuman Jemaat", isi: "" });
-            const [daftarWarta, setDaftarWarta] = React.useState([]);
-            const [adminToken, setAdminToken] = React.useState('');
-            const [isAdminLoggedIn, setIsAdminLoggedIn] = React.useState(false);
-            const [showLoginModal, setShowLoginModal] = React.useState(false);
             
+            // Pengumuman default State
+            const [pengumuman, setPengumuman] = React.useState({ header: "Pengumuman Jemaat", isi: "" });
+
+            // Token Admin (berisi password valid setelah login)
+            const [adminToken, setAdminToken] = React.useState('');
+
+            // Warta default State
+            const [daftarWarta, setDaftarWarta] = React.useState([]);
+
             // Fungsi refresh warta
             const refreshWarta = async () => {
                 try {
@@ -1800,45 +1976,105 @@
                     console.error("Gagal refresh warta", err);
                 }
             };
-            
-            // Ambil data awal
+
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            let nextRabu = new Date(today);
+            nextRabu.setDate(today.getDate() + ((3 - today.getDay() + 7) % 7));
+            const rabuYMD = toYMD(nextRabu);
+
+            let nextSabat = new Date(today);
+            nextSabat.setDate(today.getDate() + ((6 - today.getDay() + 7) % 7));
+            const sabatYMD = toYMD(nextSabat);
+
+            const getNextPerjamuan = () => {
+                const year = today.getFullYear();
+                const months = [2, 5, 9, 11];
+                for (let m of months) {
+                    let lastDay = new Date(year, m + 1, 0);
+                    let lastSat = new Date(lastDay);
+                    lastSat.setDate(lastDay.getDate() - ((lastDay.getDay() + 1) % 7));
+                    if (today <= lastSat) return lastSat;
+                }
+                let lastDayNextYear = new Date(year + 1, 3, 0);
+                let lastSatNextYear = new Date(lastDayNextYear);
+                lastSatNextYear.setDate(lastDayNextYear.getDate() - ((lastDayNextYear.getDay() + 1) % 7));
+                return lastSatNextYear;
+            };
+
+            const nextPerjamuanObj = getNextPerjamuan();
+            const perjamuanYMD = toYMD(nextPerjamuanObj);
+
+            const diffTime = nextPerjamuanObj - today;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            const showPerjamuan = diffDays <= 8 && diffDays >= 0;
+
+            const activeRabu = jadwalDB[rabuYMD] || initialJadwalRabu;
+            const activeSabat = jadwalDB[sabatYMD] || initialJadwalSabat;
+            const activePerjamuan = jadwalDB[perjamuanYMD]?.perjamuan || initialJadwalSabat.perjamuan;
+
+            // --- LOGIKA KHUSUS HALAMAN JADWAL (HARI-H LOMPAT KE MINGGU DEPAN) ---
+            let displayRabuYMD = rabuYMD;
+            if (today.getDay() === 3) {
+                let nextW = new Date(today); nextW.setDate(today.getDate() + 7);
+                displayRabuYMD = toYMD(nextW);
+            }
+
+            let displaySabatYMD = sabatYMD;
+            if (today.getDay() === 6) {
+                let nextS = new Date(today); nextS.setDate(today.getDate() + 7);
+                displaySabatYMD = toYMD(nextS);
+            }
+
+            const jadwalKhususRabu = jadwalDB[displayRabuYMD] || initialJadwalRabu;
+            const jadwalKhususSabat = jadwalDB[displaySabatYMD] || initialJadwalSabat;
+            // ----------------------------------------------------------------------
+
+            // MENGAMBIL DATA DARI REST API GOOGLE APPS SCRIPT
             React.useEffect(() => {
                 fetch(`${GAS_API_URL}?action=getData`)
-                    .then(res => res.json())
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Jaringan bermasalah atau API tidak ditemukan');
+                        }
+                        return response.json();
+                    })
                     .then(data => {
                         if (data.dataPejabat) setDataPejabat(data.dataPejabat);
                         if (data.jadwalDB) setJadwalDB(data.jadwalDB);
                         if (data.youtubeUrl) setYoutubeUrl(data.youtubeUrl);
                         if (data.kategoriPejabat) setKategoriPejabat(data.kategoriPejabat);
                         if (data.daftarWarta) setDaftarWarta(data.daftarWarta);
+                        
+                        // Menangani Pengumuman agar kompatibel dengan data lama (String biasa) dan JSON object baru
                         if (data.pengumuman !== undefined) {
                             try {
                                 const parsed = JSON.parse(data.pengumuman);
-                                setPengumuman({ header: parsed.header || "Pengumuman Jemaat", isi: decodeHTML(parsed.isi || "") });
+                                if (parsed && typeof parsed === 'object') {
+                                    setPengumuman({ 
+                                        header: parsed.header || "Pengumuman Jemaat", 
+                                        isi: decodeHTML(parsed.isi || "") 
+                                    });
+                                } else {
+                                    setPengumuman({ header: "Pengumuman Jemaat", isi: decodeHTML(data.pengumuman) });
+                                }
                             } catch (e) {
+                                // Jika gagal di-parse, artinya datanya masih berupa string murni dari versi sebelumnya
                                 setPengumuman({ header: "Pengumuman Jemaat", isi: decodeHTML(data.pengumuman) });
                             }
                         }
                         setIsAppLoading(false);
                     })
-                    .catch(err => { console.error(err); setIsAppLoading(false); });
+                    .catch(error => {
+                        console.error('Error fetching data, menggunakan data default:', error);
+                        setIsAppLoading(false);
+                    });
             }, []);
-            
-            // History API sederhana
-            React.useEffect(() => {
-                const handlePopState = () => {
-                    const hash = window.location.hash.replace('#', '');
-                    setActiveTab(hash || 'home');
-                };
-                window.addEventListener('popstate', handlePopState);
-                return () => window.removeEventListener('popstate', handlePopState);
-            }, []);
-            
-            const handleSetActiveTab = (tab) => {
-                setActiveTab(tab);
-                window.history.pushState({}, '', `#${tab}`);
-            };
-            
+
+            const [isAdminLoggedIn, setIsAdminLoggedIn] = React.useState(false);
+            const [showLoginModal, setShowLoginModal] = React.useState(false);
+
             const tabs = [
                 { id: 'home', label: 'Home', icon: 'Home' },
                 { id: 'belajar', label: 'Belajar', icon: 'BookOpen' },
@@ -1847,106 +2083,158 @@
                 { id: 'jadwal', label: 'Jadwal', icon: 'Calendar' },
                 { id: 'persembahan', label: 'Persembahan', icon: 'Gift' }
             ];
-            
-            const handleAdminClick = () => { if (isAdminLoggedIn) handleSetActiveTab('admin_dashboard'); else setShowLoginModal(true); };
-            const handleLogout = () => { setIsAdminLoggedIn(false); setAdminToken(''); handleSetActiveTab('home'); };
-            
+
+            const handleAdminClick = () => { if (isAdminLoggedIn) { setActiveTab('admin_dashboard'); } else { setShowLoginModal(true); } };
+            const handleLogout = () => { setIsAdminLoggedIn(false); setAdminToken(''); setActiveTab('home'); };
+
             const renderContent = () => {
                 switch (activeTab) {
-                    case 'home': return <Home setActiveTab={handleSetActiveTab} youtubeUrl={youtubeUrl} pengumuman={pengumuman} />;
-                    case 'belajar': return <Belajar setActiveTab={handleSetActiveTab} />;
-                    case 'belajar_alkitab': return <DetailAlkitab setActiveTab={handleSetActiveTab} dataPejabat={dataPejabat} />;
-                    case 'belajar_28dasar': return <Detail28Dasar setActiveTab={handleSetActiveTab} dataPejabat={dataPejabat} />;
-                    case 'belajar_egw': return <DetailEGW setActiveTab={handleSetActiveTab} dataPejabat={dataPejabat} />;
-                    case 'live': return <Live setActiveTab={handleSetActiveTab} activeRabu={jadwalDB[toYMD(new Date())] || initialJadwalRabu} activeSabat={jadwalDB[toYMD(new Date())] || initialJadwalSabat} rabuYMD={toYMD(new Date())} sabatYMD={toYMD(new Date())} showPerjamuan={false} perjamuanYMD="" activePerjamuan={[]} youtubeUrl={youtubeUrl} />;
-                    case 'jadwal': return <Jadwal activeRabu={initialJadwalRabu} activeSabat={initialJadwalSabat} rabuYMD={toYMD(new Date())} sabatYMD={toYMD(new Date())} showPerjamuan={false} perjamuanYMD="" activePerjamuan={[]} />;
-                    case 'persembahan': return <Persembahan dataPejabat={dataPejabat} />;
-                    case 'keanggotaan': return <Keanggotaan setActiveTab={handleSetActiveTab} />;
-                    case 'member_baru': return <MemberBaru setActiveTab={handleSetActiveTab} dataPejabat={dataPejabat} />;
-                    case 'pindah_masuk': return <PindahMasuk setActiveTab={handleSetActiveTab} dataPejabat={dataPejabat} />;
-                    case 'hubungi': return <Hubungi setActiveTab={handleSetActiveTab} dataPejabat={dataPejabat} />;
-                    case 'form_acms': return <FormACMS setActiveTab={handleSetActiveTab} />;
-                    case 'susunan_ibadah': return <SusunanIbadah setActiveTab={handleSetActiveTab} activeSabat={initialJadwalSabat} sabatYMD={toYMD(new Date())} />;
+                    case 'home': return <Home setActiveTab={setActiveTab} youtubeUrl={youtubeUrl} pengumuman={pengumuman} />;
+                    case 'belajar': return <Belajar setActiveTab={setActiveTab} />;
+                    case 'belajar_alkitab': return <DetailAlkitab setActiveTab={setActiveTab} dataPejabat={dataPejabat} />;
+                    case 'belajar_28dasar': return <Detail28Dasar setActiveTab={setActiveTab} dataPejabat={dataPejabat} />;
+                    case 'belajar_egw': return <DetailEGW setActiveTab={setActiveTab} dataPejabat={dataPejabat} />;
                     case 'warta':  return <WartaPage daftarWarta={daftarWarta} setActiveTab={setActiveTab} />;
-                    case 'admin_dashboard': return isAdminLoggedIn ? <AdminDashboard dataPejabat={dataPejabat} setDataPejabat={setDataPejabat} jadwalDB={jadwalDB} setJadwalDB={setJadwalDB} adminToken={adminToken} setAdminToken={setAdminToken} youtubeUrl={youtubeUrl} setYoutubeUrl={setYoutubeUrl} kategoriPejabat={kategoriPejabat} setKategoriPejabat={setKategoriPejabat} pengumuman={pengumuman} setPengumuman={setPengumuman} daftarWarta={daftarWarta} setDaftarWarta={setDaftarWarta} refreshWarta={refreshWarta} /> : <Home setActiveTab={handleSetActiveTab} youtubeUrl={youtubeUrl} pengumuman={pengumuman} />;
-                    default: return <Home setActiveTab={handleSetActiveTab} youtubeUrl={youtubeUrl} pengumuman={pengumuman} />;
+                    case 'live': return <Live setActiveTab={setActiveTab} activeRabu={activeRabu} activeSabat={activeSabat} rabuYMD={rabuYMD} sabatYMD={sabatYMD} showPerjamuan={showPerjamuan} perjamuanYMD={perjamuanYMD} activePerjamuan={activePerjamuan} youtubeUrl={youtubeUrl} />;
+                    case 'jadwal': return <Jadwal activeRabu={jadwalKhususRabu} activeSabat={jadwalKhususSabat} rabuYMD={displayRabuYMD} sabatYMD={displaySabatYMD} showPerjamuan={showPerjamuan} perjamuanYMD={perjamuanYMD} activePerjamuan={activePerjamuan} />;
+                    case 'persembahan': return <Persembahan dataPejabat={dataPejabat} />;
+                    case 'keanggotaan': return <Keanggotaan setActiveTab={setActiveTab} />;
+                    case 'member_baru': return <MemberBaru setActiveTab={setActiveTab} dataPejabat={dataPejabat} />;
+                    case 'pindah_masuk': return <PindahMasuk setActiveTab={setActiveTab} dataPejabat={dataPejabat} />;
+                    case 'hubungi': return <Hubungi setActiveTab={setActiveTab} dataPejabat={dataPejabat} />;
+                    case 'form_acms': return <FormACMS setActiveTab={setActiveTab} />;
+                    case 'susunan_ibadah': return <SusunanIbadah setActiveTab={setActiveTab} activeSabat={activeSabat} sabatYMD={sabatYMD} />;
+                    case 'admin_dashboard': return isAdminLoggedIn ? <AdminDashboard dataPejabat={dataPejabat} setDataPejabat={setDataPejabat} jadwalDB={jadwalDB} setJadwalDB={setJadwalDB} adminToken={adminToken} setAdminToken={setAdminToken} youtubeUrl={youtubeUrl} setYoutubeUrl={setYoutubeUrl} kategoriPejabat={kategoriPejabat} setKategoriPejabat={setKategoriPejabat} pengumuman={pengumuman} setPengumuman={setPengumuman} /> : <Home setActiveTab={setActiveTab} youtubeUrl={youtubeUrl} pengumuman={pengumuman} />;
+                    default: return <Home setActiveTab={setActiveTab} youtubeUrl={youtubeUrl} pengumuman={pengumuman} />;
                 }
             };
-            
-            if (isAppLoading) return (
-                <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center relative">
-                    <div className="flex flex-col items-center justify-center mt-[-10vh]">
-                        <div className="w-12 h-12 border-4 border-navy-100 border-t-gold-500 rounded-full animate-spin mb-4"></div>
-                        <p className="text-navy-500 font-bold uppercase tracking-widest text-xs animate-pulse">Loading...</p>
+
+            if (isAppLoading) {
+                return (
+                    <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center relative">
+                        {/* Loading Spinner di Tengah */}
+                        <div className="flex flex-col items-center justify-center mt-[-10vh]">
+                            <div className="w-12 h-12 border-4 border-navy-100 border-t-gold-500 rounded-full animate-spin mb-4 shadow-sm"></div>
+                            <p className="text-navy-500 font-bold uppercase tracking-widest text-xs animate-pulse">Loading...</p>
+                        </div>
+                        {/* Logo diantara tengah dan bawah layar (25% dari bawah) */}
+                        <div className="absolute bottom-[25%] flex flex-col items-center animate-fade-in">
+                            <img src="./PisgahColor.png" alt="PISGAH-BISDAC Logo" className="h-16 md:h-20 w-auto opacity-80" />
+                        </div>
                     </div>
-                    <div className="absolute bottom-[25%] flex flex-col items-center animate-fade-in">
-                        <img src="./PisgahColor.png" alt="PISGAH-BISDAC Logo" className="h-16 md:h-20 w-auto opacity-80" />
-                    </div>
-                </div>
-            );
-            
+                );
+            }
+
             return (
                 <div className="min-h-screen bg-gray-50 flex flex-col">
-                    <LoginModal isOpen={showLoginModal} onClose={() => setShowLoginModal(false)} onSuccess={(token) => { setAdminToken(token); setIsAdminLoggedIn(true); setShowLoginModal(false); handleSetActiveTab('admin_dashboard'); }} />
+                    <LoginModal isOpen={showLoginModal} onClose={() => setShowLoginModal(false)} onSuccess={(token) => { setAdminToken(token); setIsAdminLoggedIn(true); setShowLoginModal(false); setActiveTab('admin_dashboard'); }} />
+
                     <header className="md:hidden bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-navy-50 shadow-sm">
                         <div className="flex justify-between items-center px-5 py-4">
                             <img src="./PisgahLogoColor.png" alt="PISGAH-BISDAC Logo" className="h-7 w-auto" />
-                            {isAdminLoggedIn ? <button onClick={handleLogout} className="p-2.5 bg-red-50 rounded-full text-red-600"><Icon name="LogOut" className="w-4 h-4" /></button> : <button onClick={handleAdminClick} className="p-2.5 bg-navy-50 rounded-full text-navy-700"><Icon name="LogIn" className="w-4 h-4" /></button>}
+                            {isAdminLoggedIn ? (<button onClick={handleLogout} className="p-2.5 bg-red-50 rounded-full text-red-600 hover:bg-red-100 transition"><Icon name="LogOut" className="w-4 h-4" /></button>) : (<button onClick={handleAdminClick} className="p-2.5 bg-navy-50 rounded-full text-navy-700 hover:bg-navy-100 transition"><Icon name="LogIn" className="w-4 h-4" /></button>)}
                         </div>
                     </header>
+
                     <header className="hidden md:block bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-navy-50 shadow-sm">
                         <div className="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
-                            <div className="flex items-center space-x-2"><img src="./PisgahLogoColor.png" alt="PISGAH-BISDAC Logo" className="h-9 w-auto" /></div>
+                            <div className="flex items-center space-x-2">
+                                <img src="./PisgahLogoColor.png" alt="PISGAH-BISDAC Logo" className="h-9 w-auto" />
+                            </div>
                             <nav className="flex space-x-2">
-                                {tabs.map(tab => (
-                                    <button key={tab.id} onClick={() => handleSetActiveTab(tab.id)} className={`px-5 py-2.5 rounded-full text-sm font-bold flex items-center space-x-2 ${activeTab === tab.id ? 'bg-navy-700 text-white shadow-md' : 'text-navy-600 hover:bg-navy-50'}`}>
-                                        <Icon name={tab.icon} className={`w-[1.15rem] h-[1.15rem] ${activeTab === tab.id ? 'text-gold-400' : ''}`} /><span>{tab.label}</span>
-                                    </button>
-                                ))}
+                                {tabs.map(tab => {
+                                    const isActive = activeTab.startsWith(tab.id);
+                                    return (
+                                        <button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`px-5 py-2.5 rounded-full text-sm font-bold transition-all duration-300 flex items-center space-x-2 ${isActive ? 'bg-navy-700 text-white shadow-md' : 'text-navy-600 hover:bg-navy-50 hover:text-navy-900'}`}><Icon name={tab.icon} className={`w-[1.15rem] h-[1.15rem] ${isActive ? 'text-gold-400' : ''}`} /><span>{tab.label}</span></button>
+                                    );
+                                })}
                             </nav>
                             {isAdminLoggedIn ? (
-                                <div className="flex items-center space-x-3">
-                                    <button onClick={() => handleSetActiveTab('admin_dashboard')} className="flex items-center space-x-2 bg-navy-50 text-navy-900 px-5 py-2.5 rounded-full text-sm font-bold hover:bg-navy-200"><Icon name="Settings" className="w-[1.15rem] h-[1.15rem]" /><span>Dashboard</span></button>
-                                    <button onClick={handleLogout} className="bg-red-50 text-red-600 p-2.5 rounded-full"><Icon name="LogOut" className="w-4 h-4" /></button>
-                                </div>
+                                <div className="flex items-center space-x-3"><button onClick={() => setActiveTab('admin_dashboard')} className="flex items-center space-x-2 bg-navy-50 text-navy-900 px-5 py-2.5 rounded-full text-sm font-bold hover:bg-navy-200 transition"><Icon name="Settings" className="w-[1.15rem] h-[1.15rem]" /><span>Dashboard</span></button><button onClick={handleLogout} className="flex items-center justify-center bg-red-50 text-red-600 p-2.5 rounded-full hover:bg-red-100 transition"><Icon name="LogOut" className="w-4 h-4" /></button></div>
                             ) : (
-                                <button onClick={handleAdminClick} className="flex items-center space-x-2 bg-gold-400 text-white px-6 py-2.5 rounded-full text-sm font-bold hover:bg-gold-600"><Icon name="LogIn" className="w-[1.15rem] h-[1.15rem]" /><span>Admin Login</span></button>
+                                <button onClick={handleAdminClick} className="flex items-center space-x-2 bg-gold-400 text-white px-6 py-2.5 rounded-full text-sm font-bold hover:bg-gold-600 hover:shadow-md transition-all duration-300"><Icon name="LogIn" className="w-[1.15rem] h-[1.15rem]" /><span>Admin Login</span></button>
                             )}
                         </div>
                     </header>
+
                     <main className="flex-1 max-w-5xl mx-auto w-full p-4 md:p-8 pb-32 md:pb-12">
                         <div className="mb-6 md:mb-10">
-                            <div className="flex items-center space-x-3 mb-6 border-b border-navy-50 pb-4">
-                                <img src="./PisgahColor.png" className="h-16 md:h-20 w-auto opacity-90" />
-                                <div><h1 className="text-xl md:text-2xl font-bold text-navy-700 tracking-tight">PISGAH <span className="text-gold-500">BISDAC</span></h1><p className="text-navy-700 tracking-tighter">Batam International Seventh-Day Adventist Church</p></div>
-                            </div>
-                            <h1 className="text-2xl md:text-[2rem] font-bold text-navy-700 capitalize tracking-tight">
-                                {activeTab === 'home' ? '' : activeTab === 'belajar' ? 'Halaman Belajar' : activeTab === 'warta' ? 'Warta Gereja' : activeTab.startsWith('belajar_') ? 'Detail Pembelajaran' : activeTab === 'keanggotaan' ? 'Keanggotaan Jemaat' : activeTab === 'member_baru' ? 'Permohonan Member Baru' : activeTab === 'pindah_masuk' ? 'Permohonan Pindah Masuk' : activeTab === 'hubungi' ? 'Hubungi Kami' : activeTab === 'form_acms' ? 'Formulir Pindah Masuk' : activeTab === 'susunan_ibadah' ? 'Susunan Ibadah' : activeTab === 'admin_dashboard' ? 'Dashboard Admin' : activeTab}
-                            </h1>
-                            {activeTab === 'admin_dashboard' && <p className="text-navy-500 font-medium mt-1">Kelola data dinamis untuk website PISGAH-BISDAC</p>}
-                        </div>
+
+ {/* LOGO PISGAH DI HOME */}                          
+  <div className="flex items-center space-x-3 mb-6 border-b border-navy-50 pb-4">
+    <img src="./PisgahColor.png" className="h-16 md:h-20 w-auto opacity-90" /> 
+    <div>
+      <h1 className="text-xl md:text-2xl font-bold text-navy-700 tracking-tight">PISGAH <span className="text-gold-500">BISDAC</span></h1>
+      <p className="text-navy-700 tracking-tighter">Batam International Seventh-Day Adventist Church</p>
+    </div>
+  </div>
+ {/* Sampai di sini */} 
+
+  <h1 className="text-2xl md:text-[2rem] font-bold text-navy-700 capitalize tracking-tight">
+    {activeTab === 'home' ? (
+      <p className=""></p>
+    ) : activeTab === 'belajar' ? (
+      'Halaman Belajar'
+    ) : activeTab.startsWith('belajar_') ? (
+      'Detail Pembelajaran'
+    ) : activeTab === 'keanggotaan' ? (
+      'Keanggotaan Jemaat'
+    ) : activeTab === 'member_baru' ? (
+      'Permohonan Member Baru'
+    ) : activeTab === 'pindah_masuk' ? (
+      'Permohonan Pindah Masuk'
+    ) : activeTab === 'hubungi' ? (
+      'Hubungi Kami'
+    ) : activeTab === 'form_acms' ? (
+      'Formulir Pindah Masuk'
+    ) : activeTab === 'susunan_ibadah' ? (
+      'Susunan Ibadah'
+    ) : activeTab === 'admin_dashboard' ? (
+      'Dashboard Admin'
+    ) : activeTab === 'warta' ? (
+      'Warta Gereja'  
+    ) : (
+      activeTab
+    )}
+  </h1>
+  
+  {activeTab === 'admin_dashboard' && (
+    <p className="text-navy-500 font-medium mt-1">Kelola data dinamis untuk website PISGAH-BISDAC</p>
+  )}
+</div>
                         {renderContent()}
                     </main>
-                    <nav className="md:hidden fixed bottom-5 w-[calc(100%-2.5rem)] left-5 bg-white/90 backdrop-blur-xl border border-navy-100/50 rounded-3xl pb-safe z-50 shadow-lg">
+
+                    <nav className="md:hidden fixed bottom-5 w-[calc(100%-2.5rem)] left-5 bg-white/90 backdrop-blur-xl border border-navy-100/50 rounded-3xl pb-safe z-50 shadow-[0_8px_30px_rgb(11,26,48,0.08)]">
                         <div className="flex justify-around items-center p-2">
-                            {tabs.map(tab => (
-                                <button key={tab.id} onClick={() => handleSetActiveTab(tab.id)} className={`relative flex flex-col items-center flex-1 py-[10px] px-1 rounded-[1.25rem] ${activeTab === tab.id ? 'text-navy-900 bg-gold-400/10' : 'text-navy-400'}`}>
-                                    <Icon name={tab.icon} className={`w-[1.4rem] h-[1.4rem] mb-1.5 ${activeTab === tab.id ? 'text-gold-500 -translate-y-0.5' : ''}`} />
-                                    <span className={`text-[10px] font-bold ${activeTab === tab.id ? 'opacity-100' : 'opacity-70'}`}>{tab.label}</span>
-                                    {activeTab === tab.id && <div className="absolute -bottom-0 w-1 h-1 rounded-full bg-gold-500"></div>}
-                                </button>
-                            ))}
+                            {tabs.map(tab => {
+                                const isActive = activeTab.startsWith(tab.id);
+                                return (
+                                    <button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`relative flex flex-col items-center flex-1 py-[10px] px-1 transition-all duration-300 rounded-[1.25rem] ${isActive ? 'text-navy-900 bg-gold-400/10' : 'text-navy-400 hover:text-navy-600'}`}>
+                                        <Icon name={tab.icon} className={`w-[1.4rem] h-[1.4rem] mb-1.5 transition-all duration-300 ${isActive ? 'text-gold-500 stroke-[2.5px] -translate-y-0.5' : 'stroke-[2px]'}`} />
+                                        <span className={`text-[10px] font-bold tracking-wide transition-all duration-300 ${isActive ? 'opacity-100' : 'opacity-70'}`}>{tab.label}</span>
+                                        {isActive && <div className="absolute -bottom-0 w-1 h-1 rounded-full bg-gold-500"></div>}
+                                    </button>
+                                );
+                            })}
                         </div>
                     </nav>
+
+                    {/* Floating Action Button (Hubungi / WA) */}
                     {activeTab !== 'admin_dashboard' && activeTab !== 'hubungi' && (
-                        <button onClick={() => handleSetActiveTab('hubungi')} className="fixed bottom-28 md:bottom-8 right-6 md:right-8 z-40 bg-navy-900 hover:bg-navy-800 text-gold-400 p-4 rounded-full shadow-xl hover:shadow-2xl transition-all transform hover:-translate-y-1 flex items-center justify-center border border-gold-500/20">
-                            <Icon name="Phone" className="w-6 h-6 md:w-7 md:h-7" />
+                        <button
+                            onClick={() => setActiveTab('hubungi')}
+                            className="fixed bottom-28 md:bottom-8 right-6 md:right-8 z-40 bg-navy-900 hover:bg-navy-800 text-gold-400 p-4 rounded-full shadow-xl hover:shadow-2xl transition-all transform hover:-translate-y-1 flex items-center justify-center animate-fade-in border border-gold-500/20"
+                            aria-label="Hubungi Kami"
+                            title="Hubungi Kami"
+                        >
+                            <Icon name="Phone" className="w-6 h-6 md:w-7 md:h-7 drop-shadow-sm" />
                         </button>
                     )}
                 </div>
             );
         };
-        
+
         const root = ReactDOM.createRoot(document.getElementById('root'));
         root.render(<App />);
     </script>
