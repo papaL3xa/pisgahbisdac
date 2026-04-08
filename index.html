@@ -111,9 +111,6 @@
             color: #0b1a30;
         }
 
-        .pengumuman-text i, .pengumuman-text em {
-            font-style: italic !important;
-        }
     </style>
 </head>
 
@@ -1106,7 +1103,7 @@
             const [isSavingPengumuman, setIsSavingPengumuman] = React.useState(false);
             const textareaRef = React.useRef(null);
 
-            // Fungsi untuk menyisipkan tag HTML BOLD / ITALIC
+            // Fungsi untuk menyisipkan tag HTML BOLD
             const insertFormatting = (tag) => {
                 const textarea = textareaRef.current;
                 if (!textarea) return;
@@ -1118,9 +1115,7 @@
                 
                 let newText = text;
                 if (tag === 'bold') {
-                    newText = text.substring(0, start) + '<b>' + selectedText + '</b>' + text.substring(end);
-                } else if (tag === 'italic') {
-                    newText = text.substring(0, start) + '<i>' + selectedText + '</i>' + text.substring(end);
+                    newText = text.substring(0, start) + '<strong>' + selectedText + '</strong>' + text.substring(end);
                 }
                 
                 setEditPengumuman({ ...editPengumuman, isi: newText });
@@ -1788,11 +1783,10 @@
                                                     <label className="block text-xs font-bold text-navy-700 uppercase tracking-widest">Isi Pengumuman</label>
                                                     <div className="flex space-x-2">
                                                         <button type="button" onClick={() => insertFormatting('bold')} className="px-3 py-1 bg-navy-100 hover:bg-navy-200 text-navy-800 rounded font-bold text-sm shadow-sm transition-colors" title="Beri efek tebal pada teks yang dipilih">B</button>
-                                                        <button type="button" onClick={() => insertFormatting('italic')} className="px-3 py-1 bg-navy-100 hover:bg-navy-200 text-navy-800 rounded italic text-sm shadow-sm transition-colors" title="Beri efek miring pada teks yang dipilih">I</button>
-                                                    </div>
+                                                        </div>
                                                 </div>
                                                 <textarea ref={textareaRef} value={editPengumuman.isi} onChange={e => setEditPengumuman({...editPengumuman, isi: e.target.value})} rows="5" placeholder="Kosongkan isi untuk menyembunyikan kotak pengumuman..." className="w-full p-3.5 border border-navy-200 rounded-xl focus:border-gold-500 outline-none transition-colors bg-navy-50/50 text-sm font-medium shadow-sm leading-relaxed whitespace-pre-wrap"></textarea>
-                                                <p className="text-[10px] text-navy-500 mt-2 font-bold leading-relaxed bg-navy-50 p-2.5 rounded-lg border border-navy-100">Blok teks pada kotak lalu tekan tombol B atau I untuk menambahkan format tebal/miring. Hapus semua isi teks untuk menyembunyikan pengumuman dari layar utama.</p>
+                                                <p className="text-[10px] text-navy-500 mt-2 font-bold leading-relaxed bg-navy-50 p-2.5 rounded-lg border border-navy-100">Blok teks pada kotak lalu tekan tombol B untuk menambahkan format tebal. Hapus semua isi teks untuk menyembunyikan pengumuman dari layar utama.</p>
                                             </div>
                                             <button type="submit" disabled={isSavingPengumuman} className={`w-full ${isSavingPengumuman ? 'bg-navy-300 text-navy-500 cursor-not-allowed' : 'bg-navy-900 hover:bg-navy-800 text-gold-400 shadow-md hover:shadow-lg'} font-bold py-3.5 rounded-xl transition-all flex justify-center items-center`}>
                                                 {isSavingPengumuman ? <><span className="w-4 h-4 border-2 border-navy-500 border-t-white rounded-full animate-spin mr-2"></span> Menyimpan...</> : 'Simpan Pengumuman'}
