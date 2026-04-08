@@ -105,6 +105,16 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+
+        /* PERBAIKAN: Memaksa tag <b> dan <i> bekerja mengabaikan reset Tailwind */
+        .pengumuman-text b, .pengumuman-text strong {
+            font-weight: 800 !important;
+            color: #0b1a30;
+        }
+
+        .pengumuman-text i, .pengumuman-text em {
+            font-style: italic !important;
+        }
     </style>
 </head>
 
@@ -116,6 +126,14 @@
         // URL WEB APP MILIKMU
         // ========================================================
         const GAS_API_URL = "https://script.google.com/macros/s/AKfycbwVPmot0CUM39NA45QZR_4goadwSypnsMoHbziXj-ZGHNd6AF0cr7UpeTX6HhYmwl_U/exec";
+
+        // --- HELPER UNTUK MENGUBAH HTML ENTITIES DARI SPREADSHEET ---
+        const decodeHTML = (htmlStr) => {
+            if (!htmlStr) return '';
+            const txt = document.createElement("textarea");
+            txt.innerHTML = htmlStr;
+            return txt.value;
+        };
 
         // --- INITIAL DATA ---
         const defaultSusunan = {
@@ -240,6 +258,19 @@
         // --- COMPONENTS ---
         const Home = ({ setActiveTab, youtubeUrl, pengumuman }) => (
             <div className="space-y-6 md:space-y-8 animate-fade-in relative z-10">
+                
+                {pengumuman && pengumuman.isi && (
+                    <div className="bg-gradient-to-r from-gold-50 to-gold-100 p-5 md:p-6 rounded-[1.5rem] shadow-sm border border-gold-200 hover:shadow-md transition-shadow relative overflow-hidden">
+                        <div className="absolute top-0 right-0 bg-gold-500 text-white text-[10px] font-bold px-4 py-1.5 rounded-bl-xl uppercase tracking-widest shadow-sm flex items-center"><Icon name="Info" className="w-3 h-3 mr-1" /> Info</div>
+                        <h2 className="text-[1.15rem] font-bold mb-3 text-navy-900 flex items-center">
+                            <Icon name="Megaphone" className="w-[1.25rem] h-[1.25rem] mr-2 text-gold-600" /> {pengumuman.header || "Pengumuman Jemaat"}
+                        </h2>
+                        {/* PERBAIKAN: Memaksa tag <b> dan <i> bekerja mengabaikan reset Tailwind */}
+                        <div className="pengumuman-text text-navy-800 text-sm whitespace-pre-wrap font-medium leading-relaxed" dangerouslySetInnerHTML={{ __html: pengumuman.isi }}>
+                        </div>
+                    </div>
+                )}
+
                 <div className="grid grid-cols-3 gap-3 md:gap-5">
                     <a href="https://sabbath-school.adventech.io/in" target="_blank" rel="noopener noreferrer" className="bg-white p-4 md:p-6 rounded-[1.25rem] shadow-sm flex flex-col items-center text-center justify-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300 border border-navy-100/60 group">
                         <div className="w-12 h-12 md:w-16 md:h-16 rounded-[1rem] bg-navy-50 group-hover:bg-gold-50 transition-colors flex items-center justify-center mb-2.5 md:mb-3">
@@ -284,16 +315,7 @@
                     </div>
                 </div>
 
-                {pengumuman && pengumuman.isi && (
-                    <div className="bg-gradient-to-r from-gold-50 to-gold-100 p-5 md:p-6 rounded-[1.5rem] shadow-sm border border-gold-200 hover:shadow-md transition-shadow relative overflow-hidden">
-                        <div className="absolute top-0 right-0 bg-gold-500 text-white text-[10px] font-bold px-4 py-1.5 rounded-bl-xl uppercase tracking-widest shadow-sm flex items-center"><Icon name="Info" className="w-3 h-3 mr-1" /> Info</div>
-                        <h2 className="text-[1.15rem] font-bold mb-3 text-navy-900 flex items-center">
-                            <Icon name="Megaphone" className="w-[1.25rem] h-[1.25rem] mr-2 text-gold-600" /> {pengumuman.header || "Pengumuman Jemaat"}
-                        </h2>
-                        <div className="text-navy-800 text-sm whitespace-pre-wrap font-medium leading-relaxed" dangerouslySetInnerHTML={{ __html: pengumuman.isi }}>
-                        </div>
-                    </div>
-                )}
+
 
                 <div className="bg-white p-5 md:p-7 rounded-[1.5rem] shadow-sm border border-navy-100/60 hover:shadow-md transition-shadow">
                     <h2 className="text-[1.15rem] font-bold mb-4 text-navy-900 flex items-center">
@@ -988,7 +1010,7 @@
                                 </div>
                             </div>
                             <div className="opacity-50 pointer-events-none grayscale bg-gray-50 p-4 rounded-xl border border-gray-200">
-                                <h3 className="font-bold text-gray-800 border-b pb-1 mb-3">C. DATA KEPUTUSAN MAJELIS <span className="text-red-600 text-[10px] ml-2 font-bold bg-red-100 px-2 py-0.5 rounded uppercase tracking-wider">(Hanya diisi oleh Sekretaris Jemaat)</span></h3>
+                                <h3 className="font-bold text-gray-800 border-b pb-1 mb-3">C. DATA Keputusan MAJELIS <span className="text-red-600 text-[10px] ml-2 font-bold bg-red-100 px-2 py-0.5 rounded uppercase tracking-wider">(Hanya diisi oleh Sekretaris Jemaat)</span></h3>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div><label className="block text-xs text-gray-600 mb-1">Keputusan Majelis Tanggal</label><input type="text" disabled className="w-full p-2 border border-gray-300 rounded bg-gray-200" /></div>
                                     <div><label className="block text-xs text-gray-600 mb-1">Nomor Keputusan</label><input type="text" disabled className="w-full p-2 border border-gray-300 rounded bg-gray-200" /></div>
@@ -1071,7 +1093,9 @@
             const [adminTab, setAdminTab] = React.useState('pengaturan'); // jadwal, pelayan, pengaturan
 
             // State Ganti Password
+            const [oldPassword, setOldPassword] = React.useState('');
             const [newPassword, setNewPassword] = React.useState('');
+            const [showOldPass, setShowOldPass] = React.useState(false);
             const [showNewPass, setShowNewPass] = React.useState(false);
             const [isChangingPass, setIsChangingPass] = React.useState(false);
 
@@ -1079,7 +1103,7 @@
             const [editYoutubeUrl, setEditYoutubeUrl] = React.useState(youtubeUrl);
             const [isSavingUrl, setIsSavingUrl] = React.useState(false);
 
-            // State Pengumuman (Sekarang berupa objek dengan header dan isi)
+            // State Pengumuman
             const [editPengumuman, setEditPengumuman] = React.useState(pengumuman);
             const [isSavingPengumuman, setIsSavingPengumuman] = React.useState(false);
             const textareaRef = React.useRef(null);
@@ -1110,7 +1134,7 @@
             };
 
             // ==========================================
-            // TAMBAHAN: State & Fungsi untuk Kelola Jadwal
+            // State & Fungsi untuk Kelola Jadwal
             // ==========================================
             const scrollContainerRef = React.useRef(null);
             const scrollTabs = (direction) => {
@@ -1245,7 +1269,7 @@
             };
 
             // ==========================================
-            // TAMBAHAN: State & Fungsi untuk Drag & Drop Pejabat
+            // State & Fungsi untuk Drag & Drop Pejabat
             // ==========================================
             const [draggedItem, setDraggedItem] = React.useState(null);
             const [isSavingPejabat, setIsSavingPejabat] = React.useState(false);
@@ -1306,27 +1330,33 @@
             };
 
             // ==========================================
-            // PERBAIKAN: Menambahkan handleChangePassword
+            // PERBAIKAN: Menambahkan Kembali Kolom Password Lama
             // ==========================================
             const handleChangePassword = async (e) => {
                 e.preventDefault();
+                if (!oldPassword || !newPassword) {
+                    alert("Harap isi password lama dan password baru.");
+                    return;
+                }
+                
                 setIsChangingPass(true);
                 try {
                     const res = await fetch(GAS_API_URL, {
                         method: 'POST',
                         body: JSON.stringify({ 
                             action: 'changePassword', 
-                            password: adminToken,     // Password lama (token yang sedang login)
-                            newPassword: newPassword  // Password baru yang diinput
+                            password: oldPassword,     // Memasukkan input password lama yang di ketik user
+                            newPassword: newPassword   // Password baru yang diinput
                         })
                     });
                     const result = await res.json();
                     if (result.success) {
                         alert("Password berhasil diperbarui!");
                         setAdminToken(newPassword); // Update token session saat ini
-                        setNewPassword('');         // Kosongkan input
+                        setOldPassword('');         // Kosongkan input lama
+                        setNewPassword('');         // Kosongkan input baru
                     } else {
-                        alert("Gagal merubah password: " + (result.message || "Akses ditolak."));
+                        alert("Gagal merubah password: " + (result.message || "Password lama yang Anda masukkan salah."));
                     }
                 } catch (err) {
                     alert("Gagal terhubung ke server saat mengganti password.");
@@ -1356,7 +1386,7 @@
                 setIsSavingUrl(false);
             };
 
-            // SIMPAN PENGUMUMAN (Menggunakan JSON Stringify)
+            // SIMPAN PENGUMUMAN
             const handleSavePengumuman = async (e) => {
                 e.preventDefault();
                 setIsSavingPengumuman(true);
@@ -1366,7 +1396,7 @@
                         body: JSON.stringify({ 
                             action: 'savePengumuman', 
                             password: adminToken, 
-                            pengumuman: JSON.stringify(editPengumuman) // Kirim object sebagai string ke Google Sheets
+                            pengumuman: JSON.stringify(editPengumuman)
                         })
                     });
                     const result = await res.json();
@@ -1697,6 +1727,15 @@
                                         </div>
                                         <form onSubmit={handleChangePassword} className="space-y-5">
                                             <div>
+                                                <label className="block text-xs font-bold text-navy-700 mb-2 uppercase tracking-widest">Password Lama</label>
+                                                <div className="relative">
+                                                    <input type={showOldPass ? "text" : "password"} value={oldPassword} onChange={e => setOldPassword(e.target.value)} required className="w-full p-3.5 border border-navy-200 rounded-xl focus:border-gold-500 outline-none transition-colors bg-white text-sm font-bold shadow-sm pr-12" placeholder="Masukkan password lama" />
+                                                    <button type="button" onClick={() => setShowOldPass(!showOldPass)} className="absolute right-3 top-1/2 transform -translate-y-1/2 text-navy-400 hover:text-navy-600 transition-colors">
+                                                        <Icon name={showOldPass ? "EyeOff" : "Eye"} className="w-5 h-5" />
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div>
                                                 <label className="block text-xs font-bold text-navy-700 mb-2 uppercase tracking-widest">Password Baru</label>
                                                 <div className="relative">
                                                     <input type={showNewPass ? "text" : "password"} value={newPassword} onChange={e => setNewPassword(e.target.value)} required className="w-full p-3.5 border border-navy-200 rounded-xl focus:border-gold-500 outline-none transition-colors bg-navy-50/50 text-sm font-bold shadow-sm pr-12" placeholder="Masukkan password baru" />
@@ -1888,13 +1927,16 @@
                             try {
                                 const parsed = JSON.parse(data.pengumuman);
                                 if (parsed && typeof parsed === 'object') {
-                                    setPengumuman({ header: parsed.header || "Pengumuman Jemaat", isi: parsed.isi || "" });
+                                    setPengumuman({ 
+                                        header: parsed.header || "Pengumuman Jemaat", 
+                                        isi: decodeHTML(parsed.isi || "") 
+                                    });
                                 } else {
-                                    setPengumuman({ header: "Pengumuman Jemaat", isi: data.pengumuman });
+                                    setPengumuman({ header: "Pengumuman Jemaat", isi: decodeHTML(data.pengumuman) });
                                 }
                             } catch (e) {
                                 // Jika gagal di-parse, artinya datanya masih berupa string murni dari versi sebelumnya
-                                setPengumuman({ header: "Pengumuman Jemaat", isi: data.pengumuman });
+                                setPengumuman({ header: "Pengumuman Jemaat", isi: decodeHTML(data.pengumuman) });
                             }
                         }
                         setIsAppLoading(false);
@@ -1905,7 +1947,7 @@
                     });
             }, []);
 
-            // FIX TYPO: Memperbaiki penulisan state yang sebelumnya kurang kurung siku
+            // FIX TYPO: Memperbaiki penulisan state
             const [isAdminLoggedIn, setIsAdminLoggedIn] = React.useState(false);
             const [showLoginModal, setShowLoginModal] = React.useState(false);
 
